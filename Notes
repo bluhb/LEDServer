@@ -1,0 +1,29 @@
+Main:
+
+for every light:
+	start thread
+
+
+
+Classes:
+
+Arduino:
+	all functions to write to and read from arduino.
+	Input is name and device location(ttyUSB0)
+
+APA102:
+	handler for apa102 light strips.
+	input is name and amount of pixels
+
+
+
+Website:
+
+Use this for colorpicker on the website: http://jscolor.com/examples/
+This may prevents you from having to write your own app.
+
+color POST handler:
+	get lightid. set lightID.color_rgb
+	if lightid == 'all':
+		for key,value in lightids:
+			value.color_rgb = POSTdata
