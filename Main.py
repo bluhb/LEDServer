@@ -5,7 +5,12 @@ import data
 from Website import dirk as WEB
 import os
 import psutil
+import sys
 
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+buttonPin = 4
+GPIO.setup(buttonPin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 dataKeys = ["temp", "humid", "LDR"] #create the keys for rooms
 rooms = {}
@@ -42,9 +47,14 @@ for key in rooms:
 
 #this is the worker function, it will run the main method of the light object.
 def Worker(light):
+    global buttonPin
     while True:
+        if not GPIO.input(buttonPin):
+            light.color_rgb = {'r':255, 'g':150, 'b':120}
+            light.function = 'colorfill'
         light.main()
         time.sleep(light.wait)
+
     return(None)
 
 #this function is used to measure temp and load of the pi.
@@ -76,3 +86,12 @@ for room in rooms:
 #initialize and start the server.
 WEB.init()
 WEB.app.run('0.0.0.0', 5000, False)
+
+for keys in rooms:
+    print(keys)
+    if not keys == 'pi':
+        for lights in rooms[keys]['lights']:
+            rooms[keys]['lights'][lights].exit()
+
+print('closed everything')
+

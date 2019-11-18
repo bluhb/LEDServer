@@ -24,8 +24,35 @@ import datetime
 db = TinyDB('Database.json')
 sensorData = db.table('sensors')
 
+class GenericLed:
+    def __init__(self):
+        return None
 
-class Arduino:
+    def clear(self): #set color to black and set function to colorfill
+        self.color_rgb = {'r':0, 'g':0, 'b':0}
+        self.function = 'colorfill'
+        return None
+
+    def definecolor(self, angle): #calculate the color for the colorfade
+        pi = Math.pi
+        self.color[0] = int(Math.sin(angle)*127+128)
+        self.color[1] = int(Math.sin(angle + 0.66*pi)*127+128)
+        self.color[2] = int(Math.sin(angle + 1.33*pi)*127+128)
+        self.color_rgb['r'] = int(Math.sin(angle)*127+128)
+        self.color_rgb['g'] = int(Math.sin(angle + 0.66*pi)*127+128)
+        self.color_rgb['b'] = int(Math.sin(angle + 1.33*pi)*127+128)
+        return None
+
+    def colorfade(self): #colorfade the led strip
+        pi = Math.pi
+        for angle in range(0, int(200*pi), 1):
+            angle = angle/100
+            self.definecolor(angle)
+            self.colorfill()
+            time.sleep(self.wait)
+        return None
+
+class Arduino(GenericLed):
     def __init__(self, name, serialPort, room, master = None, roomSensors = None): #initialize object
         global sensorData
         self.room = room
@@ -36,18 +63,22 @@ class Arduino:
         self.name = name
         self.arduino = serial.Serial(self.device, 115200)
         self.color_rgb = {'r':0, 'g':0, 'b':0}
+        self.color = [0,0,0]
         self.sensorData = sensorData
         self.TempHumid = {}
         self.wait = 0.1
         self.brightness = 1
         self.function = 'colorfill'
-        self.functdict = {'colorfill': self.Write,
+        self.functdict = {'colorfill': self.colorfill,
                 'colorfade': self.colorfade,
                 'clear': self.clear}
         self.prevMilli = time.perf_counter()
         self.now = time.time()
         self.interval = 300
-        for i in range(0,3): #schrijf buffer van arduino vol
+
+        self.arduino.flushInput()
+        self.arduino.flushOutput()
+        for i in range(0,8): #schrijf buffer van arduino vol
             self.arduino.write(struct.pack('?', False))
             time.sleep(0.1)
         return None
@@ -64,31 +95,9 @@ class Arduino:
             self.brightness = main.rooms[self.master['room']]['lights'][self.master['light']].brightness
             if not self.function == 'colorfill':
                 self.function = 'colorfill'
-            #self.Write()
         return None
 
-    def clear(self): #set color to black and set function to colorfill
-        self.color_rgb = {'r':0, 'g':0, 'b':0}
-        self.function = 'colorfill'
-        return None
-
-    def definecolor(self, angle): #calculate the color for the colorfade
-        pi = Math.pi
-        self.color_rgb['r'] = int(Math.sin(angle)*127+128)
-        self.color_rgb['g'] = int(Math.sin(angle + 0.66*pi)*127+128)
-        self.color_rgb['b'] = int(Math.sin(angle + 1.33*pi)*127+128)
-        return None
-
-    def colorfade(self): #colorfade the led strip
-        pi = Math.pi
-        for angle in range(0, int(200*pi), 1):
-            angle = angle/100
-            self.definecolor(angle)
-            self.Write()
-            time.sleep(self.wait)
-        return None
-
-    def Write(self): #write colors to the arduino
+    def colorfill(self): #write colors to the arduino
         data = struct.pack('>BBB',
             int(self.color_rgb['r']*self.brightness),
             int(self.color_rgb['g']*self.brightness),
@@ -112,9 +121,13 @@ class Arduino:
             pass
         return None
 
+    def exit(self):
+        self.arduino.close()
+        return None
+
 
 # -------- class for APA102 led strip, expected at the SPI pins of the raspberry pi
-class APALedstrip:
+class APALedstrip(GenericLed):
     def __init__(self, name, room, master = None, pixels = 135): #initialize object
         self.room = room
         self.master = master
@@ -150,20 +163,20 @@ class APALedstrip:
         self.functdict[self.function]()
         return None
 
-    def clear(self): #set color to black and function to colorfill
-        self.color_rgb = {'r':0,'g':0,'b':0}
-        self.function = 'colorfill'
-        return None
+    # def clear(self): #set color to black and function to colorfill
+        # self.color_rgb = {'r':0,'g':0,'b':0}
+        # self.function = 'colorfill'
+        # return None
 
-    def definecolor(self, angle): #calculate the color based on a angle and put it in the color dict and array
-        pi = Math.pi
-        self.color[0] = int(Math.sin(angle)*127+128)
-        self.color[1] = int(Math.sin(angle + 0.66*pi)*127+128)
-        self.color[2] = int(Math.sin(angle + 1.33*pi)*127+128)
-        self.color_rgb['r'] = self.color[0]
-        self.color_rgb['g'] = self.color[1]
-        self.color_rgb['b'] = self.color[2]
-        return None
+    # def definecolor(self, angle): #calculate the color based on a angle and put it in the color dict and array
+        # pi = Math.pi
+        # self.color[0] = int(Math.sin(angle)*127+128)
+        # self.color[1] = int(Math.sin(angle + 0.66*pi)*127+128)
+        # self.color[2] = int(Math.sin(angle + 1.33*pi)*127+128)
+        # self.color_rgb['r'] = self.color[0]
+        # self.color_rgb['g'] = self.color[1]
+        # self.color_rgb['b'] = self.color[2]
+        # return None
 
     def colorfill(self): #fill the whole strip with the same color, every pixel higher than length will be black
         color = [int(i*self.brightness) for i in self.color]
@@ -176,14 +189,14 @@ class APALedstrip:
         self.pixels.show()
         return None
 
-    def colorfade(self): #colorfade the ledstrip
-        pi = Math.pi
-        for angle in range(0, int(200*pi), 1):
-            angle = angle/100
-            self.definecolor(angle)
-            self.colorfill()
-            time.sleep(self.wait)
-        return None
+    # def colorfade(self): #colorfade the ledstrip
+        # pi = Math.pi
+        # for angle in range(0, int(200*pi), 1):
+            # angle = angle/100
+            # self.definecolor(angle)
+            # self.colorfill()
+            # time.sleep(self.wait)
+        # return None
 
     def rainbow(self): #run a rainbow across the ledstrip, account for set length
         pi = Math.pi
@@ -201,4 +214,7 @@ class APALedstrip:
                     self.pixels[j] = (0,0,0)
             self.pixels.show()
             time.sleep(self.wait)
+        return None
+
+    def exit(self):
         return None
