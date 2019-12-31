@@ -1,0 +1,33 @@
+Main:
+
+for every light:
+	start thread
+
+
+
+Classes:
+
+GenericLed:
+    all functions that every ledstrip/light should and can accept.
+
+Arduino:
+	all functions to write to and read from arduino.
+	Input is name and device location(ttyUSB0)
+
+APA102:
+	handler for apa102 light strips.
+	input is name and amount of pixels
+
+
+
+Website:
+
+Use this for colorpicker on the website: http://jscolor.com/examples/
+This may prevents you from having to write your own app.
+
+color POST handler:
+(lightids is a list with ids that need to be set, allows to group lights together in the client.)
+	get lightid. set lightID.color_rgb
+	for key,value in lightids:
+		value.color_rgb = POSTdata
+
