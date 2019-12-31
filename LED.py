@@ -60,6 +60,7 @@ class GenericLed:
 class Arduino(GenericLed):
     def __init__(self, name, serialPort, room, master = None, roomSensors = None): #initialize object
         global sensorData
+        print(name +" is initializing, after that it will brighten up your day!")
         self.room = room
         self.roomSensors = roomSensors
         self.master = master
@@ -136,6 +137,7 @@ class Arduino(GenericLed):
 # -------- class for APA102 led strip, expected at the SPI pins of the raspberry pi
 class APALedstrip(GenericLed):
     def __init__(self, name, room, master = None, pixels = 135): #initialize object
+        print(name +" is initializing, after that it will brighten up your day!")
         self.room = room
         self.master = master
         self.sync = False #boolean used to sync colorfades with master
