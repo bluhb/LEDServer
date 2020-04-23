@@ -1,0 +1,21 @@
+<head>
+    <script>
+        var rooms = '{{rooms}}'
+    </script>
+    <script type="text/javascript"
+        src="{{ url_for('static', filename='functions.js') }}">
+    </script>
+</head>
+
+<div>
+    Hour: <input id='Hour' type="text"></input> Minute: <input id='Minute' type="text"></input>
+</div>
+<div id='SubmitAlarm' class = col-sm-6 onclick=submitAlarm()>
+    <button type='button' class='btn btn-defualt'>Submit</button>
+</div>
+
+<div>
+{% for i in alarms %}
+    <p>{{i}} <div id="{{i}}" class="col-sm-6" onclick="disableAlarm('{{i}}')"><button type="button" class="btn btn-default">Disable</button></div></p>
+{% endfor %}
+</div>

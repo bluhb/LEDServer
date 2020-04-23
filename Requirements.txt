@@ -1,0 +1,7 @@
+psutils 5.7.0
+Adafruit-circuitpython-dotstar
+numpy 1.28
+Flask 1.1.1
+simpleaudio 1.0.4
+
+

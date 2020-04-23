@@ -1,0 +1,2 @@
+https://python-obd.readthedocs.io/en/latest/Troubleshooting/
+Create a python OBD reader and car dashboard. Ultimately connect this to the homeserver and automate the ritregistration portion of the website.

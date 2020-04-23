@@ -1,33 +1,63 @@
 Main:
+    Sets up the GPIO for an emergency button to turn the lights on when your phone is dead
+    Defines the worker and picontrol function that are used in the threads.
 
-for every light:
-	start thread
+config:
+    Set up all your lights and rooms in this file. Format example is in the file(sort of)    
 
-
+--------------------------------------------------------------------------------------------------
 
 Classes:
 
-GenericLed:
-    all functions that every ledstrip/light should and can accept.
+    LED.py:
+        GenericLed:
+            all functions that every ledstrip/light should and can accept.
 
-Arduino:
-	all functions to write to and read from arduino.
-	Input is name and device location(ttyUSB0)
+        Arduino:
+            all functions to write to and read from arduino.
+            Input is name and device location(ttyUSB0)
 
-APA102:
-	handler for apa102 light strips.
-	input is name and amount of pixels
+        APA102:
+            handler for apa102 light strips.
+            input is name and amount of pixels
 
+    Alarm.py:
+        Alarm:
+            This class handles an alarm and will start a sunrise sequence standard 15 min before
+        setupAlarm:
+            Function used to set up the alarm, is called from the WebHandle.
 
+    data.py:
+        Room:
+            Class to hold data. A room has the capability to store all values from it's sensors and to create plots from this data.
+Outdated!            Plots are stored automatically in the ./Website/static folder with the name of the room.(Plots are now set up in the api endpoint and created in javascript with plotly.
+    
+    Database.py:
+        DataBase:
+            Simple wrapper for the sqlite3 library. Also supports writing to the same DB from multiple threads(believed to be safe in combination with thread.lock)
+    
+    Error.py:
+        Custom database wrapper to store all errors that happend when running the program. Hopefully not used that much.
+
+    Alarm.py:
+        Class to handle all the alarms that could be set. For now it's defaulting to the livingroom, but that is to be changed when neccesary.
+
+    RitRegistration.py:
+        Class that handles the registration of the mileage of my car. This also gives all the data back to the api.
+--------------------------------------------------------------------------------------------------
 
 Website:
 
-Use this for colorpicker on the website: http://jscolor.com/examples/
-This may prevents you from having to write your own app.
+    Uses this for colorpicker on the website: http://jscolor.com/examples/
+    Requires all inputs to be in the form of JSON via a POST request to the correct url.
+    
+    /rooms/graphData: returns a list with dicts for the graphs that should come on the website. The graph will be rendered in JavaScript with plotly.
 
-color POST handler:
-(lightids is a list with ids that need to be set, allows to group lights together in the client.)
-	get lightid. set lightID.color_rgb
-	for key,value in lightids:
-		value.color_rgb = POSTdata
+--------------------------------------------------------------------------------------------------
 
+Function Sets:
+RF433MHZ/RF433MHZ.py:
+    Functions to hopefully send data to arduino via 433mhz modules.
+    
+    sendToArduino(Address, Color_RGB, Attempts):
+        Handles the sending of the color to the given address, retries 'Attempts' times
