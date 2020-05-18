@@ -73,6 +73,10 @@ def disableAlarm():
 def ledPage(roomID):
     global rooms
     if (roomID in rooms):
+        Lights = {}
+        for Light in [*main.rooms[roomID]['lights']]:
+            Lights[Light] = main.rooms[roomID]["lights"][Light].functdict.keys()
+        print(Lights)
         return render_template('index.html',
                 rooms = rooms,
                 roomID = roomID,
@@ -276,3 +280,8 @@ def returnRitData():
     DataList = main.RitReg.getAllData()
     DataList.reverse()
     return(jsonify(DataList), 200)
+
+@app.route('/ritregistration/getMileage')
+def returnMileAge():
+    MileAges, MileAge = main.RitReg.averageMileage()
+    return(jsonify({"Mileage": MileAge, "Mileages": MileAges}), 200)

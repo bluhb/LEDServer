@@ -155,6 +155,11 @@ function getData(){
             document.getElementById("Data").appendChild(Paragraph)
         }
     })
+    setTimeout(() =>{
+    $.getJSON('ritregistration/getMileage').then(Data =>{
+        document.getElementById("Mileage").innerHTML = Data["Mileage"]
+        console.log(Data["Mileage"])
+    })}, 1000)
 }
 
 function submitMilage(){
