@@ -4,6 +4,7 @@ import serial
 import time
 import struct
 import sys
+import requests as rq
 
 import adafruit_dotstar
 import board
@@ -119,7 +120,7 @@ class GenericLed:
                 break
         return None
 
-    def sunRise(self, Duration = 5):
+    def sunRise(self, Duration = 1):
         global SunRise
         Steps = len(SunRise["red"])
         for i in range(0,Steps):
@@ -128,8 +129,11 @@ class GenericLed:
                         "g":SunRise["green"][i],
                         "b":SunRise["blue"][i]
                         }
+                self.color[0] = self.color_rgb['r']
+                self.color[1] = self.color_rgb['g']
+                self.color[2] = self.color_rgb['b']
                 self.colorfill()
-                print(self.color_rgb)
+                print(self.color)
                 time.sleep((Duration * 60)/Steps)
             else:
                 break
@@ -301,3 +305,44 @@ class APALedstrip(GenericLed):
             else:
                 break
         return None
+
+class WiFiLight(GenericLed):
+    def __init__(self, Name, IP_ADRESS):
+        self.Adress = "http://"+IP_ADRESS+"/color"
+        self.color = [0,0,0]
+        self.color_rgb = {"r":0, "g":0,"b":0}
+        self.wait = 0.01
+        self.function = "colorfill"
+        self.functdict = {"clear":self.clear,
+                "colorfill": self.colorfill,
+                "colorfade": self.colorfade,
+                "sunrise": self.sunRise}
+        try:
+            Re = rq.get("http://"+IP_ADRESS)
+        except Exception as E:
+            print(E)
+            print(Name, "Had a connection error")
+        self.Name = Name
+
+    def colorfill(self):
+        #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
+
+        def padding(x):
+            Padding = 3 - len(str(x))
+            R = ""
+            for _ in range(0, Padding):
+                R += "0"
+            R += str(x)
+            return R
+        self.color[0] = self.color_rgb["r"]
+        self.color[1] = self.color_rgb["g"]
+        self.color[2] = self.color_rgb["b"]
+        Colors = [padding(x) for x in self.color]
+        try:
+            Re = rq.post(self.Adress, json = str(Colors[0])+str(Colors[1])+str(Colors[2]), timeout = 0.007)
+            #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
+        except Exception as E:
+            pass
+
+    def main(self):
+        self.functdict[self.function]()

@@ -32,5 +32,12 @@ rooms = {
                     # roomSensors = 'livingroom')
 
                 }
+            },
+        "livingroom2":{
+            "room":data.room(name="livingroom2", dataKeys=dataKeys),
+            "lights":{
+                "LedStrip":LED.WiFiLight("LedStrip",
+                    "192.168.1.235")
+                }
             }
         }
