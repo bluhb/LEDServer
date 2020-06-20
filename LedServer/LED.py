@@ -112,10 +112,12 @@ class GenericLed:
         pi = Math.pi
         for angle in range(0, int(200*pi), 1):
             if self.function == "colorfade":
+                Prev = time.perf_counter()
                 angle = angle/100
                 self.definecolor(angle)
                 self.colorfill()
-                time.sleep(self.wait)
+                while time.perf_counter() - Prev < self.wait:
+                    pass
             else:
                 break
         return None
@@ -312,6 +314,7 @@ class WiFiLight(GenericLed):
         self.color = [0,0,0]
         self.color_rgb = {"r":0, "g":0,"b":0}
         self.wait = 0.01
+        self.brightness = 1
         self.function = "colorfill"
         self.functdict = {"clear":self.clear,
                 "colorfill": self.colorfill,
@@ -334,9 +337,9 @@ class WiFiLight(GenericLed):
                 R += "0"
             R += str(x)
             return R
-        self.color[0] = self.color_rgb["r"]
-        self.color[1] = self.color_rgb["g"]
-        self.color[2] = self.color_rgb["b"]
+        self.color[0] = int(self.color_rgb["r"] * self.brightness)
+        self.color[1] = int(self.color_rgb["g"] * self.brightness)
+        self.color[2] = int(self.color_rgb["b"] * self.brightness)
         Colors = [padding(x) for x in self.color]
         try:
             Re = rq.post(self.Adress, json = str(Colors[0])+str(Colors[1])+str(Colors[2]), timeout = 0.007)
