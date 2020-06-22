@@ -309,13 +309,16 @@ class APALedstrip(GenericLed):
         return None
 
 class WiFiLight(GenericLed):
-    def __init__(self, Name, IP_ADRESS):
+    def __init__(self, Name, IP_ADRESS, Master=None):
         self.Adress = "http://"+IP_ADRESS+"/color"
         self.color = [0,0,0]
+        self.OldColor = None
         self.color_rgb = {"r":0, "g":0,"b":0}
         self.wait = 0.01
         self.brightness = 1
         self.function = "colorfill"
+        self.master = Master
+        self.sync = False
         self.functdict = {"clear":self.clear,
                 "colorfill": self.colorfill,
                 "colorfade": self.colorfade,
@@ -341,11 +344,19 @@ class WiFiLight(GenericLed):
         self.color[1] = int(self.color_rgb["g"] * self.brightness)
         self.color[2] = int(self.color_rgb["b"] * self.brightness)
         Colors = [padding(x) for x in self.color]
-        try:
-            Re = rq.post(self.Adress, json = str(Colors[0])+str(Colors[1])+str(Colors[2]), timeout = 0.007)
-            #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
-        except Exception as E:
-            pass
+        if not self.OldColor == Colors:
+            self.OldColor = Colors
+            try:
+                Re = rq.post(self.Adress, json = str(Colors[0])+str(Colors[1])+str(Colors[2]), timeout = 0.007)
+                #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
+            except Exception as E:
+                pass
 
     def main(self):
+        if self.sync and not self.master == None:
+            self.wait = main.rooms[self.master['room']]['lights'][self.master['light']].wait
+            self.color_rgb = main.rooms[self.master['room']]['lights'][self.master['light']].color_rgb
+            self.brightness = main.rooms[self.master['room']]['lights'][self.master['light']].brightness
+            if not self.function == 'colorfill':
+                self.function = 'colorfill'
         self.functdict[self.function]()
