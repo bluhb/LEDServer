@@ -92,7 +92,7 @@ class GenericLed:
         for i in range(int(Math.pi*50), 0, -1):
             self.brightness = Math.sin(i/100)
             self.colorfill()
-            time.sleep(1/50)
+            time.sleep(1/100)
         self.color_rgb = {'r':0, 'g':0, 'b':0}
         self.brightness = OldBrightness
         self.function = 'colorfill'
@@ -110,7 +110,7 @@ class GenericLed:
 
     def colorfade(self): #colorfade the led strip
         pi = Math.pi
-        for angle in range(0, int(200*pi), 1):
+        for angle in range(0, int(200*pi), 2):
             if self.function == "colorfade":
                 Prev = time.perf_counter()
                 angle = angle/100
@@ -313,8 +313,9 @@ class WiFiLight(GenericLed):
         self.Adress = "http://"+IP_ADRESS+"/color"
         self.color = [0,0,0]
         self.OldColor = None
+        self.LastSendTime = None
         self.color_rgb = {"r":0, "g":0,"b":0}
-        self.wait = 0.01
+        self.wait = 0.1
         self.brightness = 1
         self.function = "colorfill"
         self.master = Master
@@ -344,8 +345,13 @@ class WiFiLight(GenericLed):
         self.color[1] = int(self.color_rgb["g"] * self.brightness)
         self.color[2] = int(self.color_rgb["b"] * self.brightness)
         Colors = [padding(x) for x in self.color]
-        if not self.OldColor == Colors:
+        if not self.OldColor == Colors or time.perf_counter() > self.LastSendTime + 300: #don't resend already send colors, unless 5 minutes have past.
+            try:
+                print("Request send", time.perf_counter() - self.LastSendTime, Colors)
+            except:
+                pass
             self.OldColor = Colors
+            self.LastSendTime = time.perf_counter()
             try:
                 Re = rq.post(self.Adress, json = str(Colors[0])+str(Colors[1])+str(Colors[2]), timeout = 0.007)
                 #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
