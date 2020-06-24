@@ -23,3 +23,6 @@ Defenitions:
     - WEB.py - Defines all the handles for the website, this is the server.
     - static
       - functions.js - All javascript functions for the website.
+
+<img src=./Pictures/Website1.png>
+<img src=./Pictures/Website2.png>
