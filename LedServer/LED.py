@@ -83,19 +83,30 @@ SunRise = {
                 252, 253, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
                 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255]
         }
+
+def LogColors(f):
+    def wrapper(*args):
+        print("hallo")
+        if args[0].function == "clear" and args[0].color != [0,0,0]:
+            print("{} : {}".format(args[0].name, args[0].color))
+        return f(*args)
+    return wrapper
+
 class GenericLed:
     def __init__(self):
         return None
 
+    @LogColors
     def clear(self): #set color to black and set function to colorfill
         OldBrightness = self.brightness
         for i in range(int(Math.pi*50), 0, -1):
             self.brightness = Math.sin(i/100)
             self.colorfill()
             time.sleep(1/100)
-        self.color_rgb = {'r':0, 'g':0, 'b':0}
+        self.color = [0,0,0]
+        self.color_rgb = {"r": 0, "g": 0, "b":0}
+        self.function = "colorfill"
         self.brightness = OldBrightness
-        self.function = 'colorfill'
         return None
 
     def definecolor(self, angle): #calculate the color for the colorfade
@@ -209,6 +220,9 @@ class Arduino(GenericLed):
         return None
 
     def colorfill(self): #write colors to the arduino
+        self.color[0] = self.color_rgb["r"]
+        self.color[1] = self.color_rgb["g"]
+        self.color[2] = self.color_rgb["b"]
         data = struct.pack('>BBB',
             int(self.color_rgb['r']*self.brightness),
             int(self.color_rgb['g']*self.brightness),
@@ -329,7 +343,7 @@ class WiFiLight(GenericLed):
         except Exception as E:
             print(E)
             print(Name, "Had a connection error")
-        self.Name = Name
+        self.name = Name
 
     def colorfill(self):
         #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
@@ -346,10 +360,6 @@ class WiFiLight(GenericLed):
         self.color[2] = int(self.color_rgb["b"] * self.brightness)
         Colors = [padding(x) for x in self.color]
         if not self.OldColor == Colors or time.perf_counter() > self.LastSendTime + 300: #don't resend already send colors, unless 5 minutes have past.
-            try:
-                print("Request send", time.perf_counter() - self.LastSendTime, Colors)
-            except:
-                pass
             self.OldColor = Colors
             self.LastSendTime = time.perf_counter()
             try:

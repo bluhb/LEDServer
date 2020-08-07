@@ -36,7 +36,7 @@ rooms = {
         "livingroom2":{
             "room":data.room(name="livingroom2", dataKeys=dataKeys),
             "lights":{
-                "LedStrip":LED.WiFiLight(Name = "LedStrip",
+                "LedStrip":LED.WiFiLight(Name = "livingroom2",
                     IP_ADRESS = "ESP-01_test.lan",
                     Master = {"room":"livingroom", "light":"LedStrip"})
                 }
