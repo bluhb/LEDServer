@@ -1,15 +1,15 @@
 # all classes for the led strips.
 import __main__ as main
-# import serial
-# import time
-# import struct
-# import sys
-# import requests as rq
+import serial
+import time
+import struct
+import sys
+import requests as rq
 
-# import adafruit_dotstar
-# import board
-# from functools import lru_cache
-# import random
+import adafruit_dotstar
+import board
+from functools import lru_cache
+import random
 import colorsys
 
 #modules for functions
