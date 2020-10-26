@@ -185,9 +185,9 @@ class Arduino(GenericLed):
     def colorfill(self): #write colors to the arduino
         RGB = self.HSV.ToRGB()
         data = struct.pack('>BBB',
-            int(RGB[0]*self.brightness),
-            int(RGB[1]*self.brightness),
-            int(RGB[2]*self.brightness))
+            int(RGB[0]),
+            int(RGB[1]),
+            int(RGB[2]))
         self.arduino.write(struct.pack('?', True))
         self.arduino.write(data)
         return None
