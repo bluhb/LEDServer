@@ -80,8 +80,8 @@ def ApiLightSetattr():
         Key = JSON["AttrKey"][0]
         Value = JSON["AttrKey"][1]
         for Light in JSON["Lights"]:
-            if hasattr(main.rooms[RoomID]["Lights"][Light], Key):
-                setattr(main.rooms[RoomID]["Lights"][Light], Key, Value)
+            if hasattr(main.rooms[RoomID]["lights"][Light], Key):
+                setattr(main.rooms[RoomID]["lights"][Light], Key, Value)
             else:
                 continue
         return("Attribute set", 200)
@@ -96,7 +96,7 @@ def ApiLightGetattr():
             and "Attr" in JSON:
         RoomID = JSON["Room"]
         Key = JSON["Attr"]
-        Value = getattr(main.rooms[RoomID]["Lights"][Light], Key)
+        Value = getattr(main.rooms[RoomID]["lights"][Light], Key)
         return(jsonify({"Key": Key, "Value": Value}), 200)
     else:
         return("Bad Json", 400)
