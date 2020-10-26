@@ -229,9 +229,9 @@ class APALedstrip(GenericLed):
         self.length = pixels
         self.function = 'colorfill'
         self.functdict = {
-                'colorfill', self.colorfill,
+                'colorfill': self.colorfill,
                 'on': self.on,
-                "off", self.off,
+                "off": self.off,
                 'colorfade': self.colorfade,
                 'sunrise': self.sunRise,
                 'sunset': self.sunSet,
