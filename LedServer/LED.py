@@ -149,12 +149,15 @@ class Arduino(GenericLed):
         self.TempHumid = {}
         self.wait = 0.1
         self.brightness = 1
-        self.function = 'colorfill'
-        self.functdict = {'colorfill': self.colorfill,
+        self.function = 'on'
+        self.functdict = {
+                'colorfill': self.colorfill,
+                'on': self.on,
+                "off", self.off,
                 'colorfade': self.colorfade,
                 'sunrise': self.sunRise,
                 'sunset': self.sunSet,
-                'clear': self.clear}
+                'on': self.on}
         self.prevMilli = time.perf_counter()
         self.now = time.time()
         self.interval = 305
@@ -225,12 +228,15 @@ class APALedstrip(GenericLed):
         self.wait = 0.1
         self.length = pixels
         self.function = 'colorfill'
-        self.functdict = {'colorfill': self.colorfill,
+        self.functdict = {
+                'colorfill', self.colorfill,
+                'on': self.on,
+                "off", self.off,
                 'colorfade': self.colorfade,
                 'sunrise': self.sunRise,
                 'sunset': self.sunSet,
                 'rainbow': self.rainbow,
-                'clear':self.clear}
+                'on':self.on}
         return None
 
     def main(self): #check for sync, copy colors from dict to array and run the function
@@ -281,7 +287,8 @@ class WiFiLight(GenericLed):
         self.function = "colorfill"
         self.master = Master
         self.sync = False
-        self.functdict = {"clear":self.clear,
+        self.functdict = {"on":self.on,
+                "off", self.off,
                 "colorfill": self.colorfill,
                 "colorfade": self.colorfade,
                 "sunrise": self.sunRise}
