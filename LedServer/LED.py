@@ -95,40 +95,40 @@ class GenericLed:
                 break
         return None
 
-    # def sunRise(self, Duration = 1):
-        # global SunRise
-        # Steps = len(SunRise["red"])
-        # for i in range(0,Steps):
-            # if self.function == "sunrise":
-                # self.color_rgb = {"r":SunRise["red"][i],
-                        # "g":SunRise["green"][i],
-                        # "b":SunRise["blue"][i]
-                        # }
-                # self.color[0] = self.color_rgb['r']
-                # self.color[1] = self.color_rgb['g']
-                # self.color[2] = self.color_rgb['b']
-                # self.colorfill()
-                # print(self.color)
-                # time.sleep((Duration * 60)/Steps)
-            # else:
-                # break
-        # return None
+    def sunRise(self, Duration = 1):
+        global SunRise
+        Steps = len(SunRise["red"])
+        for i in range(0,Steps):
+            if self.function == "sunrise":
+                self.color_rgb = {"r":SunRise["red"][i],
+                        "g":SunRise["green"][i],
+                        "b":SunRise["blue"][i]
+                        }
+                self.color[0] = self.color_rgb['r']
+                self.color[1] = self.color_rgb['g']
+                self.color[2] = self.color_rgb['b']
+                self.colorfill()
+                print(self.color)
+                time.sleep((Duration * 60)/Steps)
+            else:
+                break
+        return None
 
-    # def sunSet(self, Duration = 5):
-        # global SunRise
-        # Steps = len(SunRise["red"])
-        # for i in range(Steps-1, 0, -1):
-            # if self.function == "sunset":
-                # self.color_rgb = {"r":SunRise["red"][i],
-                        # "g":SunRise["green"][i],
-                        # "b":SunRise["blue"][i]
-                        # }
-                # self.colorfill()
-                # print(self.color_rgb)
-                # time.sleep((Duration * 60)/Steps)
-            # else:
-                # break
-        # return None
+    def sunSet(self, Duration = 5):
+        global SunRise
+        Steps = len(SunRise["red"])
+        for i in range(Steps-1, 0, -1):
+            if self.function == "sunset":
+                self.color_rgb = {"r":SunRise["red"][i],
+                        "g":SunRise["green"][i],
+                        "b":SunRise["blue"][i]
+                        }
+                self.colorfill()
+                print(self.color_rgb)
+                time.sleep((Duration * 60)/Steps)
+            else:
+                break
+        return None
 
     def exit(self):
         return None
