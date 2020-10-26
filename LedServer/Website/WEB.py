@@ -88,6 +88,21 @@ def ApiLightSetattr():
     else:
         return("Bad Json", 400)
 
+@app.route('/api/light/setHSV', methods=["POST"])
+def ApiLightSetHSV():
+    JSON = request.get_json(force=True)
+    if "Room" in JSON\
+            and "Lights" in JSON\
+            and "HSV" in JSON:
+        RoomID = JSON["Room"]
+        for Light in JSON["Lights"]:
+                main.rooms[RoomID]["lights"][Light].SetHSV(*JSON["HSV"])
+            else:
+                continue
+        return("HSV set", 200)
+    else:
+        return("Bad Json", 400)
+
 @app.route('/api/light/getAttr', methods=["POST"])
 def ApiLightGetattr():
     JSON = request.get_json(force=True)
