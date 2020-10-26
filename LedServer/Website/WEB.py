@@ -96,9 +96,7 @@ def ApiLightSetHSV():
             and "HSV" in JSON:
         RoomID = JSON["Room"]
         for Light in JSON["Lights"]:
-                main.rooms[RoomID]["lights"][Light].SetHSV(*JSON["HSV"])
-            else:
-                continue
+            main.rooms[RoomID]["lights"][Light].SetHSV(*JSON["HSV"])
         return("HSV set", 200)
     else:
         return("Bad Json", 400)
