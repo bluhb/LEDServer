@@ -288,7 +288,7 @@ class WiFiLight(GenericLed):
         self.master = Master
         self.sync = False
         self.functdict = {"on":self.on,
-                "off", self.off,
+                "off": self.off,
                 "colorfill": self.colorfill,
                 "colorfade": self.colorfade,
                 "sunrise": self.sunRise}
