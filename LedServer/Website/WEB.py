@@ -31,13 +31,6 @@ def homePage():
             rooms=rooms,
             page="home")
 
-#handle to show the graphs of every room and the pi
-@app.route('/graphs')
-def graphs():
-    global rooms
-    return render_template('index.html',
-            rooms = rooms,
-            page='graphs')
 
 #Here are the handles for alarms
 @app.route('/alarm')
@@ -49,24 +42,6 @@ def alarm():
                 alarms = Alarms,
                 page = 'alarm')
 
-@app.route('/alarm/setAlarm', methods=["POST"])
-def setAlarm():
-    JSON = request.get_json(force=True)
-    if not ( ("Hour" in JSON) and ("Minute" in JSON) ):
-        return ("", 204)
-    Hour = JSON["Hour"]
-    Minute = JSON["Minute"]
-    PreWakeUp = JSON.get("PreWakeUp", None)
-    Alarm.setupAlarm(Hour, Minute, PreWakeUp=PreWakeUp)
-    return("", 418)
-
-@app.route('/alarm/disableAlarm', methods=["POST"])
-def disableAlarm():
-    JSON = request.get_json(force=True)
-    if not "AlarmName" in JSON:
-        return("",204)
-    Alarm.AlarmDict[JSON["AlarmName"]]["Stop"] = True
-    return("",204)
 
 #From here on all the light handles begin
 @app.route('/rooms/<string:roomID>')
@@ -88,91 +63,48 @@ def ledPage(roomID):
     else:
         return('404 not found, you have not installed this light')
 
+@app.route('/car')
+def ritRegistration():
+    global rooms
+    return render_template('index.html',
+            rooms = rooms,
+            page='ritRegistration')
+
+@app.route('/api/light/setAttr', methods=["POST"])
+def ApiLightSetattr():
+    JSON = request.get_json(force=True)
+    if "Room" in JSON\
+            and "Lights" in JSON\
+            and "AttrKey" in JSON:
+        RoomID = JSON["Room"]
+        Key = JSON["AttrKey"][0]
+        Value = JSON["AttrKey"][1]
+        for Light in JSON["Lights"]:
+            if hasattr(main.rooms[RoomID]["Lights"][Light], Key):
+                setattr(main.rooms[RoomID]["Lights"][Light], Key, Value)
+            else:
+                continue
+        return("Attribute set", 200)
+    else:
+        return("Bad Json", 400)
+
+@app.route('/api/light/getAttr', methods=["POST"])
+def ApiLightGetattr():
+    JSON = request.get_json(force=True)
+    if "Room" in JSON\
+            and "Light" in JSON\
+            and "Attr" in JSON:
+        RoomID = JSON["Room"]
+        Key = JSON["Attr"]
+        Value = getattr(main.rooms[RoomID]["Lights"][Light], Key)
+        return(jsonify({"Key": Key, "Value": Value}), 200)
+    else:
+        return("Bad Json", 400)
 
 
-@app.route('/rooms/color', methods=["POST"])
-# expect JSON in the following format:
-# {'roomID':A rooms defined in main
-#  'lightIDs':A list of lightIDs defined in main,
-#  'r': 0, 'g':0, 'b':0}
-def colorControl():
-    color = {'r':0,'g':0,'b':0}
-    json = request.get_json(force=True)
-    for key in color:
-        color[key] = int(json[key])
-    lightIDs = json['lightIDs']
-    roomID = json['roomID']
-    for lightID in lightIDs:
-        main.rooms[roomID]['lights'][lightID].color_rgb = color
-    return("",204)
+@app.route('/api/room/alarm', methods=["POST"])
 
-@app.route('/rooms/function', methods=["POST"])
-def functionControl():
-    #expect JSON with following format
-    #{'roomID': A room defined in main.
-    # 'lightIDs': A list of lightIDs defined in main.
-    # 'function': An accepted function for the light}
-    function = ""
-    json = request.get_json(force=True)
-    roomID = json['roomID']
-    lightIDs = json['lightIDs']
-    function = json['function']
-    for lights in lightIDs:
-        main.rooms[roomID]['lights'][lights].function = function
-    return("",204)
-
-@app.route('/rooms/attrNum', methods=["POST"])
-def attributeControlNum():
-    #expect JSON with following format
-    # {'roomID': A room defined in main,
-     # 'lightIDs': A list of lightIDs defined in main.
-     # 'key':value -> key is the variable that needs to be set to value
-     # }
-    json = request.get_json(force=True)
-    roomID = json['roomID']
-    lightIDs = json['lightIDs']
-    json.pop('roomID', None)
-    json.pop('lightIDs', None)
-    attributes={}
-    for key,value in json.items():
-        attributes[key] = value
-    #try:
-    for lights in lightIDs:
-        for key,value in attributes.items():
-            setattr(main.rooms[roomID]['lights'][lights],
-                    key,
-                    float(value))
-    #except:
-    #    pass
-    return("",204)
-
-@app.route('/rooms/attrBool', methods=["POST"])
-def attributeControlBool():
-    #expect JSON with following format
-    # {'roomID': A room defined in main,
-     # 'lightIDs': A list of lightIDs defined in main.
-     # 'key':value -> key is the variable that needs to be set to value
-     # }
-
-    json = request.get_json(force=True)
-    roomID = json['roomID']
-    lightIDs = json['lightIDs']
-    json.pop('roomID', None)
-    json.pop('lightIDs', None)
-    attributes={}
-    for key,value in json.items():
-            attributes[key] = value
-    try:
-        for lights in lightIDs:
-            for key,value in attributes.items():
-                setattr(main.rooms[roomID]['lights'][lights],
-                        key,
-                        bool(value))
-    except:
-        pass
-    return("",204)
-
-@app.route('/rooms/data', methods=["POST"])
+@app.route('/api/room/data', methods=["POST"])
 def returnData():
     # expect json with only the room ID in it, return with the data in json
     json = request.get_json(force=True)
@@ -189,7 +121,7 @@ def returnData():
     except:
         return(jsonify({'error': 'invalid'}), 200)
 
-@app.route('/rooms/graphData', methods=["POST"])
+@app.route('/api/car/graphData', methods=["POST"])
 def returnGraphData():
     # expect json with roomID
     JSON = request.get_json(force = True)
@@ -255,14 +187,9 @@ def returnGraphData():
     GraphsJSON = jsonify(Graphs)
     return(GraphsJSON)
 
-@app.route('/ritregistration')
-def ritRegistration():
-    global rooms
-    return render_template('index.html',
-            rooms = rooms,
-            page='ritRegistration')
 
-@app.route('/ritregistration/addNew', methods=["POST"])
+
+@app.route('/api/car/addNew', methods=["POST"])
 def addNewMileage():
     #expects json with "KMStand", "BeginEindPunt", "Getankt"
     json = request.get_json(force=True)
@@ -275,13 +202,13 @@ def addNewMileage():
     except Exception as e:
         return(e,400)
 
-@app.route('/ritregistration/getData')
+@app.route('/api/car/getData')
 def returnRitData():
     DataList = main.RitReg.getAllData()
     DataList.reverse()
     return(jsonify(DataList), 200)
 
-@app.route('/ritregistration/getMileage')
+@app.route('/api/car/getMileage')
 def returnMileAge():
     MileAges, MileAge = main.RitReg.averageMileage()
     return(jsonify({"Mileage": MileAge, "Mileages": MileAges}), 200)
