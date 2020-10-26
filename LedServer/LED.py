@@ -152,7 +152,7 @@ class Arduino(GenericLed):
         self.TempHumid = {}
         self.wait = 0.1
         self.brightness = 1
-        self.function = 'on'
+        self.function = 'colorfill'
         self.functdict = {
                 'colorfill': self.colorfill,
                 'on': self.on,
