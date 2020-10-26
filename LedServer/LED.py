@@ -68,7 +68,6 @@ class HSV:
 
 class GenericLed:
     def __init__(self):
-        self.HSV = HSV()
         return None
 
 
@@ -146,6 +145,7 @@ class Arduino(GenericLed):
         self.name = name
         self.arduino = serial.Serial(self.device, 115200)
 
+        self.HSV = HSV()
         self.TempHumid = {}
         self.wait = 0.1
         self.brightness = 1
@@ -225,6 +225,7 @@ class APALedstrip(GenericLed):
 		auto_write=False)
         self.name = name
         self.brightness = 1
+        self.HSV = HSV()
         self.wait = 0.1
         self.length = pixels
         self.function = 'colorfill'
@@ -283,6 +284,7 @@ class WiFiLight(GenericLed):
         self.LastSendTime = None
         self.OldColor = []
         self.wait = 0.1
+        self.HSV = HSV()
         self.brightness = 1
         self.function = "colorfill"
         self.master = Master
