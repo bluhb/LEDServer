@@ -266,7 +266,7 @@ class APALedstrip(GenericLed):
         self.HSV.S = 100
         if self.length < 1: self.length = 1
         for angle in range(0,360, 1): #loop from zero to 200 pi, because you can't loop in floats
-            if self.function == "raiseinbow":
+            if self.function == "rainbow":
                 for j in range(0, len(self.pixels),1):
                     if j < int(self.length):
                         angle = angle + offset #calculate offset with angle, this will make sure every led is another color
