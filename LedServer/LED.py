@@ -76,6 +76,7 @@ class GenericLed:
         for i in range(V, 0, -1):
             self.colorfill()
             self.HSV.V = i
+        self.HSV.V = 0
         self.function = "colorfill"
         return None
 
