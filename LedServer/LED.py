@@ -270,6 +270,7 @@ class APALedstrip(GenericLed):
                 for j in range(0, len(self.pixels),1):
                     if j < int(self.length):
                         angle = angle + offset #calculate offset with angle, this will make sure every led is another color
+                        if angle > 360: angle = angle - 360
                         self.HSV.H = angle
                         Color = self.HSV.ToRGB()
                         self.pixels[j] = tuple(Color)
