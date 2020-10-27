@@ -16,7 +16,7 @@ rooms = {
             "lights":{
                 "LedStrip":LED.Arduino(name ='bed',
                     serialPort = 'ttyUSB0',
-                    master = {'room':'livingroom', 'light':'LedStrip'},
+                    master = {'room':'livingroom', 'light':'Muur'},
                     roomSensors = 'livingroom')
                 }
             },
