@@ -58,7 +58,7 @@ def ritRegistration():
 
 @app.route('/api/light/getLights', methods=["POST"])
 def ApiGetLights():
-    return ("Dirk", 200)
+    return (jsonify(main.rooms), 200)
 
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
