@@ -64,7 +64,6 @@ async function CreateRoomCards(){
     TotalHTML = ""
     for (Room in RoomsLights){
         RoomHTML = RoomCardT({"Room":Room, "Lights":RoomsLights[Room]});
-        console.log(RoomHTML);
         TotalHTML = TotalHTML.concat(RoomHTML);
     }
     document.getElementById("RoomContainer").innerHTML = TotalHTML;
