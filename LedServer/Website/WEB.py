@@ -62,8 +62,8 @@ def ApiGetLights():
     for room in main.rooms:
         if "lights" in main.rooms[room]:
             Data[room] = list(main.rooms[room]["lights"].keys())
-
-    return (jsonify(main.rooms), 200)
+    print(Data)
+    return (jsonify(Data), 200)
 
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
