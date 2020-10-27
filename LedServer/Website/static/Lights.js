@@ -59,9 +59,11 @@ async function CreateRoomCards(){
         contentType: 'application/json',
         data: JSON.stringify(""),
     });
+    TotalHTML = ""
     for (Room in RoomsLights){
         RoomHTML = RoomCardT({"Room":Room, "Lights":RoomsLights[Room]});
         console.log(RoomHTML);
-        document.getElementById("RoomContainer").innerHTML = RoomHTML;
+        TotalHTML = TotalHTML.concat(RoomHTML);
     }
+    document.getElementById("RoomContainer").innerHTML = TotalHTML;
 }
