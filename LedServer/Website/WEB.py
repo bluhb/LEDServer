@@ -44,24 +44,10 @@ def alarm():
 
 
 #From here on all the light handles begin
-@app.route('/rooms/<string:roomID>')
-def ledPage(roomID):
-    global rooms
-    if (roomID in rooms):
-        Lights = {}
-        for Light in [*main.rooms[roomID]['lights']]:
-            Lights[Light] = main.rooms[roomID]["lights"][Light].functdict.keys()
-        print(Lights)
-        return render_template('index.html',
-                rooms = rooms,
-                roomID = roomID,
-                lights = [*main.rooms[roomID]['lights']],
-                functdict = main.rooms[roomID]['lights']['LedStrip'].functdict,
-                color_rgb = main.rooms[roomID]['lights']['LedStrip'].color_rgb,
-                wait = main.rooms[roomID]['lights']['LedStrip'].wait,
+@app.route('/lights')
+def ledPage():
+    return render_template('index.html',
                 page='led')
-    else:
-        return('404 not found, you have not installed this light')
 
 @app.route('/car')
 def ritRegistration():

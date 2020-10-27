@@ -118,12 +118,11 @@ class GenericLed:
         Steps = len(SunRise["red"])
         for i in range(Steps-1, 0, -1):
             if self.function == "sunset":
-                self.color_rgb = {"r":SunRise["red"][i],
-                        "g":SunRise["green"][i],
-                        "b":SunRise["blue"][i]
-                        }
+                self.HSV.FromRGB([SunRise["red"][i],
+                        SunRise["green"][i],
+                        SunRise["blue"][i]
+                        ])
                 self.colorfill()
-                print(self.color_rgb)
                 time.sleep((Duration * 60)/Steps)
             else:
                 break
@@ -133,7 +132,6 @@ class GenericLed:
         return None
 
 #------ class for arduino ledstrip.
-#------ in the future a class for wifi enabled led strips will come.
 
 class Arduino(GenericLed):
     def __init__(self, name, serialPort, master = None, roomSensors = None): #initialize object
