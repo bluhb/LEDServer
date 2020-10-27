@@ -71,12 +71,10 @@ function CreateLightCards(RoomsLights, RoomCardT, LightCardT, EndRoomCard){
         LightHTML = "";
         for(L in Lights){
             Light = Lights[L]
-            console.log(Light);
             HTML = LightCardT({"Room":Room, "Light":Light});
             LightHTML.concat(HTML);
-            console.log(HTML);
-            console.log(LightHTML);
         }
         TotalHTML = RoomHTML.concat(LightHTML).concat(EndRoomCard);
+        console.log(TotalHTML);
     }
 }
