@@ -103,15 +103,11 @@ class GenericLed:
         Steps = len(SunRise["red"])
         for i in range(0,Steps):
             if self.function == "sunrise":
-                self.color_rgb = {"r":SunRise["red"][i],
-                        "g":SunRise["green"][i],
-                        "b":SunRise["blue"][i]
-                        }
-                self.color[0] = self.color_rgb['r']
-                self.color[1] = self.color_rgb['g']
-                self.color[2] = self.color_rgb['b']
+                self.HSV.FromRGB([SunRise["red"][i],
+                        SunRise["green"][i],
+                        SunRise["blue"][i]
+                        ])
                 self.colorfill()
-                print(self.color)
                 time.sleep((Duration * 60)/Steps)
             else:
                 break
