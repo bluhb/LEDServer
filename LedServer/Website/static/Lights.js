@@ -66,8 +66,8 @@ async function CreateRoomCards(){
         Lights = RoomsLights[Room];
         RoomHTML = RoomCardT({"Room":Room});
         LightHTML = "";
-        for(Light in Lights){
-            console.log(Light)
+        for(L in Lights){
+            Light = Lights[L]
             LightHTML.concat(LightCardT({"Light":Light}));
             LightHTML.concat("/n");
         }
