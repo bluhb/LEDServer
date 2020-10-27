@@ -64,10 +64,10 @@ async function CreateRoomCards(){
     });
     for (Room in RoomsLights){
         Lights = RoomsLights[Room];
-        console.log(Room.concat(" ").concat(Lights));
         RoomHTML = RoomCardT({"Room":Room});
         LightHTML = "";
         for(Light in Lights){
+            console.log(Light)
             LightHTML.concat(LightCardT({"Light":Light}));
             LightHTML.concat("/n");
         }
