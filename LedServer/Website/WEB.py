@@ -58,6 +58,7 @@ def ritRegistration():
 
 @app.route('/api/light/getLights', methods=["POST"])
 def ApiGetLights():
+    return ("Dirk", 200)
 
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
