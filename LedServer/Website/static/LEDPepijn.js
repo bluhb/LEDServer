@@ -1,5 +1,4 @@
-InitColorWheel()
-function InitColorWheel(){
+InitColorWheel() function InitColorWheel(){
     var ColorPicker1 = iro.ColorPicker("#livingroom_lamp_1_colorpicker", {
             width:250,
             id:"Livingroom_light_1"
@@ -21,7 +20,7 @@ function InitColorWheel(){
 }
 
 function ColorChanged(color, ID){
-    console.log(color.rgb);
+    console.log(color);
     console.log(ID);
 }
 
@@ -46,4 +45,8 @@ function SwitchLightClicked(ID, Value){
         }
     }
     LightAll.checked = Value;
+}
+
+function SetLights(){
+
 }

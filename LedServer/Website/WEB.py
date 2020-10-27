@@ -56,6 +56,9 @@ def ritRegistration():
             rooms = rooms,
             page='ritRegistration')
 
+@app.route('/api/light/getLights', methods=["POST"])
+def ApiGetLights():
+
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
     JSON = request.get_json(force=True)
