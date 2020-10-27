@@ -61,7 +61,7 @@ def ApiGetLights():
     Data = {}
     for room in main.rooms:
         if "lights" in main.rooms[room]:
-            Data[room] = list(main.rooms[room]["lights"].keys)
+            Data[room] = list(main.rooms[room]["lights"].keys())
 
     return (jsonify(main.rooms), 200)
 
