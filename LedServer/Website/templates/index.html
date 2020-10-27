@@ -27,13 +27,10 @@
     <a class="navbar-brand" href="/">PI HOME</a>
     </div>
     <ul class="nav navbar-nav">
-    <li {% if page == 'home' %} class="active" {% endif %}><a href="/">Home</a></li>
-    {% for i in rooms %}
-    <li {% if i == roomID %} class="active" {% endif %}><a href="/rooms/{{i}}">{{i}}</a></li>
-    {% endfor %}
-    <li {% if page == 'graphs' %} class="active" {% endif %}><a href="/graphs">Graphs</a></li>
-    <li {% if page == 'alarms' %} class="active" {% endif %}><a href="/alarm">Alarms</a></li>
-    <li {% if page == 'ritRegistration' %} class="active" {% endif %}><a href="/ritregistration">Rit registratie</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/graphs">Graphs</a></li>
+    <li><a href="/alarm">Alarms</a></li>
+    <li><a href="/ritregistration">Rit registratie</a></li>
     </ul>
   </nav>
   <div class="jumbotron">
