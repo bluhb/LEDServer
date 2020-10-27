@@ -53,6 +53,8 @@ async function CreateRoomCards(){
         </div>
     </div>
     `
+    RoomCardT = Handlebars.compile(RoomCard);
+    LightCardT = Handlebars.compile(LightCard);
     var RoomsLights = await $.ajax({
         url: BaseUrl.concat("/api/light/getLights"),
         dataType: 'json',
@@ -63,5 +65,13 @@ async function CreateRoomCards(){
     for (Room in RoomsLights){
         Lights = RoomsLights[Room];
         console.log(Room.concat(" ").concat(Lights));
+        RoomHTML = RoomCardT({"Room":Room});
+        LightHTML = "";
+        for(Light in Lights){
+            LightHTML.concat(LightCardT({"Light":Light}));
+            LightHTML.concat("/n");
+        }
+        TotalHTML = RoomHTML.concat(LightHTML).concat(EndRoomCard);
+        console.log(TotalHTML);
     }
 }

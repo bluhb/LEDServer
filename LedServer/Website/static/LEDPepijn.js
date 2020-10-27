@@ -1,4 +1,4 @@
-InitColorWheel() function InitColorWheel(){
+function InitColorWheel(){
     var ColorPicker1 = iro.ColorPicker("#livingroom_lamp_1_colorpicker", {
             width:250,
             id:"Livingroom_light_1"
