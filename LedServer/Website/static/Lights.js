@@ -20,41 +20,38 @@ async function CreateRoomCards(){
             <div id="light{{Room}}" class="collapse" data-parent="#{{Room}}">
                 
                 <div id="accordion">
-    `
-    var LightCard = `
+                    {{#each Lights}}
                     <div class="card">
 
                         <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#{{Room}}collapse{{Light}}">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#{{Room}}collapse{{this}}">
                                 <div>
-                                    <p>{{Light}}</p>
+                                    <p>{{this}}</p>
                                 </div>
                             </a>
                             <form>
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="{{Room}}-{{Light}}" onclick="SwitchLightClicked(this.id, this.checked)">
-                                    <label class="custom-control-label" for="{{Room}}-{{Light}}">ON / OFF</label> 
+                                    <input type="checkbox" class="custom-control-input" id="{{Room}}-{{this}}" onclick="SwitchLightClicked(this.id, this.checked)">
+                                    <label class="custom-control-label" for="{{Room}}-{{this}}">ON / OFF</label> 
                                 </div>
                                     <label class="text-info">Intensity</label>
-                                    <input type="range" class="custom-range" id="{{Room}}-{{Light}}"> <!-- style=width:100px> -->
+                                    <input type="range" class="custom-range" id="{{Room}}-{{this}}"> <!-- style=width:100px> -->
                             </form> 
                         </div>
-                        <div id="{{Room}}collapse{{Light}}" class="collapse" data-parent="#accordion">
+                        <div id="{{Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
                             <div class="card-body">
-                                <p style="text-decoration:underline"><strong>Settings {{Light}}</strong><p>
-                                <div class="wheel" id="{{Room}}-{{Light}}-colorpicker"></div>
+                                <p style="text-decoration:underline"><strong>Settings {{this}}</strong><p>
+                                <div class="wheel" id="{{Room}}-{{this}}-colorpicker"></div>
                             </div>
                         </div>
                     </div>
-    `
-    var EndRoomCard = `
+                    {{/each}}
                 </div>
             </div>
         </div>
     </div>
     `
     RoomCardT = Handlebars.compile(RoomCard);
-    LightCardT = Handlebars.compile(LightCard);
     var RoomsLights = await $.ajax({
         url: BaseUrl.concat("/api/light/getLights"),
         dataType: 'json',
@@ -62,19 +59,9 @@ async function CreateRoomCards(){
         contentType: 'application/json',
         data: JSON.stringify(""),
     });
-    await CreateLightCards(RoomsLights, RoomCardT, LightCardT, EndRoomCard);
-}
-function CreateLightCards(RoomsLights, RoomCardT, LightCardT, EndRoomCard){
     for (Room in RoomsLights){
-        Lights = RoomsLights[Room];
-        RoomHTML = RoomCardT({"Room":Room});
-        LightHTML = "";
-        for(L in Lights){
-            Light = Lights[L]
-            HTML = LightCardT({"Room":Room, "Light":Light});
-            LightHTML.concat(HTML);
-        }
-        TotalHTML = RoomHTML.concat(LightHTML).concat(EndRoomCard);
+        RoomHTML = RoomCardT({"Room":Room, "Lights":RoomsLights[Room]});
+        TotalHTML = RoomHTML.concat(EndRoomCard);
         console.log(TotalHTML);
     }
 }
