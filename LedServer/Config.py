@@ -24,18 +24,7 @@ rooms = {
             "room":data.room(name='livingroom', dataKeys=dataKeys),
             "lights":{
                 "LedStrip":LED.APALedstrip(name = 'livingroom',
-                    )
-                # "LedStrip2":LED.Arduino(name ='bed',
-                    # serialPort = 'ttyUSB0',
-                    # room = 'livingroom',
-                    # master = {'room':'livingroom', 'light':'LedStrip'},
-                    # roomSensors = 'livingroom')
-
-                }
-            },
-        "livingroom2":{
-            "room":data.room(name="livingroom2", dataKeys=dataKeys),
-            "lights":{
+                    ),
                 "LedStrip":LED.WiFiLight(Name = "livingroom2",
                     IP_ADRESS = "ESP-01_test.lan",
                     Master = {"room":"livingroom", "light":"LedStrip"})
