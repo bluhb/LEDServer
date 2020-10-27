@@ -62,6 +62,9 @@ async function CreateRoomCards(){
         contentType: 'application/json',
         data: JSON.stringify(""),
     });
+    await CreateLightCards(RoomsLights);
+}
+function CreateLightCards(RoomsLights){
     for (Room in RoomsLights){
         Lights = RoomsLights[Room];
         RoomHTML = RoomCardT({"Room":Room});
