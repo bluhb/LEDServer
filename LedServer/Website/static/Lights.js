@@ -62,9 +62,9 @@ async function CreateRoomCards(){
         contentType: 'application/json',
         data: JSON.stringify(""),
     });
-    await CreateLightCards(RoomsLights, LightCardT);
+    await CreateLightCards(RoomsLights, RoomCardT, LightCardT, EndRoomCard);
 }
-function CreateLightCards(RoomsLights, LightCardT){
+function CreateLightCards(RoomsLights, RoomCardT, LightCardT, EndRoomCard){
     for (Room in RoomsLights){
         Lights = RoomsLights[Room];
         RoomHTML = RoomCardT({"Room":Room});
@@ -78,6 +78,5 @@ function CreateLightCards(RoomsLights, LightCardT){
             console.log(LightHTML);
         }
         TotalHTML = RoomHTML.concat(LightHTML).concat(EndRoomCard);
-        console.log(TotalHTML);
     }
 }
