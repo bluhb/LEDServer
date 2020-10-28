@@ -28,7 +28,9 @@ function SwitchAllClicked(ID, Value){
     console.log(ID);
     console.log(Value);
     ID = ID.split("-").slice(0,-1).join();
-    Lights = document.querySelectorAll('[id^='.concat(ID).concat']');
+    SearchString = '[id^='.concat(ID).concat(']');
+    console.log(SearchString);
+    Lights = document.querySelectorAll(SearchString);
     console.log(Lights);
     for(x=1; x<Lights.length; x++){
         Lights[x].checked= Value;
