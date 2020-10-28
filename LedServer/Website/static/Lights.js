@@ -10,8 +10,8 @@ async function CreateRoomCards(){
                         </a></h3>
                         <form>
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="switch_{{Room}}_all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
-                                <label class="custom-control-label" for="switch_{{Room}}_all">ON / OFF</label> 
+                                <input type="checkbox" class="custom-control-input" id="switch-{{Room}}-all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
+                                <label class="custom-control-label" for="switch-{{Room}}-all">ON / OFF</label> 
                             </div>
                                 <label class="text-info">Intensity</label>
                                 <input type="range" class="custom-range" id="{{Room}}-Intensity" > <!-- style=width:100px> -->
@@ -32,17 +32,17 @@ async function CreateRoomCards(){
                                 </a>
                                 <form>
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="{{../Room}}-{{this}}-Switch" onclick="SwitchLightClicked(this.id, this.checked)">
+                                        <input type="checkbox" class="custom-control-input" id="Swtich-{{../Room}}-{{this}}" onclick="SwitchLightClicked(this.id, this.checked)">
                                         <label class="custom-control-label" for="{{../Room}}-{{this}}">ON / OFF</label> 
                                     </div>
                                         <label class="text-info">Intensity</label>
-                                        <input type="range" class="custom-range" id="{{../Room}}-{{this}}-Intensity"> <!-- style=width:100px> -->
+                                        <input type="range" class="custom-range" id="Intensity-{{../Room}}-{{this}}"> <!-- style=width:100px> -->
                                 </form> 
                             </div>
                             <div id="{{../Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
                                 <div class="card-body">
                                     <p style="text-decoration:underline"><strong>Settings {{this}}</strong><p>
-                                    <div class="wheel" id="{{../Room}}-{{this}}-colorpicker"></div>
+                                    <div class="wheel" id="colorpicker-{{../Room}}-{{this}}"></div>
                                 </div>
                             </div>
                         </div>
