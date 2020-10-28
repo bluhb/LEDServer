@@ -97,7 +97,22 @@ function AddColorWheel(Room, Light){
     )
 }
 
+function UpdateLightsStatus(){
+    var Statusses = await $.ajax({
+        url: BaseUrl.concat("/api/light/getStatus"),
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(""),
+    });
 
+    for (Room in Statusses){
+        for (Light in Statusses[Room]){
+            console.log(Room.concat("-").concat(Light));
+            console.log(Statusses[Room][Light]);
+        }
+    }
+}
 
 
 
