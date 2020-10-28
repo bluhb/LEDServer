@@ -37,6 +37,7 @@ function SwitchLightClicked(ID, Value){
     Light = ID.split("-").slice(-1).pop();
     IDAll = ID.split("-").slice(0,-1).join("-").concat("-all");
     LightAll=document.getElementById(IDAll);
+    ValueAll = Value;
     if (!Value){
         Lights = $("input[id^='".concat(IDAll.slice(0,IDAll.length - 3)).concat("']"));
         for(x=1; x<Lights.length; x++){
