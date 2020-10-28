@@ -29,17 +29,17 @@ function SwitchAllClicked(ID, Value){
     console.log(Value);
     ID = ID.split("-").slice(0,-1).join("-");
     SearchString = '[id^='.concat(ID).concat(']');
-    console.log(SearchString);
     Lights = document.querySelectorAll(SearchString);
-    console.log(Lights);
     for(x=1; x<Lights.length; x++){
         Lights[x].checked= Value;
     }
 }
 
 function SwitchLightClicked(ID, Value){
+    console.log(ID);
     x = ID.search("[0-9]");
     ID = ID.slice(0,x).concat("all");
+    console.log(ID);
     LightAll=document.getElementById(ID);
     if (!Value){
         Lights = $("input[id^='".concat(ID.slice(0,ID.length - 3)).concat("']"));
