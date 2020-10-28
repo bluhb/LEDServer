@@ -141,7 +141,7 @@ def ApiLightGetStatus():
                         main.rooms[room]["lights"][Light].HSV.S,
                         main.rooms[room]["lights"][Light].HSV.V
                         ],
-                        "Function":main.rooms[Room]["lights"][Light].function
+                        "Function":main.rooms[room]["lights"][Light].function
                     }
     return (jsonify(RoomsLights), 200)
 
