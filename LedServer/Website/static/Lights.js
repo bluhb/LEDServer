@@ -70,7 +70,7 @@ async function CreateRoomCards(){
     
     for (Room in RoomsLights){
         for(Light in RoomsLights[Room]){
-            AddColorWheel(Room, Light)
+            AddColorWheel(Room, RoomsLights[Room][Light])
         }
     }
 }
