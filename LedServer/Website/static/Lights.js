@@ -108,27 +108,36 @@ async function UpdateLightsStatus(){
         data: JSON.stringify(""),
     });
 
-    for (Room in Statusses){
-        for (Light in Statusses[Room]){
-            console.log(Room.concat("-").concat(Light));
-            console.log(Statusses[Room][Light]);
-            UpdateLightFunctionColor(Room, Light, Statusses[Room][Light]);
-        }
-    }
+    UpdateLightFunctionColor(Room, Light, Statusses);
 }
 
-function UpdateLightFunctionColor(Room, Light, FunctionColor){
-    Func = FunctionColor["Function"];
-    Color = FunctionColor["HSV"];
-    ID = Room.concat("-").concat(Light)
-    console.log(Func);
-    console.log(Color)
-    console.log(ID)
-    window.ColorPickers[ID].color.set(Color)
-    if (!(Func === "off")){
-        document.getElementById("Switch-".concat(ID)).checked = true;
-    }else{
-        document.getElementById("Switch-".concat(ID)).checked = false;
+function UpdateLightFunctionColor(Statusses){
+    AvgHSV = {"h":0, "s":0, "v":0};
+    AvgCount = 0
+    for (Room in Statusses){
+        for (Light in Statusses[Room]){
+            Func = Statusses[Room][Light]["Function"];
+            Color = Statusses[Room][Light]["HSV"];
+            AvgCount++;
+            AvgHSV.h += Color.h;
+            AvgHSV.s += Color.s;
+            AvgHSV.v += Color.v;
+            ID = Room.concat("-").concat(Light)
+            console.log(Func);
+            console.log(Color)
+            console.log(ID)
+            window.ColorPickers[ID].color.set(Color)
+            if (!(Func === "off")){
+                document.getElementById("Switch-".concat(ID)).checked = true;
+            }else{
+                document.getElementById("Switch-".concat(ID)).checked = false;
+            }
+        }
+        AvgHSV.h = AvgHSV.h/AvgCount;
+        AvgHSV.s = AvgHSV.s/AvgCount;
+        AvgHSV.v = AvgHSV.v/AvgCount;
+        window.ColorPickers[Room.concat("all")].color.set(AvgHSV);
+
     }
 }
 
