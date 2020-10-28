@@ -29,6 +29,7 @@ function SwitchAllClicked(ID, Value){
     console.log(Value);
     ID = ID.slice(0, ID.length - 3);
     Lights = $("input[id^='".concat(ID).concat("']"));
+    console.log(Lights);
     for(x=1; x<Lights.length; x++){
         Lights[x].checked= Value;
     }
