@@ -129,6 +129,22 @@ def ApiLightGetattr():
     else:
         return("Bad Json", 400)
 
+@app.route('/api/light/getStatus', methods=["POST"])
+def ApiLightGetStatus():
+    RoomsLights = {}
+    for room in main.rooms:
+        if "lights" in main.rooms[room]:
+            for Light in list(main.rooms[room]["lights"].keys()):
+                RoomsLights[room][Light] =
+                    {"HSV":[
+                        main.rooms[room]["lights"][Light].HSV.H,
+                        main.rooms[room]["lights"][Light].HSV.S,
+                        main.rooms[room]["lights"][Light].HSV.V
+                        ],
+                        "Function":main.rooms[room]["lights"][Light].function
+                    }
+    return (jsonify(RoomsLights), 200)
+
 
 @app.route('/api/room/alarm', methods=["POST"])
 
