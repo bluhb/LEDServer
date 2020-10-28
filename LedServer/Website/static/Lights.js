@@ -13,8 +13,9 @@ async function CreateRoomCards(){
                                 <input type="checkbox" class="custom-control-input" id="Switch-{{Room}}-all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
                                 <label class="custom-control-label" for="Switch-{{Room}}-all">ON / OFF</label> 
                             </div>
-                                <label class="text-info">Intensity</label>
-                                <input type="range" class="custom-range" id="{{Room}}-Intensity" > <!-- style=width:100px> -->
+                            <label class="text-info">Intensity</label>
+                            <input type="range" class="custom-range" id="{{Room}}-Intensity" > <!-- style=width:100px> -->
+                            <div class="wheel" id="colorpicker-{{Room}}-all"></div>
                         </form> 
                 </div>
 
@@ -70,8 +71,9 @@ async function CreateRoomCards(){
     
     for (Room in RoomsLights){
         for(Light in RoomsLights[Room]){
-            AddColorWheel(Room, RoomsLights[Room][Light])
+            AddColorWheel(Room, RoomsLights[Room][Light]);
         }
+        AddColorWheel(Room, "All");
     }
 }
 
