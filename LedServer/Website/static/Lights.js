@@ -91,7 +91,13 @@ function AddColorWheel(Room, Light){
         }
     );
     ColorPicker.on(
-        'color:change',
+        'input:move',
+        function (color, change){
+            ColorChanged(color, this.id);
+        }
+    )
+    ColorPicker.on(
+        'input:end',
         function (color, change){
             ColorChanged(color, this.id);
         }
