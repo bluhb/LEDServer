@@ -37,8 +37,7 @@ function SwitchAllClicked(ID, Value){
 
 function SwitchLightClicked(ID, Value){
     console.log(ID);
-    x = ID.search("[0-9]");
-    ID = ID.slice(0,x).concat("all");
+    ID = ID.split("-").slice(0,-1).join("-").concat("-all");
     console.log(ID);
     LightAll=document.getElementById(ID);
     if (!Value){
