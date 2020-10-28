@@ -25,6 +25,8 @@ function ColorChanged(color, ID){
 }
 
 function SwitchAllClicked(ID, Value){
+    console.log(ID);
+    console.log(Value);
     ID = ID.slice(0, ID.length - 3);
     Lights = $("input[id^='".concat(ID).concat("']"));
     for(x=1; x<Lights.length; x++){
