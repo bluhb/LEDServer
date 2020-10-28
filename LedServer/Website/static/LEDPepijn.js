@@ -37,7 +37,7 @@ function SwitchAllClicked(ID, Value){
         url:Url,
         data:JSON.stringify(Data)
     });
-    setTimeout(500, UpdateLightsStatus)
+    setTimeout(UpdateLightsStatus, 500)
 }
 
 function SwitchLightClicked(ID, Value){
@@ -67,5 +67,5 @@ function SwitchLightClicked(ID, Value){
         url:Url,
         data:JSON.stringify(Data)
     });
-    setTimeout(500, UpdateLightsStatus)
+    setTimeout(UpdateLightsStatus, 500)
 }
