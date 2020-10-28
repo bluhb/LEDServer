@@ -118,13 +118,15 @@ async function UpdateLightsStatus(){
 
 function UpdateLightFunctionColor(Statusses){
     for (var Room in Statusses){
+        AvgH = {"Cos":0, "Sin":0}
         AvgHSV = {"h":0, "s":0, "v":0};
         AvgCount = 0
         for (var Light in Statusses[Room]){
             Func = Statusses[Room][Light]["Function"];
             Color = Statusses[Room][Light]["HSV"];
             AvgCount++;
-            AvgHSV.h += Math.sin(deg2rad(Color.h));
+            AvgH.Sin += Math.sin(deg2rad(Color.h));
+            AvgH.Cos += Math.cos(deg2rad(Color.h));
             AvgHSV.s += Color.s;
             AvgHSV.v += Color.v;
             console.log(Color);
@@ -140,13 +142,7 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
         }
-        console.log(AvgHSV);
-        hAtan = Math.atan2(AvgHSV.h);
-        console.log(hAtan);
-        hAvgRad = hAtan/AvgCount;
-        console.log(hAvgRad);
-        hAvg = rad2deg(hAvgRad);
-        console.log(hAvg);
+        hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
         AvgHSV.h = hAvg;
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
