@@ -10,8 +10,8 @@ async function CreateRoomCards(){
                         </a></h3>
                         <form>
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="switch-{{Room}}-all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
-                                <label class="custom-control-label" for="switch-{{Room}}-all">ON / OFF</label> 
+                                <input type="checkbox" class="custom-control-input" id="Switch-{{Room}}-all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
+                                <label class="custom-control-label" for="Switch-{{Room}}-all">ON / OFF</label> 
                             </div>
                                 <label class="text-info">Intensity</label>
                                 <input type="range" class="custom-range" id="{{Room}}-Intensity" > <!-- style=width:100px> -->
@@ -32,8 +32,8 @@ async function CreateRoomCards(){
                                 </a>
                                 <form>
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="Swtich-{{../Room}}-{{this}}" onclick="SwitchLightClicked(this.id, this.checked)">
-                                        <label class="custom-control-label" for="{{../Room}}-{{this}}">ON / OFF</label> 
+                                        <input type="checkbox" class="custom-control-input" id="Switch-{{../Room}}-{{this}}" onclick="SwitchLightClicked(this.id, this.checked)">
+                                        <label class="custom-control-label" for="Switch-{{../Room}}-{{this}}">ON / OFF</label> 
                                     </div>
                                         <label class="text-info">Intensity</label>
                                         <input type="range" class="custom-range" id="Intensity-{{../Room}}-{{this}}"> <!-- style=width:100px> -->
