@@ -25,8 +25,6 @@ function ColorChanged(color, ID){
 }
 
 function SwitchAllClicked(ID, Value){
-    console.log(ID);
-    console.log(Value);
     ID = ID.split("-").slice(0,-1).join("-");
     SearchString = '[id^='.concat(ID).concat(']');
     Lights = document.querySelectorAll(SearchString);
@@ -36,9 +34,8 @@ function SwitchAllClicked(ID, Value){
 }
 
 function SwitchLightClicked(ID, Value){
-    console.log(ID);
+    Light = ID.split("-")[-1]
     ID = ID.split("-").slice(0,-1).join("-").concat("-all");
-    console.log(ID);
     LightAll=document.getElementById(ID);
     if (!Value){
         Lights = $("input[id^='".concat(ID.slice(0,ID.length - 3)).concat("']"));
@@ -49,6 +46,20 @@ function SwitchLightClicked(ID, Value){
         }
     }
     LightAll.checked = Value;
+    OnOff = ((Value) ? 'on' : 'off');
+    Url = window.BaseUrl.concat('/api/light/setAtts');
+    Data = {
+        "Room":ID.split("-")[1],
+        "Lights":[Light],
+        "AttrKey":["function", OnOff]
+    }
+    $.ajax({
+        type: "POST",
+        url:Url,
+        data:Data
+    });
+
+
 }
 
 function SetLights(){

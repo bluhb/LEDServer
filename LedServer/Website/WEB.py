@@ -64,6 +64,19 @@ def ApiGetLights():
             Data[room] = list(main.rooms[room]["lights"].keys())
     return (jsonify(Data), 200)
 
+@app.route('/api/light/switchAll', methods=["POST"])
+def ApiSwitchAllLights():
+    JSON = request.get_json(force=True)
+
+    if "Room" in JSON\
+            and "Function" in JSON:
+                RoomID = JSON["Room"]
+                for light in main.rooms[RoomID]["lights"]:
+                    light.function=Function
+        return("Turned on", 200)
+    else:
+        return("BadJson",400)
+
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
     JSON = request.get_json(force=True)
