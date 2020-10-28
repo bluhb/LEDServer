@@ -31,6 +31,19 @@ function SwitchAllClicked(ID, Value){
     for(x=1; x<Lights.length; x++){
         Lights[x].checked= Value;
     }
+    OnOff = ((Value) ? 'on' : 'off');
+    Url = window.BaseUrl.concat('/api/light/switchAll');
+    Data = {
+        "Room":ID.split("-")[1],
+        "Function": OnOff]
+    }
+    console.log(Data);
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
 }
 
 function SwitchLightClicked(ID, Value){
