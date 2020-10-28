@@ -125,7 +125,7 @@ function UpdateLightFunctionColor(Room, Light, FunctionColor){
     console.log(Color)
     console.log(ID)
     window.ColorPickers[ID].color.set(Color)
-    if !(Func === "off"){
+    if (!(Func === "off")){
         document.getElementById("Switch-".concat(ID)).checked = true;
     }else{
         document.getElementById("Switch-".concat(ID)).checked = false;
