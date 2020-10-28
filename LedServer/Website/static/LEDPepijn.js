@@ -4,10 +4,17 @@ function ColorChanged(color, ID){
     HSV = color.hsv;
     Data = {
         "Room":Room,
-        "Light":Light,
-        "AttrKey":["HSV", HSV]
+        "Lights":[Light],
+        "HSV": [HSV.h, HSV.s, HSV.v]
     }
     console.log(Data);
+    Url = BaseUrl.concat('/api/light/setHSV');
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
 }
 
 function SwitchAllClicked(ID, Value){
