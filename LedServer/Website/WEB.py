@@ -105,11 +105,12 @@ def ApiLightSetHSV():
             and "Lights" in JSON\
             and "HSV" in JSON:
         RoomID = JSON["Room"]
-        if JSON["Lights"] == "all":
+        if JSON["Lights"][0] == "all":
             Lights = main.rooms[RoomID]["lights"].keys()
         else:
             Lights = JSON["Lights"]
         for Light in Lights:
+            print(Light)
             main.rooms[RoomID]["lights"][Light].HSV.SetHSV(*JSON["HSV"])
         return("HSV set", 200)
     else:
