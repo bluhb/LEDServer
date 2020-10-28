@@ -79,6 +79,7 @@ def ApiSwitchAllLights():
 
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
+    print(request)
     JSON = request.get_json(force=True)
     print(JSON)
     if "Room" in JSON\
@@ -94,7 +95,7 @@ def ApiLightSetattr():
                 continue
         return("Attribute set", 200)
     else:
-        return("Bad Json", 400)
+        return("Bad Json", 418)
 
 @app.route('/api/light/setHSV', methods=["POST"])
 def ApiLightSetHSV():
