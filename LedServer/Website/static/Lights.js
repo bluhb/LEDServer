@@ -101,7 +101,8 @@ function AddColorWheel(Room, Light){
         'input:end',
         function (color, change){
             ColorChanged(color, this.id);
-            setTimeout(500, UpdateLightsStatus);
+            console.log("Color End");
+            setTimeout(UpdateLightsStatus, 1100);
         }
     )
     window.ColorPickers[ID] = ColorPicker
