@@ -117,20 +117,18 @@ async function UpdateLightsStatus(){
 }
 
 function UpdateLightFunctionColor(Statusses){
-    AvgHSV = {"h":0, "s":0, "v":0};
-    AvgCount = 0
     for (var Room in Statusses){
+        AvgHSV = {"h":0, "s":0, "v":0};
+        AvgCount = 0
         for (var Light in Statusses[Room]){
-            console.log(Room);
-            console.log(Light)
             Func = Statusses[Room][Light]["Function"];
             Color = Statusses[Room][Light]["HSV"];
-            console.log(Func);
-            console.log(Color)
             AvgCount++;
             AvgHSV.h += Color.h;
             AvgHSV.s += Color.s;
             AvgHSV.v += Color.v;
+            console.log(Color);
+            console.log(AvgHSV);
             ID = Room.concat("-").concat(Light)
             console.log(Func);
             console.log(Color)
