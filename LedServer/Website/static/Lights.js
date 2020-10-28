@@ -96,7 +96,7 @@ function AddColorWheel(Room, Light){
             ColorChanged(color, this.id);
         }
     )
-    window.ColorPickers.ID = ColorPicker
+    window.ColorPickers[ID] = ColorPicker
 }
 
 async function UpdateLightsStatus(){
@@ -124,7 +124,7 @@ function UpdateLightFunctionColor(Room, Light, FunctionColor){
     console.log(Func);
     console.log(Color)
     console.log(ID)
-    window.ColorPickers.ID.color=Color
+    window.ColorPickers[ID].color=Color
 }
 
 
