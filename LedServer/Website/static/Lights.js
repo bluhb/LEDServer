@@ -124,7 +124,7 @@ function UpdateLightFunctionColor(Room, Light, FunctionColor){
     console.log(Func);
     console.log(Color)
     console.log(ID)
-    window.ColorPickers[ID].color=Color
+    window.ColorPickers[ID].color.set(Color)
 }
 
 
