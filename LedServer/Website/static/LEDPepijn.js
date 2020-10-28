@@ -15,6 +15,7 @@ function ColorChanged(color, ID){
         url:Url,
         data:JSON.stringify(Data)
     });
+    UpdateLightsStatus()
 }
 
 function SwitchAllClicked(ID, Value){
@@ -37,6 +38,7 @@ function SwitchAllClicked(ID, Value){
         url:Url,
         data:JSON.stringify(Data)
     });
+    UpdateLightsStatus()
 }
 
 function SwitchLightClicked(ID, Value){
@@ -66,6 +68,5 @@ function SwitchLightClicked(ID, Value){
         url:Url,
         data:JSON.stringify(Data)
     });
-
-
+    UpdateLightsStatus()
 }

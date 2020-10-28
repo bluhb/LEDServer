@@ -76,6 +76,7 @@ async function CreateRoomCards(){
         }
         AddColorWheel(Room, "all");
     }
+    UpdateLightsStatus()
 }
 
 function AddColorWheel(Room, Light){
