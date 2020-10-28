@@ -73,7 +73,7 @@ def ApiSwitchAllLights():
         RoomID = JSON["Room"]
         Function = JSON["Function"]
         for light in main.rooms[RoomID]["lights"]:
-            light.function=Function
+            main.rooms[RoomID]["lights"][light].function=Function
         return("Turned on", 200)
     else:
         return("BadJson",400)
