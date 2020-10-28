@@ -107,7 +107,7 @@ async function UpdateLightsStatus(){
         contentType: 'application/json',
         data: JSON.stringify(""),
     });
-
+    console.log(Statusses);
     UpdateLightFunctionColor(Room, Light, Statusses);
 }
 
@@ -116,8 +116,12 @@ function UpdateLightFunctionColor(Statusses){
     AvgCount = 0
     for (Room in Statusses){
         for (Light in Statusses[Room]){
+            console.log(Room);
+            console.log(Light)
             Func = Statusses[Room][Light]["Function"];
             Color = Statusses[Room][Light]["HSV"];
+            console.log(Func);
+            console.log(Color)
             AvgCount++;
             AvgHSV.h += Color.h;
             AvgHSV.s += Color.s;
