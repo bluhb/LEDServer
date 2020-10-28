@@ -143,7 +143,7 @@ function UpdateLightFunctionColor(Statusses){
             }
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
-        AvgHSV.h = hAvg;
+        AvgHSV.h = rad2deg(hAvg);
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
         console.log(AvgHSV);
