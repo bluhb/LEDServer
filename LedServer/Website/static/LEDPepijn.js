@@ -35,7 +35,7 @@ function SwitchAllClicked(ID, Value){
     Url = window.BaseUrl.concat('/api/light/switchAll');
     Data = {
         "Room":ID.split("-")[1],
-        "Function": OnOff]
+        "Function": OnOff
     }
     console.log(Data);
     $.ajax({
