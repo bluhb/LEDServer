@@ -80,6 +80,7 @@ def ApiSwitchAllLights():
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
     JSON = request.get_json(force=True)
+    print(JSON)
     if "Room" in JSON\
             and "Lights" in JSON\
             and "AttrKey" in JSON:
