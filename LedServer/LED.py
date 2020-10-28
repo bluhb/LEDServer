@@ -77,7 +77,7 @@ class GenericLed:
             self.colorfill()
             self.HSV.V = i
         self.HSV.V = 0
-        self.function = "colorfill"
+        self.colorfill()
         return None
 
     def on(self):
