@@ -137,9 +137,9 @@ def ApiLightGetStatus():
             RoomsLights[room] = {}
             for Light in list(main.rooms[room]["lights"].keys()):
                 RoomsLights[Room][Light] = {"HSV":[
-                        main.rooms[Room]["lights"][Light].HSV.H,
-                        main.rooms[Room]["lights"][Light].HSV.S,
-                        main.rooms[Room]["lights"][Light].HSV.V
+                        main.rooms[room]["lights"][Light].HSV.H,
+                        main.rooms[room]["lights"][Light].HSV.S,
+                        main.rooms[room]["lights"][Light].HSV.V
                         ],
                         "Function":main.rooms[Room]["lights"][Light].function
                     }
