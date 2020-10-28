@@ -118,13 +118,13 @@ async function UpdateLightsStatus(){
 
 function UpdateLightFunctionColor(Statusses){
     for (var Room in Statusses){
-        AvgHSV = {"h":0, "s":0, "v":0};
+        AvgHSVsin = {"h":0, "s":0, "v":0};
         AvgCount = 0
         for (var Light in Statusses[Room]){
             Func = Statusses[Room][Light]["Function"];
             Color = Statusses[Room][Light]["HSV"];
             AvgCount++;
-            AvgHSV.h += Color.h;
+            AvgHSV.h += Math.sin(deg2rad(Color.h));
             AvgHSV.s += Color.s;
             AvgHSV.v += Color.v;
             console.log(Color);
@@ -140,7 +140,7 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
         }
-        AvgHSV.h = AvgHSV.h/AvgCount;
+        AvgHSV.h = rad2deg(Math.atan2(AvgHSV.h)/AvgCount);
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
@@ -148,7 +148,13 @@ function UpdateLightFunctionColor(Statusses){
     }
 }
 
+function deg2rad(deg){
+    return deg * (Math.PI/180);
+}
 
+function rad2deg(rad){
+    return rad * (180/Math.PI);
+}
 
 
 
