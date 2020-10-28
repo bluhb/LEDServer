@@ -114,8 +114,8 @@ async function UpdateLightsStatus(){
 function UpdateLightFunctionColor(Statusses){
     AvgHSV = {"h":0, "s":0, "v":0};
     AvgCount = 0
-    for (Room in Statusses){
-        for (Light in Statusses[Room]){
+    for (var Room in Statusses){
+        for (var Light in Statusses[Room]){
             console.log(Room);
             console.log(Light)
             Func = Statusses[Room][Light]["Function"];
