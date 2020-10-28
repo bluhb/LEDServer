@@ -136,7 +136,7 @@ function UpdateLightFunctionColor(Statusses){
         AvgHSV.h = AvgHSV.h/AvgCount;
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
-        window.ColorPickers[Room.concat("all")].color.set(AvgHSV);
+        window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
 
     }
 }
