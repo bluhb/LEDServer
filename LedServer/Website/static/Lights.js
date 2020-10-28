@@ -11,7 +11,7 @@ async function CreateRoomCards(){
                         <form>
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="switch_{{Room}}_all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
-                                <label class="custom-control-label" for="switch_livingroom_all">ON / OFF</label> 
+                                <label class="custom-control-label" for="switch_{{Room}}_all">ON / OFF</label> 
                             </div>
                                 <label class="text-info">Intensity</label>
                                 <input type="range" class="custom-range" id="{{Room}}-Intensity" > <!-- style=width:100px> -->
