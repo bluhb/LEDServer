@@ -54,9 +54,10 @@ function SwitchLightClicked(ID, Value){
         "AttrKey":["function", OnOff]
     }
     $.ajax({
-        type: "POST",
+        dataType:'json',
+        type: "post",
         url:Url,
-        data:Data
+        data:JSON.stringify(Data)
     });
 
 
