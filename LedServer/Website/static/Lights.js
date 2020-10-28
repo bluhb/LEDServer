@@ -140,6 +140,7 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
         }
+        console.log(AvgHSV);
         AvgHSV.h = rad2deg(Math.atan2(AvgHSV.h)/AvgCount);
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
