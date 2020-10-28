@@ -1,4 +1,5 @@
 BaseUrl = window.location.origin;
+ColorPickers = {};
 async function CreateRoomCards(){
     var RoomCard = `
     <div class="col-sm-4">
@@ -95,6 +96,7 @@ function AddColorWheel(Room, Light){
             ColorChanged(color, this.id);
         }
     )
+    window.ColorPickers.ID = ColorPicker
 }
 
 async function UpdateLightsStatus(){
@@ -110,11 +112,20 @@ async function UpdateLightsStatus(){
         for (Light in Statusses[Room]){
             console.log(Room.concat("-").concat(Light));
             console.log(Statusses[Room][Light]);
+            UpdateLightFunctionColor(Room, Light, Statusses[Room][Light]);
         }
     }
 }
 
-
+function UpdateLightFunctionColor(Room, Light, FunctionColor){
+    Func = FunctionColor["Function"];
+    Color = FunctionColor["HSV"];
+    ID = Room.concat("-").concat(Light)
+    console.log(Func);
+    console.log(Color)
+    console.log(ID)
+    window.ColorPicker.ID.color=Color
+}
 
 
 
