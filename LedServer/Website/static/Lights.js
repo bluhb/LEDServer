@@ -77,7 +77,9 @@ async function CreateRoomCards(){
 
 function AddColorWheel(Room, Light){
     DomID = "#colorpicker-".concat(Room).concat("-").concat(Light);
+    console.log(DomID)
     ID = Room.concat("-").concat(Light)
+    console.log(ID)
     var ColorPicker = iro.ColorPicker(
         DomID, 
         {
