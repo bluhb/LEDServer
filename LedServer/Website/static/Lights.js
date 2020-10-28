@@ -141,7 +141,13 @@ function UpdateLightFunctionColor(Statusses){
             }
         }
         console.log(AvgHSV);
-        AvgHSV.h = rad2deg(Math.atan2(AvgHSV.h)/AvgCount);
+        hAtan = Math.atan2(AvgHSV.h);
+        console.log(hAtan);
+        hAvgRad = hAtan/AvgCount;
+        console.log(hAvgRad);
+        hAvg = rad2deg(hAvgRad);
+        console.log(hAvg);
+        AvgHSV.h = hAvg;
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
         console.log(AvgHSV);
