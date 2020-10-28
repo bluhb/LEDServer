@@ -27,7 +27,7 @@ function ColorChanged(color, ID){
 function SwitchAllClicked(ID, Value){
     console.log(ID);
     console.log(Value);
-    ID = ID.split("-").slice(0,-1).join();
+    ID = ID.split("-").slice(0,-1).join("-");
     SearchString = '[id^='.concat(ID).concat(']');
     console.log(SearchString);
     Lights = document.querySelectorAll(SearchString);
