@@ -47,7 +47,7 @@ function SwitchLightClicked(ID, Value){
     }
     LightAll.checked = Value;
     OnOff = ((Value) ? 'on' : 'off');
-    Url = window.BaseUrl.concat('/api/light/setAtts');
+    Url = window.BaseUrl.concat('/api/light/setAttr');
     Data = {
         "Room":ID.split("-")[1],
         "Lights":[Light],
