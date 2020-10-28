@@ -97,7 +97,7 @@ function AddColorWheel(Room, Light){
     )
 }
 
-function UpdateLightsStatus(){
+async function UpdateLightsStatus(){
     var Statusses = await $.ajax({
         url: BaseUrl.concat("/api/light/getStatus"),
         dataType: 'json',
