@@ -67,4 +67,37 @@ async function CreateRoomCards(){
         TotalHTML = TotalHTML.concat(RoomHTML);
     }
     document.getElementById("RoomContainer").innerHTML = TotalHTML;
+    
+    for (Room in RoomsLights){
+        for(Light in RoomsLights[Room]){
+            AddColorWheel(Room, Light)
+        }
+    }
 }
+
+function AddColorWheel(Room, Light){
+    DomID = "#colorpicker-".concat(Room).concat("-").concat(Light);
+    ID = Room.concat("-").concat(Light)
+    var ColorPicker = iro.ColorPicker(
+        DomID, 
+        {
+            width:250,
+            id:ID
+        }
+    );
+    ColorPicker.on(
+        'color:change',
+        function (color, change){
+            ColorChanged(color, this.id);
+        }
+    )
+}
+
+
+
+
+
+
+
+
+
