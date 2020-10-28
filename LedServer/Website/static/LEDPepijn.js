@@ -35,17 +35,17 @@ function SwitchAllClicked(ID, Value){
 
 function SwitchLightClicked(ID, Value){
     Light = ID.split("-").slice(-1).pop();
-    ID = ID.split("-").slice(0,-1).join("-").concat("-all");
-    LightAll=document.getElementById(ID);
+    IDAll = ID.split("-").slice(0,-1).join("-").concat("-all");
+    LightAll=document.getElementById(IDAll);
     if (!Value){
-        Lights = $("input[id^='".concat(ID.slice(0,ID.length - 3)).concat("']"));
+        Lights = $("input[id^='".concat(IDAll.slice(0,IDAll.length - 3)).concat("']"));
         for(x=1; x<Lights.length; x++){
             if (Lights[x].checked){
-                Value = true;
+                ValueAll = true;
             }
         }
     }
-    LightAll.checked = Value;
+    LightAll.checked = ValueAll;
     OnOff = ((Value) ? 'on' : 'off');
     Url = window.BaseUrl.concat('/api/light/setAttr');
     Data = {
