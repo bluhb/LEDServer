@@ -107,13 +107,7 @@ async function UpdateLightsStatus(){
         contentType: 'application/json',
         data: JSON.stringify(""),
     });
-    for (var Room in Statusses){
-        for (var Light in Statusses[Room]){
-            console.log(Room);
-            console.log(Light);
-        }
-    }
-    UpdateLightFunctionColor(Room, Light, Statusses);
+    UpdateLightFunctionColor(Statusses);
 }
 
 function UpdateLightFunctionColor(Statusses){
