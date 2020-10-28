@@ -134,14 +134,15 @@ def ApiLightGetStatus():
     RoomsLights = {}
     for room in main.rooms:
         if "lights" in main.rooms[room]:
+            RoomsLights[room] = {}
             for Light in list(main.rooms[room]["lights"].keys()):
-                RoomsLights[room][Light] =
+                RoomsLights[Room][Light] =
                     {"HSV":[
-                        main.rooms[room]["lights"][Light].HSV.H,
-                        main.rooms[room]["lights"][Light].HSV.S,
-                        main.rooms[room]["lights"][Light].HSV.V
+                        main.rooms[Room]["lights"][Light].HSV.H,
+                        main.rooms[Room]["lights"][Light].HSV.S,
+                        main.rooms[Room]["lights"][Light].HSV.V
                         ],
-                        "Function":main.rooms[room]["lights"][Light].function
+                        "Function":main.rooms[Room]["lights"][Light].function
                     }
     return (jsonify(RoomsLights), 200)
 
