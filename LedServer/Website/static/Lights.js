@@ -143,6 +143,7 @@ function UpdateLightFunctionColor(Statusses){
         AvgHSV.h = rad2deg(Math.atan2(AvgHSV.h)/AvgCount);
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
+        console.log(AvgHSV);
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
 
     }
