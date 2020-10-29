@@ -91,6 +91,10 @@ def ApiLightSetattr():
         Value = JSON["AttrKey"][1]
         for Light in JSON["Lights"]:
             if hasattr(main.rooms[RoomID]["lights"][Light], Key):
+                if Key == "function":
+                    setattr(main.rooms[RoomID]["lights"][Light],
+                            "oldFunction",
+                            main.rooms[RoomID]["lights"][Light].function)
                 setattr(main.rooms[RoomID]["lights"][Light], Key, Value)
             else:
                 continue
@@ -137,7 +141,6 @@ def ApiLightSetV():
             HSV = {"H": Lobj.HSV.H,
                     "S": Lobj.HSV.S,
                     "V": JSON["V"]}
-            main.rooms[RoomID]["lights"][Light].function = "colorfill"
             main.rooms[RoomID]["lights"][Light].HSV.SetHSV(**HSV)
         return("HSV set", 200)
     else:
