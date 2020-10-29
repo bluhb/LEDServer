@@ -154,6 +154,7 @@ function HSVtoHSL(h,s,v){
     if (arguments.length === 1){
         s=h.s, v=h.v, h=h.h;
     }
+    var s = s/100, v=v/100;
     var _h = h,
         _s = s*v,
         _l = (2-s)*v;
