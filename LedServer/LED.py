@@ -71,6 +71,14 @@ class GenericLed:
     def __init__(self):
         return None
 
+    def __setattr__(self, Name, Value):
+        print(Name, Value, sep=" ")
+        if Name == "function" and Value != "on":
+            print("Cached")
+            self.oldFunction = self.function
+        self.__dict__[Name] = Value
+        return None
+
 
     def off(self): #set color to black and set function to colorfill
         V = self.HSV.V
