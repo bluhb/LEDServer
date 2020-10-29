@@ -152,7 +152,7 @@ class Arduino(GenericLed):
         self.TempHumid = {}
         self.wait = 0.1
         self.brightness = 1
-        self.function = 'colorfill'
+        self.function = 'off'
         self.functdict = {
                 'colorfill': self.colorfill,
                 'on': self.on,
@@ -231,7 +231,7 @@ class APALedstrip(GenericLed):
         self.HSV = HSV()
         self.wait = 0.1
         self.length = pixels
-        self.function = 'colorfill'
+        self.function = 'off'
         self.functdict = {
                 'colorfill': self.colorfill,
                 'on': self.on,
