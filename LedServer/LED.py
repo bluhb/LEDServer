@@ -77,7 +77,7 @@ class GenericLed:
             T = time.perf_counter_ns()
             self.colorfill()
             self.HSV.V = i
-            while time.perf_counter_ns() - T < 50000000: #wait for 0.05 second
+            while time.perf_counter_ns() - T < 5000000: #wait for 0.05 second
                 pass
         self.HSV.V = 0
         self.colorfill()
