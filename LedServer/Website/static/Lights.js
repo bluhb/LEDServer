@@ -178,19 +178,38 @@ function rad2deg(rad){
     return rad * (180/Math.PI);
 }
 
-function HSVtoHSL(h,s,v){
+//function HSVtoHSL(h,s,v){
+    //if (arguments.length === 1){
+        //s=h.s, v=h.v, _h=h.h;
+    //}
+    //s = s/100;
+    //v = v/100;
+    //_s = s*v/((h=(2-s)*v)<1?h:2-h);
+    //_l = h/2
+    //if (isNaN(_s)){_s=0;}
+    //if (isNaN(_l)){_l=0;}
+    //hsl = {"h":_h, "s":_s*100, "l":_l}
+    //return hsl
+//}
+
+function HSVtoHSL(H,S,V){
     if (arguments.length === 1){
-        s=h.s, v=h.v, _h=h.h;
+        S=H.s, V=H.v, H=H.h;
     }
-    s = s/100;
-    v = v/100;
-    _s = s*v/((h=(2-s)*v)<1?h:2-h);
-    _l = h/2
-    if (isNaN(_s)){_s=0;}
-    if (isNaN(_l)){_l=0;}
-    hsl = {"h":_h, "s":_s*100, "l":_l}
-    return hsl
+    var l = (2-S) * V / 2;
+
+    if (l!=0){
+        if(l==1){
+            s = 0
+        } else if(l<0.5){
+            s = s*v / (l*2)
+        } else{
+            s = s*v / (2-l*2)
+        }
+    }
+    return [H, s, l]
 }
+
 
 //function HSVtoHSL(h,s,v){
     //if (arguments.length === 1){
