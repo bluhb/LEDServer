@@ -160,11 +160,6 @@ function HSVtoHSL(h,s,v){
     _s /= (_l <= 1) ? (_l === 0 ? 1 : _l) : 2 - _l;
     _l /= 2
 
-    return{
-        h:_h,
-        s:_s,
-        l:_l
-    };
-}
-
+    HSL = {h:_h, s:_s, l:_l}
+    return HSL
 }
