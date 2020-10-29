@@ -37,7 +37,7 @@ function UpdateLightFunctionColor(Statusses){
             HSLString = CreateCSSColorString(HSL);
             console.log(HSLString);
             document.getElementById("Intensity-".concat(ID)).style.background = HSLString;
-            console.log(document.getElementById("Intensity-".concat(ID)));
+            console.log(document.getElementById("Intensity-".concat(ID).style));
             Color.v = 100;
             window.ColorPickers[ID].color.set(Color);
         }
