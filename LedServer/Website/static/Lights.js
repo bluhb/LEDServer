@@ -196,6 +196,7 @@ function HSVtoHSL(H,S,V){
     if (arguments.length === 1){
         S=H.s, V=H.v, H=H.h;
     }
+    S = S/100; V = V/100;
     var l = (2-S) * V / 2;
     var s;
 
