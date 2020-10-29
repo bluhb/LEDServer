@@ -34,7 +34,7 @@ function UpdateLightFunctionColor(Statusses){
             }else{
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
-            document.getElementById("Intensity-".concat(ID).value=Color.v;
+            document.getElementById("Intensity-".concat(ID)).value = Color.v;
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
         AvgHSV.h = rad2deg(hAvg);
