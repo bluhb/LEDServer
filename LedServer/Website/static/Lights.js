@@ -37,6 +37,7 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
             document.getElementById("Intensity-".concat(ID)).value = Color.v;
+            document.getElementById("Card-".concat(ID)).style.backgroundColor = "hsv("+
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
         AvgHSV.h = rad2deg(hAvg);
@@ -147,4 +148,23 @@ function deg2rad(deg){
 
 function rad2deg(rad){
     return rad * (180/Math.PI);
+}
+
+function HSVtoHSL(h,s,v){
+    if arguments.length === 1{
+        s=h.s, v=h.v, h=h.h;
+    }
+    var _h = h,
+        _s = s*v,
+        _l = (2-s)*v;
+    _s /= (_l <= 1) ? (_l === 0 ? 1 : _l) : 2 - _l;
+    _l /= 2
+
+    return{
+        h:_h,
+        s:_s,
+        l:_l;
+    }
+}
+
 }
