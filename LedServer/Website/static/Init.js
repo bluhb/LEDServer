@@ -89,7 +89,10 @@ function AddColorWheel(Room, Light){
         {
             width:250,
             id:ID,
-            component:iro.ui.Wheel
+            layout:[{
+                component:iro.ui.Wheel,
+                options:{}
+            }]
         }
     );
     ColorPicker.on(
