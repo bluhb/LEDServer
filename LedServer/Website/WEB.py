@@ -99,7 +99,7 @@ def ApiLightSetattr():
         return("Bad Json", 418)
 
 @app.route('/api/light/setHS', methods=["POST"])
-def ApiLightSetHSV():
+def ApiLightSetHS():
     JSON = request.get_json(force=True)
     if "Room" in JSON\
             and "Lights" in JSON\
@@ -120,7 +120,7 @@ def ApiLightSetHSV():
         return("Bad Json", 400)
 
 @app.route('/api/light/setV', methods=["POST"])
-def ApiLightSetHSV():
+def ApiLightSetV():
     JSON = request.get_json(force=True)
     if "Room" in JSON\
             and "Lights" in JSON\
