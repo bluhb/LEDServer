@@ -181,6 +181,8 @@ function rad2deg(rad){
 }
 
 function HSVtoHSL(h,s,v){
+    s = s/100;
+    v = v/100;
     _s = s*v/((h=(2-s)*v)<1?h:2-h);
     _l = h/2
     hsl = {"h":h, "s":_s, "l":_l}
