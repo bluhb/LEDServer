@@ -49,12 +49,11 @@ function ColorChanged(color, ID){
     Room = ID.split("-")[0];
     Light = ID.split("-")[1];
     HSV = color.hsv;
-    Data = {
-        "Room":Room,
+    Data = {"Room":Room,
         "Lights":[Light],
         "H": HSV.h,
         "S": HSV.s
-    }
+    };
     console.log(Data);
     Url = BaseUrl.concat('/api/light/setHS');
     $.ajax({
@@ -68,11 +67,10 @@ function ColorChanged(color, ID){
 function VChanged(V, ID){
     Room = ID.split("-")[1];
     Light = ID.split("-")[2];
-    Data = {
-        "Room":Room,
+    Data = {"Room":Room,
         "Lights":[Light],
         "V": V,
-    }
+    };
     console.log(Data);
     Url = BaseUrl.concat('/api/light/setV');
     $.ajax({

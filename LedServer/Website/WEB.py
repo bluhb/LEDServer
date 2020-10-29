@@ -103,7 +103,8 @@ def ApiLightSetHS():
     JSON = request.get_json(force=True)
     if "Room" in JSON\
             and "Lights" in JSON\
-            and "HSV" in JSON:
+            and "H" in JSON\
+            and "S" in JSON:
         RoomID = JSON["Room"]
         if JSON["Lights"][0] == "all":
             Lights = main.rooms[RoomID]["lights"].keys()
@@ -124,7 +125,7 @@ def ApiLightSetV():
     JSON = request.get_json(force=True)
     if "Room" in JSON\
             and "Lights" in JSON\
-            and "HSV" in JSON:
+            and "V" in JSON:
         RoomID = JSON["Room"]
         if JSON["Lights"][0] == "all":
             Lights = main.rooms[RoomID]["lights"].keys()
