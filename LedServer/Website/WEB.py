@@ -191,7 +191,12 @@ def ApiLightGetStatus():
 
 @app.route('/api/room/alarm', methods=["POST"])
 
-@app.route('/api/room/data', methods=["POST"])
+@app.route('/api/roomstatistics/getRooms', methods=["POST"])
+def ApiRoomstatisticsGetRooms():
+    Rooms = main.rooms.keys()
+    return (jsonify(Rooms), 200)
+
+@app.route('/api/roomstatistics/data', methods=["POST"])
 def returnData():
     # expect json with only the room ID in it, return with the data in json
     json = request.get_json(force=True)
