@@ -180,7 +180,7 @@ function rad2deg(rad){
 
 function HSVtoHSL(h,s,v){
     if (arguments.length === 1){
-        s=h.s, v=h.v, h=h.h;
+        s=h.s, v=h.v, _h=h.h;
     }
     s = s/100;
     v = v/100;
@@ -188,7 +188,7 @@ function HSVtoHSL(h,s,v){
     _l = h/2
     if (isNaN(_s)){_s=0;}
     if (isNaN(_l)){_l=0;}
-    hsl = {"h":h, "s":_s*100, "l":_l}
+    hsl = {"h":_h, "s":_s*100, "l":_l}
     return hsl
 }
 
