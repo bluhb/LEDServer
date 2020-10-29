@@ -36,7 +36,7 @@ function UpdateLightFunctionColor(Statusses){
             HSL = HSVtoHSL(Color);
             HSLString = CreateCSSColorString(HSL);
             console.log(HSLString);
-            document.getElementById("Intensity-".concat(ID)).style.background = HSLString
+            document.getElementById("Intensity-".concat(ID)).style.background = HSLString;
             Color.v = 100;
             window.ColorPickers[ID].color.set(Color);
         }
@@ -50,7 +50,7 @@ function UpdateLightFunctionColor(Statusses){
         HSL = HSVtoHSL(AvgHSV);
         HSLString = CreateCSSColorString(HSL);
         console.log(HSLString)
-        document.getElementById("Intensity-".concat(Room).concat("-all")).style.background = HSLString
+        document.getElementById("Intensity-".concat(Room).concat("-all")).style.background = HSLString;
         AvgHSV.v = 100;
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
 
@@ -173,6 +173,6 @@ function HSVtoHSL(h,s,v){
 
 function CreateCSSColorString(HSL){
     Start = ("hsl(" + HSL.h + ",0%,0%)")
-    End = ("hsl(" + HSL.h + "," + HSL.s + "%," + HSL.l + "%)")
+    End = ("hsl(" + HSL.h + "," + HSL.s + "%," + "50%)")
     return "linear-gradient(" + Start + ", " + End + ");"
 }
