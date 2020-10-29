@@ -208,7 +208,8 @@ function HSVtoHSL(H,S,V){
             s = S*V / (2-l*2)
         }
     }
-    HSL = {"h": H, "s": s*100, "l": l*100}
+    HSL = {"h": H, "s": s, "l": l}
+    console.log(HSL)
     return HSL
 }
 
