@@ -151,7 +151,7 @@ function rad2deg(rad){
 }
 
 function HSVtoHSL(h,s,v){
-    if arguments.length === 1{
+    if (arguments.length === 1){
         s=h.s, v=h.v, h=h.h;
     }
     var _h = h,
