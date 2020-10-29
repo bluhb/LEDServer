@@ -208,7 +208,7 @@ function HSVtoHSL(H,S,V){
             s = S*V / (2-l*2)
         }
     }
-    HSL = {"h": H, "s": s, "l": l}
+    HSL = {"h": H, "s": s*100, "l": l*100}
     return HSL
 }
 
@@ -230,6 +230,6 @@ function HSVtoHSL(H,S,V){
 
 function CreateCSSColorString(HSL){
     Start = ("hsl(" + HSL.h + ",0%,0%)")
-    End = ("hsl(" + HSL.h + "," + HSL.s + "%," + "50%)")
+    End = ("hsl(" + HSL.h + "," + HSL.s + "%," + HSL.l + "%)")
     return "linear-gradient(to right, " + Start + ", " + End + ")"
 }
