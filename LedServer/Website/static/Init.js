@@ -16,7 +16,6 @@ async function CreateRoomCards(){
                             </div>
                             <label class="text-info">Intensity</label><br>
                             <input type="range" class="slider" id="Intensity-{{Room}}-all" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
-                            <div class="wheel" id="colorpicker-{{Room}}-all"></div>
                         </form> 
                 </div>
 
