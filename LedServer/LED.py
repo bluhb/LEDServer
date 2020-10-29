@@ -96,9 +96,9 @@ class GenericLed:
     def colorfade(self): #colorfade the led strip
         for angle in range(0, 360):
             if self.function == "colorfade":
-                print("Colorfade")
                 Prev = time.perf_counter()
                 self.HSV.H = angle
+                self.HSV.S = 100
                 self.colorfill()
                 while time.perf_counter() - Prev < self.wait:
                     pass
