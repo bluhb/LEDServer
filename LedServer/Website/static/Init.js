@@ -23,6 +23,16 @@ async function CreateRoomCards(){
                 <div id="light{{Room}}" class="collapse" data-parent="#{{Room}}">
                     
                     <div id="accordion">
+                        <div class="card" id="Card-Colorpicker-all">
+                            <div class="card-header">
+                                <div>
+                                    <p>
+                                        Whole room
+                                    </p>
+                                    <div class="wheel" id="colorpicker-{{Room}}-all"></div>
+                                </div>
+                            </div>
+                        </div>
                         {{#each Lights}}
                         <div class="card" id="Card-{{../Room}}-{{this}}">
 
