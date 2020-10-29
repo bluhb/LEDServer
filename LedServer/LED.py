@@ -248,11 +248,12 @@ class APALedstrip(GenericLed):
 
     def colorfill(self): #fill the whole strip with the same color, every pixel higher than length will be black
         Color = self.HSV.ToRGB()
-        for i in range(0,len(self.pixels), 1):
-            if i < int(self.length):
-                self.pixels[i] = tuple(Color)
-            else:
-                self.pixels[i] = (0,0,0)
+        self.pixels = [tuple(Color) if i<self.length else (0,0,0) for i in range(0,len(self.pixels))]
+        # for i in range(0,len(self.pixels), 1):
+            # if i < int(self.length):
+                # self.pixels[i] = tuple(Color)
+            # else:
+                # self.pixels[i] = (0,0,0)
         self.pixels.show()
         return None
 
