@@ -37,7 +37,9 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
             document.getElementById("Intensity-".concat(ID)).value = Color.v;
-            //document.getElementById("Card-".concat(ID)).style.backgroundColor = "hsv("+
+            HSL = HSVtoHSL(Color);
+            HSLString = CreateCSSColorString(HSL);
+            document.getElementById("Card-".concat(ID)).style.backgroundColor = HSLString
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
         AvgHSV.h = rad2deg(hAvg);
@@ -46,6 +48,9 @@ function UpdateLightFunctionColor(Statusses){
         console.log(AvgHSV);
         document.getElementById("Intensity-".concat(Room).concat("-all")).value = AvgHSV.v;
         document.getElementById("Switch-".concat(Room).concat("-all")).checked = AllSwitch;
+        HSL = HSVtoHSL(AvgHSV);
+        HSLString = CreateCSSColorString(HSL);
+        document.getElementById("Card-".concat(Room).concat("-all")).style.backgroundColor = HSLString
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
 
     }
@@ -163,4 +168,8 @@ function HSVtoHSL(h,s,v){
 
     HSL = {h:_h, s:_s, l:_l}
     return HSL
+}
+
+function CreateCSSColorString(HSL){
+    return ("hsl(" + HSL.h + "," + HSL.s + "%," + HSL.l + "%)")
 }
