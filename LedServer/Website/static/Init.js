@@ -4,8 +4,8 @@ async function CreateRoomCards(){
     var RoomCard = `
     <div class="col-sm-4">
         <div id="{{Room}}">
-            <div class="card">
-                <div class="card-header" id="Header-{{../Room}}-{{this}}">
+            <div class="card" id="Card-{{Room}}-all">
+                <div class="card-header">
                     <h3><a class="card-link" data-toggle="collapse" href="#light{{Room}}">
                             {{Room}}
                         </a></h3>
@@ -24,9 +24,9 @@ async function CreateRoomCards(){
                     
                     <div id="accordion">
                         {{#each Lights}}
-                        <div class="card">
+                        <div class="card" id="Card-{{../Room}}-{{this}}">
 
-                            <div class="card-header" id="Header-{{../Room}}-{{this}}">
+                            <div class="card-header">
                                 <a class="collapsed card-link" data-toggle="collapse" href="#{{../Room}}collapse{{this}}">
                                     <div>
                                         <p>{{this}}</p>
