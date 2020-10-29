@@ -56,7 +56,7 @@ async function CreateRoomCards(){
                                     <div class="wheel" id="colorpicker-{{../Room}}-{{this}}"></div>
                                 </div>
                             </div>
-                            <div id="Functions-{{../Room}}-{{this}}">
+                            <div id="Functions-{{../Room}}-{{this}}" class="collapse" data-parent="#accordion">
                             </div>
                         </div>
                         {{/each}}
@@ -111,7 +111,7 @@ async function AddFunctionKeys(){
                 HTML = ButtonT({
                     "Room":Room,
                     "Light":Light,
-                    "Function":Func
+                    "Function":FunctionsRooms[Room][Light][Func]
                 })
                 document.getElementById("Functions-" + Room + "-" + Light).insertAdjacentHTML('afterbegin', HTML);
             }

@@ -148,6 +148,26 @@ function SwitchLightClicked(ID, Value){
     setTimeout(UpdateLightsStatus, 2000)
 }
 
+function FunctionButtonClicked(ID){
+    Split = ID.split("-");
+    Room = Split[0];
+    Light = Split[1];
+    Func = Split[2];
+
+    Url = window.BaseUrl.concat('/api/light/setAttr');
+    Data = {
+        "Room":Room,
+        "Lights":[Light],
+        "AttrKey":["function", Func]
+    }
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
+}
+
 function deg2rad(deg){
     return deg * (Math.PI/180);
 }
