@@ -50,7 +50,7 @@ def ledPage():
                 page='led')
 
 @app.route('/roomstatistics')
-def ledPage():
+def roomstatisticsPage():
     return render_template('index.html',
                 page='roomstatistics')
 
