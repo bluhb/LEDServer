@@ -163,8 +163,8 @@ function HSVtoHSL(h,s,v){
     return{
         h:_h,
         s:_s,
-        l:_l;
-    }
+        l:_l
+    };
 }
 
 }
