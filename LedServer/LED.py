@@ -291,7 +291,7 @@ class WiFiLight(GenericLed):
         self.wait = 0.1
         self.HSV = HSV()
         self.brightness = 1
-        self.function = "colorfill"
+        self.function = "off"
         self.master = Master
         self.sync = False
         self.functdict = {"on":self.on,
