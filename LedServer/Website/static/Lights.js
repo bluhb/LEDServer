@@ -37,8 +37,6 @@ function UpdateLightFunctionColor(Statusses){
             window.ColorPickers[ID].color.set(Color);
             HSL = HSVtoHSL(Color);
             HSLString = CreateCSSColorString(HSL);
-            console.log(HSV)
-            console.log(HSLString);
             document.getElementById("Intensity-".concat(ID)).style.background = HSLString;
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
