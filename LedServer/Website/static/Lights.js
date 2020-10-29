@@ -10,6 +10,7 @@ async function UpdateLightsStatus(){
 }
 
 function UpdateLightFunctionColor(Statusses){
+    AllSwitch = false;
     for (var Room in Statusses){
         AvgH = {"Cos":0, "Sin":0}
         AvgHSV = {"h":0, "s":0, "v":0};
@@ -30,6 +31,7 @@ function UpdateLightFunctionColor(Statusses){
             console.log(ID)
             window.ColorPickers[ID].color.set(Color)
             if (!(Func === "off") || Color.v > 0){
+                AllSwitch = true;
                 document.getElementById("Switch-".concat(ID)).checked = true;
             }else{
                 document.getElementById("Switch-".concat(ID)).checked = false;
@@ -41,6 +43,7 @@ function UpdateLightFunctionColor(Statusses){
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
         console.log(AvgHSV);
+        document.getElementById("Switch-".concat(Room).concat("-all").checked = AllSwitch;
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
 
     }
