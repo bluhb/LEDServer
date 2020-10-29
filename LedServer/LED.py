@@ -72,9 +72,7 @@ class GenericLed:
         return None
 
     def __setattr__(self, Name, Value):
-        print(Name, Value, sep=" ")
         if Name == "function" and Value != "on" and hasattr(self, Name):
-            print("Cached")
             self.oldFunction = self.function
         self.__dict__[Name] = Value
         return None
