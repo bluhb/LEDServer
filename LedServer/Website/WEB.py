@@ -98,7 +98,7 @@ def ApiLightSetattr():
     else:
         return("Bad Json", 418)
 
-@app.route('/api/light/setHSV', methods=["POST"])
+@app.route('/api/light/setHS', methods=["POST"])
 def ApiLightSetHSV():
     JSON = request.get_json(force=True)
     if "Room" in JSON\
@@ -110,8 +110,32 @@ def ApiLightSetHSV():
         else:
             Lights = JSON["Lights"]
         for Light in Lights:
-            print(Light)
-            main.rooms[RoomID]["lights"][Light].HSV.SetHSV(*JSON["HSV"])
+            Lobj = main.rooms[RoomID]["lights"][Light]
+            HSV = {"H": JSON["H"],
+                    "S": JSON["S"],
+                    "V": Lobj.HSV.V}
+            main.rooms[RoomID]["lights"][Light].HSV.SetHSV(*HSV)
+        return("HSV set", 200)
+    else:
+        return("Bad Json", 400)
+
+@app.route('/api/light/setV', methods=["POST"])
+def ApiLightSetHSV():
+    JSON = request.get_json(force=True)
+    if "Room" in JSON\
+            and "Lights" in JSON\
+            and "HSV" in JSON:
+        RoomID = JSON["Room"]
+        if JSON["Lights"][0] == "all":
+            Lights = main.rooms[RoomID]["lights"].keys()
+        else:
+            Lights = JSON["Lights"]
+        for Light in Lights:
+            Lobj = main.rooms[RoomID]["lights"][Light]
+            HSV = {"H": Lobj.HSV.H,
+                    "S": Lobj.HSV.S,
+                    "V": JSON["V"]}
+            main.rooms[RoomID]["lights"][Light].HSV.SetHSV(*HSV)
         return("HSV set", 200)
     else:
         return("Bad Json", 400)

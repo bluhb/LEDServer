@@ -1,112 +1,3 @@
-BaseUrl = window.location.origin;
-ColorPickers = {};
-async function CreateRoomCards(){
-    var RoomCard = `
-    <div class="col-sm-4">
-        <div id="{{Room}}">
-            <div class="card">
-                <div class="card-header">
-                    <h3><a class="card-link" data-toggle="collapse" href="#light{{Room}}">
-                            {{Room}}
-                        </a></h3>
-                        <form>
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="Switch-{{Room}}-all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
-                                <label class="custom-control-label" for="Switch-{{Room}}-all">ON / OFF</label> 
-                            </div>
-                            <label class="text-info">Intensity</label>
-                            <input type="range" class="custom-range" id="{{Room}}-Intensity" > <!-- style=width:100px> -->
-                            <div class="wheel" id="colorpicker-{{Room}}-all"></div>
-                        </form> 
-                </div>
-
-                <div id="light{{Room}}" class="collapse" data-parent="#{{Room}}">
-                    
-                    <div id="accordion">
-                        {{#each Lights}}
-                        <div class="card">
-
-                            <div class="card-header">
-                                <a class="collapsed card-link" data-toggle="collapse" href="#{{../Room}}collapse{{this}}">
-                                    <div>
-                                        <p>{{this}}</p>
-                                    </div>
-                                </a>
-                                <form>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="Switch-{{../Room}}-{{this}}" onclick="SwitchLightClicked(this.id, this.checked)">
-                                        <label class="custom-control-label" for="Switch-{{../Room}}-{{this}}">ON / OFF</label> 
-                                    </div>
-                                        <label class="text-info">Intensity</label>
-                                        <input type="range" class="custom-range" id="Intensity-{{../Room}}-{{this}}"> <!-- style=width:100px> -->
-                                </form> 
-                            </div>
-                            <div id="{{../Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p style="text-decoration:underline"><strong>Settings {{this}}</strong><p>
-                                    <div class="wheel" id="colorpicker-{{../Room}}-{{this}}"></div>
-                                </div>
-                            </div>
-                        </div>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    `
-    RoomCardT = Handlebars.compile(RoomCard);
-    var RoomsLights = await $.ajax({
-        url: BaseUrl.concat("/api/light/getLights"),
-        dataType: 'json',
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify(""),
-    });
-    TotalHTML = ""
-    for (Room in RoomsLights){
-        RoomHTML = RoomCardT({"Room":Room, "Lights":RoomsLights[Room]});
-        TotalHTML = TotalHTML.concat(RoomHTML);
-    }
-    document.getElementById("RoomContainer").innerHTML = TotalHTML;
-    
-    for (Room in RoomsLights){
-        for(Light in RoomsLights[Room]){
-            AddColorWheel(Room, RoomsLights[Room][Light]);
-        }
-        AddColorWheel(Room, "all");
-    }
-    UpdateLightsStatus()
-}
-
-function AddColorWheel(Room, Light){
-    DomID = "#colorpicker-".concat(Room).concat("-").concat(Light);
-    console.log(DomID)
-    ID = Room.concat("-").concat(Light)
-    console.log(ID)
-    var ColorPicker = iro.ColorPicker(
-        DomID, 
-        {
-            width:250,
-            id:ID
-        }
-    );
-    ColorPicker.on(
-        'input:move',
-        function (color, change){
-            ColorChanged(color, this.id);
-        }
-    )
-    ColorPicker.on(
-        'input:end',
-        function (color, change){
-            ColorChanged(color, this.id);
-            setTimeout(UpdateLightsStatus, 2000);
-        }
-    )
-    window.ColorPickers[ID] = ColorPicker
-}
-
 async function UpdateLightsStatus(){
     var Statusses = await $.ajax({
         url: BaseUrl.concat("/api/light/getStatus"),
@@ -154,6 +45,97 @@ function UpdateLightFunctionColor(Statusses){
     }
 }
 
+function ColorChanged(color, ID){
+    Room = ID.split("-")[0];
+    Light = ID.split("-")[1];
+    HSV = color.hsv;
+    Data = {
+        "Room":Room,
+        "Lights":[Light],
+        "H": HSV.h,
+        "S": HSV.s
+    }
+    console.log(Data);
+    Url = BaseUrl.concat('/api/light/setHS');
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
+}
+
+function VChanged(V, ID){
+    Room = ID.split("-")[1];
+    Light = ID.split("-")[2];
+    Data = {
+        "Room":Room,
+        "Lights":[Light],
+        "V": V,
+    }
+    console.log(Data);
+    Url = BaseUrl.concat('/api/light/setV');
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
+}
+
+function SwitchAllClicked(ID, Value){
+    ID = ID.split("-").slice(0,-1).join("-");
+    SearchString = '[id^='.concat(ID).concat(']');
+    Lights = document.querySelectorAll(SearchString);
+    for(x=1; x<Lights.length; x++){
+        Lights[x].checked= Value;
+    }
+    OnOff = ((Value) ? 'on' : 'off');
+    Url = window.BaseUrl.concat('/api/light/switchAll');
+    Data = {
+        "Room":ID.split("-")[1],
+        "Function": OnOff
+    }
+    console.log(Data);
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
+    setTimeout(UpdateLightsStatus, 2000)
+}
+
+function SwitchLightClicked(ID, Value){
+    Light = ID.split("-").slice(-1).pop();
+    IDAll = ID.split("-").slice(0,-1).join("-").concat("-all");
+    LightAll=document.getElementById(IDAll);
+    ValueAll = Value;
+    if (!Value){
+        Lights = $("input[id^='".concat(IDAll.slice(0,IDAll.length - 3)).concat("']"));
+        for(x=1; x<Lights.length; x++){
+            if (Lights[x].checked){
+                ValueAll = true;
+            }
+        }
+    }
+    LightAll.checked = ValueAll;
+    OnOff = ((Value) ? 'on' : 'off');
+    Url = window.BaseUrl.concat('/api/light/setAttr');
+    Data = {
+        "Room":ID.split("-")[1],
+        "Lights":[Light],
+        "AttrKey":["function", OnOff]
+    }
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
+    setTimeout(UpdateLightsStatus, 2000)
+}
+
 function deg2rad(deg){
     return deg * (Math.PI/180);
 }
@@ -161,6 +143,3 @@ function deg2rad(deg){
 function rad2deg(rad){
     return rad * (180/Math.PI);
 }
-
-
-
