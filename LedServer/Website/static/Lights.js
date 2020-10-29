@@ -203,9 +203,9 @@ function HSVtoHSL(H,S,V){
         if(l==1){
             s = 0
         } else if(l<0.5){
-            s = S*v / (l*2)
+            s = S*V / (l*2)
         } else{
-            s = S*v / (2-l*2)
+            s = S*V / (2-l*2)
         }
     }
     return [H, s, l]
