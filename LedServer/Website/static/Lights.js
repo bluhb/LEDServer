@@ -185,7 +185,7 @@ function HSVtoHSL(h,s,v){
     }
     s = s/100;
     v = v/100;
-    _s = ((v!==0) ? s*v/((h=(2-s)*v)<1?h:2-h) : 0);
+    _s = ((s!==0) ? s*v/((h=(2-s)*v)<1?h:2-h) : 0);
     _l = h/2
     hsl = {"h":h, "s":_s, "l":_l}
     return hsl
