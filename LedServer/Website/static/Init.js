@@ -100,9 +100,9 @@ async function AddFunctionKeys(){
         data: JSON.stringify(""),
     });
     ButtonHtml = `
-        <input type="button" class="btn btn-secondary" id="{{Room}}-{{Light}}-{{Function}}" onclick=FunctionButtonClicked(this.id)>
+        <button type="button" class="btn btn-secondary" id="{{Room}}-{{Light}}-{{Function}}" onclick=FunctionButtonClicked(this.id)>
         {{Function}}
-        </input>
+        </button><br>
     `
     ButtonT = Handlebars.compile(ButtonHtml)
     for (Room in FunctionsRooms){
