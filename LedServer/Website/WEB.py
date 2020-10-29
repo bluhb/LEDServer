@@ -49,6 +49,11 @@ def ledPage():
     return render_template('index.html',
                 page='led')
 
+@app.route('/roomstatistics')
+def ledPage():
+    return render_template('index.html',
+                page='roomstatistics')
+
 @app.route('/car')
 def ritRegistration():
     global rooms
@@ -203,7 +208,7 @@ def returnData():
     except:
         return(jsonify({'error': 'invalid'}), 200)
 
-@app.route('/api/car/graphData', methods=["POST"])
+@app.route('/api/roomstatistics/graphData', methods=["POST"])
 def returnGraphData():
     # expect json with roomID
     JSON = request.get_json(force = True)
