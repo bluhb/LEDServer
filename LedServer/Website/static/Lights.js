@@ -199,7 +199,7 @@ function HSVtoHSL(H,S,V){
     var l = (2-S) * V / 2;
     var s;
 
-    if (l!=0){
+    if (l!=0 | true){
         if(l==1){
             s = 0
         } else if(l<0.5){
