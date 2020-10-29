@@ -15,8 +15,7 @@ def Worker(light):
     global buttonPin
     while True:
         if not GPIO.input(buttonPin):
-            light.HSV.SetHSV(20,50,100)
-            light.function = 'colorfill'
+            light.function = 'on'
         light.main()
         time.sleep(light.wait)
 
