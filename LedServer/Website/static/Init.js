@@ -100,7 +100,7 @@ async function AddFunctionKeys(){
         data: JSON.stringify(""),
     });
     ButtonHtml = `
-        <button type="button" class="btn btn-secondary" id="{{Room}}-{{Light}}-{{Function}}" onclick=FunctionButtonClicked(this.id)>
+        <button type="button" class="btn btn-secondary functionbutton" id="{{Room}}-{{Light}}-{{Function}}" onclick=FunctionButtonClicked(this.id)>
         {{Function}}
         </button><br>
     `
