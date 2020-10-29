@@ -33,13 +33,12 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
             document.getElementById("Intensity-".concat(ID)).value = Color.v;
+            Color.v = 100;
+            window.ColorPickers[ID].color.set(Color);
             HSL = HSVtoHSL(Color);
             HSLString = CreateCSSColorString(HSL);
             console.log(HSLString);
             document.getElementById("Intensity-".concat(ID)).style.background = HSLString;
-            console.log(document.getElementById("Intensity-".concat(ID).style));
-            Color.v = 100;
-            window.ColorPickers[ID].color.set(Color);
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
         AvgHSV.h = rad2deg(hAvg);
@@ -174,6 +173,6 @@ function HSVtoHSL(h,s,v){
 
 function CreateCSSColorString(HSL){
     Start = ("hsl(" + HSL.h + ",0%,0%)")
-    End = ("hsl(" + HSL.h + "," + "100%," + "50%)")
+    End = ("hsl(" + HSL.h + "," + HSL.s + "%," + "50%)")
     return "linear-gradient(to right, " + Start + ", " + End + ")"
 }
