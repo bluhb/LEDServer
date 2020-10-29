@@ -193,7 +193,7 @@ def ApiLightGetStatus():
 
 @app.route('/api/roomstatistics/getRooms', methods=["POST"])
 def ApiRoomstatisticsGetRooms():
-    Rooms = main.rooms.keys()
+    Rooms = list(main.rooms.keys())
     return (jsonify(Rooms), 200)
 
 @app.route('/api/roomstatistics/data', methods=["POST"])
