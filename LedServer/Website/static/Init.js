@@ -108,12 +108,12 @@ async function AddFunctionKeys(){
     for (Room in FunctionsRooms){
         for (Light in FunctionsRooms[Room]){
             for (Func in FunctionsRooms[Room][Light]){
-                ButtonT({
+                HTML = ButtonT({
                     "Room":Room,
                     "Light":Light,
                     "Function":Func
                 })
-                document.getElementById("Functions-" + Room + "-" + Light).insertAdjacentHTML('afterbegin', ButtonT);
+                document.getElementById("Functions-" + Room + "-" + Light).insertAdjacentHTML('afterbegin', HTML);
             }
         }
     }
