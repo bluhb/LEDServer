@@ -172,5 +172,7 @@ function HSVtoHSL(h,s,v){
 }
 
 function CreateCSSColorString(HSL){
-    return ("hsl(" + HSL.h + "," + HSL.s + "%," + HSL.l + "%)")
+    Start = ("hsl(" + HSL.h + ",0%,0%)")
+    End = ("hsl(" + HSL.h + "," + HSL.s + "%," + HSL.l + "%)")
+    return "linear-gradient(" + Start + ", " + End + ");"
 }
