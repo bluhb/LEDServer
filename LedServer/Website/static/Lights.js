@@ -175,5 +175,5 @@ function HSVtoHSL(h,s,v){
 function CreateCSSColorString(HSL){
     Start = ("hsl(" + HSL.h + ",0%,0%)")
     End = ("hsl(" + HSL.h + "," + HSL.s + "%," + "50%)")
-    return "linear-gradient(to right, " + Start + ", " + End + ");"
+    return "linear-gradient(to right, " + Start + ", " + End + ")"
 }
