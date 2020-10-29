@@ -72,6 +72,8 @@ def ApiGetLightsFunctions():
             Data[room] = {}
             for light in main.rooms[room]["lights"].keys():
                 Data[room][light] = list(main.rooms[room]["lights"][light].functdict.keys())
+                Data[room][light].remove("on")
+                Data[room][light].remove("off")
     return (jsonify(Data), 200)
 
 @app.route('/api/light/switchAll', methods=["POST"])
