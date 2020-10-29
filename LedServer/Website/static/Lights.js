@@ -26,6 +26,8 @@ function UpdateLightFunctionColor(Statusses){
             AvgH.Cos += Math.cos(deg2rad(Color.h));
             AvgHSV.s += Color.s;
             AvgHSV.v += Color.v;
+            console.log(Color);
+            console.log(AvgHSV);
             ID = Room.concat("-").concat(Light)
             if (!(Func === "off") || Color.v > 0){
                 AllSwitch = true;
@@ -38,23 +40,19 @@ function UpdateLightFunctionColor(Statusses){
             window.ColorPickers[ID].color.set(Color);
             HSL = HSVtoHSL(Color);
             HSLString = CreateCSSColorString(HSL);
-            console.log(Color)
-            console.log(HSL)
-            console.log(HSLString)
             document.getElementById("Intensity-".concat(ID)).style.background = HSLString;
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
         AvgHSV.h = rad2deg(hAvg);
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
+        console.log(AvgHSV);
         document.getElementById("Intensity-".concat(Room).concat("-all")).value = AvgHSV.v;
         document.getElementById("Switch-".concat(Room).concat("-all")).checked = AllSwitch;
         AvgHSV.v = 100;
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
         HSL = HSVtoHSL(AvgHSV);
         HSLString = CreateCSSColorString(HSL);
-        console.log(Color)
-        console.log(HSL)
         console.log(HSLString)
         document.getElementById("Intensity-".concat(Room).concat("-all")).style.background = HSLString;
 
@@ -72,6 +70,7 @@ function ColorChanged(color, ID){
         "H": HSV.h,
         "S": HSV.s
     };
+    console.log(Data);
     Url = BaseUrl.concat('/api/light/setHS');
     $.ajax({
         dataType:'json',
@@ -89,6 +88,7 @@ function VChanged(V, ID){
         "Lights":[Light],
         "V": V,
     };
+    console.log(Data);
     Url = BaseUrl.concat('/api/light/setV');
     $.ajax({
         dataType:'json',
@@ -112,6 +112,7 @@ function SwitchAllClicked(ID, Value){
         "Room":ID.split("-")[1],
         "Function": OnOff
     }
+    console.log(Data);
     $.ajax({
         dataType:'json',
         type: "post",
@@ -185,8 +186,10 @@ function HSVtoHSL(h,s,v){
     }
     s = s/100;
     v = v/100;
-    _s = ((s!==0) ? s*v/((h=(2-s)*v)<1?h:2-h) : 0);
+    _s = s*v/((h=(2-s)*v)<1?h:2-h);
     _l = h/2
+    if (isNaN(_s)){_s=0;}
+    if (isNaN(_l)){_l=0;}
     hsl = {"h":h, "s":_s, "l":_l}
     return hsl
 }
