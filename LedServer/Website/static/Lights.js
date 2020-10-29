@@ -1,4 +1,6 @@
+var UpdateLightsStatusRepeater;
 async function UpdateLightsStatus(){
+    clearTimeout(UpdateLightsStatusRepeater);
     var Statusses = await $.ajax({
         url: BaseUrl.concat("/api/light/getStatus"),
         dataType: 'json',
@@ -7,6 +9,7 @@ async function UpdateLightsStatus(){
         data: JSON.stringify(""),
     });
     UpdateLightFunctionColor(Statusses);
+    window.UpdateLightsStatusRepeater = setTimeout(UpdateLightsStatus, 5000);
 }
 
 function UpdateLightFunctionColor(Statusses){
@@ -52,6 +55,7 @@ function UpdateLightFunctionColor(Statusses){
         HSLString = CreateCSSColorString(HSL);
         console.log(HSLString)
         document.getElementById("Intensity-".concat(Room).concat("-all")).style.background = HSLString;
+
 
 
     }
