@@ -181,19 +181,26 @@ function rad2deg(rad){
 }
 
 function HSVtoHSL(h,s,v){
-    if (arguments.length === 1){
-        s=h.s, v=h.v, h=h.h;
-    }
-    var s = s/100, v=v/100;
-    var _h = h,
-        _s = s*v,
-        _l = (2-s)*v;
-    _s /= (_l <= 1) ? (_l === 0 ? 1 : _l) : 2 - _l;
-    _l /= 2
-    _s = ((isNaN(_s)) ? 0 : _s);
-    HSL = {h:_h, s:_s*100, l:_l*100}
-    return HSL
+    _s = s*v/((h=(2-s)*v)<1?h:2-h);
+    _l = h/2
+    hsl = {"h":h, "s":_s, "l":_l}
+    return hsl
 }
+
+//function HSVtoHSL(h,s,v){
+    //if (arguments.length === 1){
+        //s=h.s, v=h.v, h=h.h;
+    //}
+    //var s = s/100, v=v/100;
+    //var _h = h,
+        //_s = s*v,
+        //_l = (2-s)*v;
+    //_s /= (_l <= 1) ? (_l === 0 ? 1 : _l) : 2 - _l;
+    //_l /= 2
+    //_s = ((isNaN(_s)) ? 0 : _s);
+    //HSL = {h:_h, s:_s*100, l:_l*100}
+    //return HSL
+//}
 
 function CreateCSSColorString(HSL){
     Start = ("hsl(" + HSL.h + ",0%,0%)")
