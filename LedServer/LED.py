@@ -30,6 +30,7 @@ class HSV:
         return None
 
     def __setattr__(self, Name, Value):
+        print(Name, Value)
         try:
             if Name in "S,V":
                 if 0<= Value <= 100:
