@@ -15,7 +15,7 @@ async function CreateRoomCards(){
                                 <label class="custom-control-label" for="Switch-{{Room}}-all">ON / OFF</label> 
                             </div>
                             <label class="text-info">Intensity</label>
-                            <input type="range" class="custom-range" id="Intensity-{{Room}}-all" onchange=VChanged(this.value, this.id)> <!-- style=width:100px> -->
+                            <input type="range" class="custom-range" id="Intensity-{{Room}}-all" onchange="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                             <div class="wheel" id="colorpicker-{{Room}}-all"></div>
                         </form> 
                 </div>
@@ -38,7 +38,7 @@ async function CreateRoomCards(){
                                         <label class="custom-control-label" for="Switch-{{../Room}}-{{this}}">ON / OFF</label> 
                                     </div>
                                         <label class="text-info">Intensity</label>
-                                        <input type="range" class="custom-range" id="Intensity-{{../Room}}-{{this}}" onchange=VChanged(this.value, this.id)> <!-- style=width:100px> -->
+                                        <input type="range" class="custom-range" id="Intensity-{{../Room}}-{{this}}" onchange="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                                 </form> 
                             </div>
                             <div id="{{../Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
