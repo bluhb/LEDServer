@@ -197,16 +197,19 @@ function HSVtoHSL(H,S,V){
         S=H.s, V=H.v, H=H.h;
     }
     var l = (2-S) * V / 2;
-    var s = 0;
+    var s;
 
-    if(l==1){
-        s = 0
-    } else if(l<0.5){
-        s = S*V / (l*2)
-    } else{
-        s = S*V / (2-l*2)
+    if (l!=0){
+        if(l==1){
+            s = 0
+        } else if(l<0.5){
+            s = S*V / (l*2)
+        } else{
+            s = S*V / (2-l*2)
+        }
     }
-    return [H, s, l]
+    HSL = {"h": H, "s": s, "l": l}
+    return HSL
 }
 
 
