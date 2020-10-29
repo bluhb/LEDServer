@@ -78,7 +78,6 @@ function ColorChanged(color, ID){
         url:Url,
         data:JSON.stringify(Data)
     });
-    setTimeout(UpdateLightsStatus, 2000)
 }
 
 function VChanged(V, ID){
@@ -96,7 +95,6 @@ function VChanged(V, ID){
         url:Url,
         data:JSON.stringify(Data)
     });
-    setTimeout(UpdateLightsStatus, 2000)
 }
 
 function SwitchAllClicked(ID, Value){
@@ -190,7 +188,7 @@ function HSVtoHSL(h,s,v){
     _l = h/2
     if (isNaN(_s)){_s=0;}
     if (isNaN(_l)){_l=0;}
-    hsl = {"h":h, "s":_s, "l":_l}
+    hsl = {"h":h, "s":_s*100, "l":_l}
     return hsl
 }
 
