@@ -37,6 +37,7 @@ function UpdateLightFunctionColor(Statusses){
             window.ColorPickers[ID].color.set(Color);
             HSL = HSVtoHSL(Color);
             HSLString = CreateCSSColorString(HSL);
+            console.log(HSV)
             console.log(HSLString);
             document.getElementById("Intensity-".concat(ID)).style.background = HSLString;
         }
@@ -47,12 +48,13 @@ function UpdateLightFunctionColor(Statusses){
         console.log(AvgHSV);
         document.getElementById("Intensity-".concat(Room).concat("-all")).value = AvgHSV.v;
         document.getElementById("Switch-".concat(Room).concat("-all")).checked = AllSwitch;
+        AvgHSV.v = 100;
+        window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
         HSL = HSVtoHSL(AvgHSV);
         HSLString = CreateCSSColorString(HSL);
         console.log(HSLString)
         document.getElementById("Intensity-".concat(Room).concat("-all")).style.background = HSLString;
-        AvgHSV.v = 100;
-        window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
+
 
     }
 }
