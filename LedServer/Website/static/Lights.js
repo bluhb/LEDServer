@@ -29,7 +29,7 @@ function UpdateLightFunctionColor(Statusses){
             console.log(Color)
             console.log(ID)
             window.ColorPickers[ID].color.set(Color)
-            if (!(Func === "off")){
+            if (!(Func === "off") || Color.v > 0){
                 document.getElementById("Switch-".concat(ID)).checked = true;
             }else{
                 document.getElementById("Switch-".concat(ID)).checked = false;
