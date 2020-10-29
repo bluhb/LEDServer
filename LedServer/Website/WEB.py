@@ -91,7 +91,7 @@ def ApiLightSetattr():
         Value = JSON["AttrKey"][1]
         for Light in JSON["Lights"]:
             if hasattr(main.rooms[RoomID]["lights"][Light], Key):
-                if Key == "function":
+                if Key == "function" and Value != "on":
                     oldFunction = main.rooms[RoomID]["lights"][Light].function
                     print(oldFunction)
                     setattr(main.rooms[RoomID]["lights"][Light],
