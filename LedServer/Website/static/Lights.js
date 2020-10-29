@@ -35,6 +35,7 @@ function UpdateLightFunctionColor(Statusses){
             document.getElementById("Intensity-".concat(ID)).value = Color.v;
             HSL = HSVtoHSL(Color);
             HSLString = CreateCSSColorString(HSL);
+            console.log(HSLString);
             document.getElementById("Intensity-".concat(ID)).style.background = HSLString
             Color.v = 100;
             window.ColorPickers[ID].color.set(Color);
@@ -48,6 +49,7 @@ function UpdateLightFunctionColor(Statusses){
         document.getElementById("Switch-".concat(Room).concat("-all")).checked = AllSwitch;
         HSL = HSVtoHSL(AvgHSV);
         HSLString = CreateCSSColorString(HSL);
+        console.log(HSLString)
         document.getElementById("Intensity-".concat(Room).concat("-all")).style.background = HSLString
         AvgHSV.v = 100;
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
