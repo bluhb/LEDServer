@@ -137,7 +137,7 @@ def ApiLightSetV():
             HSV = {"H": Lobj.HSV.H,
                     "S": Lobj.HSV.S,
                     "V": JSON["V"]}
-            main.rooms[RoomID]["Lights"][Light].function = "colorfill"
+            main.rooms[RoomID]["lights"][Light].function = "colorfill"
             main.rooms[RoomID]["lights"][Light].HSV.SetHSV(**HSV)
         return("HSV set", 200)
     else:
