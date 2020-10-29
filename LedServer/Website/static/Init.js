@@ -56,6 +56,8 @@ async function CreateRoomCards(){
                                     <div class="wheel" id="colorpicker-{{../Room}}-{{this}}"></div>
                                 </div>
                             </div>
+                            <div id="Functions-{{../Room}}-{{this}}">
+                            </div>
                         </div>
                         {{/each}}
                     </div>
@@ -85,7 +87,37 @@ async function CreateRoomCards(){
         }
         AddColorWheel(Room, "all");
     }
+    AddFunctionKeys()
     UpdateLightsStatus()
+}
+
+async function AddFunctionKeys(){
+    var FunctionsRooms = await $.ajax({
+        url: BaseUrl.concat("/api/light/getLightsFunctions"),
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(""),
+    });
+    ButtonHtml = `
+        <input type="button" class="btn btn-secondary" id="{{Room}}-{{Light}}-{{Function}}" onclick=FunctionButtonClicked(this.id)>
+        {{Function}}
+        </input>
+    `
+    ButtonT = Handlebars.compile(ButtonHtml)
+    for (Room in FunctionsRooms){
+        for (Light in FunctionsRooms[Room]){
+            for (Func in FunctionsRooms[Room][Light]){
+                ButtonT({
+                    "Room":Room,
+                    "Light":Light,
+                    "Function":Func
+                })
+                document.getElementById("Functions-" + Room + "-" + Light).insertAdjacentHTML('afterbegin', ButtonT);
+            }
+        }
+    }
+
 }
 
 function AddColorWheel(Room, Light){
