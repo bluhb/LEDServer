@@ -1,44 +1,58 @@
-<!doctype html>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- D3.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-<!-- Plotly.js -->
-<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home ROGIER</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <script src="/static/iro.js-master/dist/iro.min.js"></script>
+        <script src="/static/Init.js"></script>
+        <script src="/static/Lights.js"></script>
+        <link rel="stylesheet" href="/static/style.css">
 
-<head lang="en">
-    <meta charset="utf-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-</head>
-<title>Led Strip</title>
 
-<body>
+        <style>
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1250px; /* or 950px */
+}
+        </style>
 
-<div class="container">
-  <nav class="navbar navbar-default">
-    <div class="navbar-header">
-    <a class="navbar-brand" href="/">PI HOME</a>
-    </div>
-    <ul class="nav navbar-nav">
-    <li {% if page == 'home' %} class="active" {% endif %}><a href="/">Home</a></li>
-    {% for i in rooms %}
-    <li {% if i == roomID %} class="active" {% endif %}><a href="/rooms/{{i}}">{{i}}</a></li>
-    {% endfor %}
-    <li {% if page == 'graphs' %} class="active" {% endif %}><a href="/graphs">Graphs</a></li>
-    <li {% if page == 'alarms' %} class="active" {% endif %}><a href="/alarm">Alarms</a></li>
-    <li {% if page == 'ritRegistration' %} class="active" {% endif %}><a href="/ritregistration">Rit registratie</a></li>
-    </ul>
-  </nav>
-  <div class="jumbotron">
-    <h1>Raspberry pi user interface</h1> 
-  </div>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/lights">Licht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Temperatuur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tuin</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1>HOME ROGIER</h1>      
+                    <h2>Verlichting</h2>
+                </div>
+            </div>    
+
 
   {% include page + '.html'%}
 

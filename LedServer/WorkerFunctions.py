@@ -15,8 +15,7 @@ def Worker(light):
     global buttonPin
     while True:
         if not GPIO.input(buttonPin):
-            light.color_rgb = {'r':255, 'g':150, 'b':120}
-            light.function = 'colorfill'
+            light.function = 'on'
         light.main()
         time.sleep(light.wait)
 
