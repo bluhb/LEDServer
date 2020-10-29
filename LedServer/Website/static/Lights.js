@@ -10,8 +10,8 @@ async function UpdateLightsStatus(){
 }
 
 function UpdateLightFunctionColor(Statusses){
-    AllSwitch = false;
     for (var Room in Statusses){
+        AllSwitch = false;
         AvgH = {"Cos":0, "Sin":0}
         AvgHSV = {"h":0, "s":0, "v":0};
         AvgCount = 0

@@ -30,7 +30,6 @@ class HSV:
         return None
 
     def __setattr__(self, Name, Value):
-        print(Name, Value)
         Value = int(Value)
         try:
             if Name in "S,V":
@@ -83,6 +82,7 @@ class GenericLed:
                 pass
         self.HSV.V = 0
         self.colorfill()
+        time.sleep(0.01)
         return None
 
     def on(self):
