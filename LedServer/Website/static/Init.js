@@ -14,8 +14,8 @@ async function CreateRoomCards(){
                                 <input type="checkbox" class="custom-control-input" id="Switch-{{Room}}-all" value="" onclick="SwitchAllClicked(this.id, this.checked)">
                                 <label class="custom-control-label" for="Switch-{{Room}}-all">ON / OFF</label> 
                             </div>
-                            <label class="text-info">Intensity</label>
-                            <input type="range" class="hidden-slider" id="Intensity-{{Room}}-all" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                            <label class="text-info">Intensity</label><br>
+                            <input type="range" class="slider" id="Intensity-{{Room}}-all" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                             <div class="wheel" id="colorpicker-{{Room}}-all"></div>
                         </form> 
                 </div>
@@ -37,8 +37,8 @@ async function CreateRoomCards(){
                                         <input type="checkbox" class="custom-control-input" id="Switch-{{../Room}}-{{this}}" onclick="SwitchLightClicked(this.id, this.checked)">
                                         <label class="custom-control-label" for="Switch-{{../Room}}-{{this}}">ON / OFF</label> 
                                     </div>
-                                        <label class="text-info">Intensity</label>
-                                        <input type="range" class="hidden-slider" id="Intensity-{{../Room}}-{{this}}" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                                        <label class="text-info">Intensity</label><br>
+                                        <input type="range" class="slider" id="Intensity-{{../Room}}-{{this}}" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                                 </form> 
                             </div>
                             <div id="{{../Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
