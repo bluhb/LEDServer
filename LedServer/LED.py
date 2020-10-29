@@ -74,9 +74,11 @@ class GenericLed:
     def off(self): #set color to black and set function to colorfill
         V = self.HSV.V
         for i in range(V, 0, -1):
+            T = time.perf_counter_ns()
             self.colorfill()
             self.HSV.V = i
-            time.sleep(0.01)
+            while time.perf_counter_ns() - T < 10000000: #wait for 1 second
+                pass
         self.HSV.V = 0
         self.colorfill()
         return None
