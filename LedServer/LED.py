@@ -31,14 +31,15 @@ class HSV:
 
     def __setattr__(self, Name, Value):
         print(Name, Value)
+        Value = int(Value)
         try:
             if Name in "S,V":
-                if 0<= int(Value) <= 100:
+                if 0<= Value <= 100:
                     self.__dict__[Name] = Value
                 else:
                     raise ValueError("{} is a too high or low value, must be 0<{}>100".format(Name,Name))
             elif Name in "H":
-                if  0 <= int(Value) <= 360:
+                if  0 <= Value <= 360:
                     self.__dict__[Name] = Value
                 else:
                     raise ValueError("{} is a too high or low value, must be 0<{}>360".format(Name,Name))
