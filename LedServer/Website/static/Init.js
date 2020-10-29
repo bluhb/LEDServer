@@ -26,7 +26,7 @@ async function CreateRoomCards(){
                             <div class="card-header">
                                 <div>
                                     <p>
-                                        Whole room
+                                        <a>Whole room</a>
                                     </p>
                                     <div class="wheel" id="colorpicker-{{Room}}-all"></div>
                                 </div>
