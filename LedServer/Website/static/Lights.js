@@ -43,7 +43,7 @@ function UpdateLightFunctionColor(Statusses){
         AvgHSV.s = AvgHSV.s/AvgCount;
         AvgHSV.v = AvgHSV.v/AvgCount;
         console.log(AvgHSV);
-        document.getElementById("Intensity-".concat(ID)).value = AvgHSV.v;
+        document.getElementById("Intensity-".concat(Room).concat("-all")).value = AvgHSV.v;
         document.getElementById("Switch-".concat(Room).concat("-all")).checked = AllSwitch;
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
 
