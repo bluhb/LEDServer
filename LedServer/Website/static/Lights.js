@@ -50,7 +50,7 @@ function UpdateLightFunctionColor(Statusses){
         document.getElementById("Switch-".concat(Room).concat("-all")).checked = AllSwitch;
         HSL = HSVtoHSL(AvgHSV);
         HSLString = CreateCSSColorString(HSL);
-        document.getElementById("Intensity".concat(Room).concat("-all")).style.background = HSLString
+        document.getElementById("Intensity-".concat(Room).concat("-all")).style.background = HSLString
         window.ColorPickers[Room.concat("-all")].color.set(AvgHSV);
 
     }
