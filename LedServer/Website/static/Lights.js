@@ -34,6 +34,7 @@ function UpdateLightFunctionColor(Statusses){
             }else{
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
+            document.getElementById("Intensity-".concat(ID).value=Color.v;
         }
         hAvg = Math.atan2(AvgH.Sin, AvgH.Cos);
         AvgHSV.h = rad2deg(hAvg);
@@ -62,6 +63,7 @@ function ColorChanged(color, ID){
         url:Url,
         data:JSON.stringify(Data)
     });
+    setTimeout(UpdateLightsStatus, 2000)
 }
 
 function VChanged(V, ID){
@@ -79,6 +81,7 @@ function VChanged(V, ID){
         url:Url,
         data:JSON.stringify(Data)
     });
+    setTimeout(UpdateLightsStatus, 2000)
 }
 
 function SwitchAllClicked(ID, Value){
