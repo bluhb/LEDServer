@@ -65,7 +65,7 @@ def ApiGetLights():
     return (jsonify(Data), 200)
 
 @app.route('/api/light/getLightsFunctions', methods=["POST"])
-def ApiGetLights():
+def ApiGetLightsFunctions():
     Data = {}
     for room in main.rooms:
         if "lights" in main.rooms[room]:
