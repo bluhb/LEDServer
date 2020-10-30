@@ -14,6 +14,7 @@ async function GetCurrentTemps(){
     Data = {}
     Url = BaseUrl.concat('/api/roomstatistics/data')
     for (Room in Rooms){
+        Room = Rooms[Room]
         Data[Room] = await $.ajax({
             dataType:'json',
             type: "post",
