@@ -204,7 +204,7 @@ def returnData():
     json = request.get_json(force=True)
     try:
         roomID = json['roomID']
-        if roomID in main.rooms.keys:
+        if roomID in main.rooms.keys():
             response = {}
             response.update(main.rooms[roomID]["room"].json)
             if "lightID" in json:
