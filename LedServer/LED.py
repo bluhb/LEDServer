@@ -75,7 +75,9 @@ class GenericLed:
         if Name == "function" and getattr(self, "function", None) != "off" and hasattr(self, Name):
             self.oldFunction = self.function
             print("Set oldfunction to: {}".format(self.oldFunction))
-        self.__dict__[Name] = Value
+            self.__dict__[Name] = Value
+        else:
+            self.__dict__[Name] = Value
         return None
 
 
