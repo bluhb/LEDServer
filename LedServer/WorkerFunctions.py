@@ -22,7 +22,7 @@ def Worker(Room, light):
                     "Lights": [light.name],
                     "AttrKey": ["function", OnOff]
                     }
-            requests.post(Url, Data)
+            requests.post(Url, json=Data)
         light.main()
         time.sleep(light.Speed)
 
