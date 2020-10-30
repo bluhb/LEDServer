@@ -204,7 +204,7 @@ def returnData():
     json = request.get_json(force=True)
     try:
         roomID = json['roomID']
-        if roomID in main.rooms.keys():
+        if roomID in main.rooms:
             response = {}
             response.update(main.rooms[roomID]["room"].json)
             if "lightID" in json:
@@ -212,8 +212,8 @@ def returnData():
             return(jsonify(response), 200)
         else:
             return("",418) #I'm a teapot
-    except:
-        return(jsonify({'error': 'invalid'}), 200)
+    except Exception as E:
+        return(jsonify({'error': E}), 200)
 
 @app.route('/api/roomstatistics/graphData', methods=["POST"])
 def returnGraphData():
