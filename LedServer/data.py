@@ -91,12 +91,12 @@ class room:
         Time = []
         print("getDataFromDB: name; {}, table; {}".format(self.name, self.Table))
         for value in self.dataKeys:
-            if not (value[0] == "time" or value[0] == "room"):
+            if not (value[0] == "room"):
                 Data[value[0]] = []
 
         for value in DataRaw:
             for key in Data:
                 Data[key].append(float(value[key]))
             if "time" in value:
-                Time.append(value["time"])
+                Data["time"].append(value["time"])
         return Data, Time
