@@ -93,10 +93,7 @@ class GenericLed:
 
     def on(self):
         self.HSV.V = 100
-        if self.oldFunction != "":
-            self.function = self.oldFunction
-        else:
-            self.function = "colorfill"
+        self.function = self.oldFunction
         return None
 
     def colorfade(self): #colorfade the led strip
@@ -162,7 +159,7 @@ class Arduino(GenericLed):
         self.Speed = 0.1
         self.brightness = 1
         self.function = 'off'
-        self.oldFunction = ""
+        self.oldFunction = "colorfill"
         self.functdict = {
                 'colorfill': self.colorfill,
                 'on': self.on,
@@ -242,7 +239,7 @@ class APALedstrip(GenericLed):
         self.Speed = 0.1
         self.length = pixels
         self.function = 'off'
-        self.oldFunction = ""
+        self.oldFunction = "colorfill"
         self.functdict = {
                 'colorfill': self.colorfill,
                 'on': self.on,
@@ -305,7 +302,7 @@ class WiFiLight(GenericLed):
         self.HSV = HSV()
         self.brightness = 1
         self.function = "off"
-        self.oldFunction = ""
+        self.oldFunction = "colorfill"
         self.master = Master
         self.sync = False
         self.functdict = {"on":self.on,

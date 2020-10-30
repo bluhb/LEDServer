@@ -16,6 +16,8 @@ def Worker(light):
     while True:
         if not GPIO.input(buttonPin):
             light.function = 'on'
+            light.HSV.h = 20
+            light.HSV.s = 100
         light.main()
         time.sleep(light.Speed)
 
