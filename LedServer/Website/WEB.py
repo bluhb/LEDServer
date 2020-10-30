@@ -202,19 +202,15 @@ def ApiRoomstatisticsGetRooms():
 def returnData():
     # expect json with only the room ID in it, return with the data in json
     JSON = request.get_json(force=True)
-    try:
-        roomID = JSON.get("RoomID", "")
-        if roomID in main.rooms:
-            response = {}
-            Data, Time = main.rooms[roomID]["room"].getDataFromDB(Items=1)
-            response.update(Data)
-            response.update(Time)
-            return(jsonify(response), 200)
-        else:
-            return("",418) #I'm a teapot
-    except Exception as E:
-        print(E)
-        return("Error", 500)
+    roomID = JSON.get("RoomID", "")
+    if roomID in main.rooms:
+        response = {}
+        Data, Time = main.rooms[roomID]["room"].getDataFromDB(Items=1)
+        response.update(Data)
+        response.update(Time)
+        return(jsonify(response), 200)
+    else:
+        return("",418) #I'm a teapot
 
 @app.route('/api/roomstatistics/graphData', methods=["POST"])
 def returnGraphData():
