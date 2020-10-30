@@ -1,5 +1,5 @@
 function Init(){
-    GetCurrentTemps()    
+    GetCurrentData()    
 }
 
 async function GetCurrentData(){
