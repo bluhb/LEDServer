@@ -19,7 +19,7 @@ async function GetCurrentTemps(){
             dataType:'json',
             type: "post",
             url:Url,
-            json:JSON.stringify({"RoomID": Room})
+            data:JSON.stringify({"RoomID": Room})
         });
     }
     console.log(Data)
