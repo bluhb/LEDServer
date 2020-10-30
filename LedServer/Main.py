@@ -33,7 +33,7 @@ threads['pi'] = threading.Thread(target = WF.PiControl, args = (rooms,))
 threads['pi'].daemon = True
 threads['pi'].start()
 
-threads['buttonReader'] = threading.ThreadError(target = WF.buttonRead)
+threads['buttonReader'] = threading.Thread(target = WF.buttonRead)
 threads['buttonReader'].daemon = True
 threads['buttonReader'].start()
 
