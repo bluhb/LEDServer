@@ -17,7 +17,7 @@ def Worker(light):
         if not GPIO.input(buttonPin):
             light.function = 'on'
         light.main()
-        time.sleep(light.wait)
+        time.sleep(light.Speed)
 
     return(None)
 
