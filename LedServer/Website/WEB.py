@@ -203,7 +203,7 @@ def returnData():
     # expect json with only the room ID in it, return with the data in json
     JSON = request.get_json(force=True)
     try:
-        roomID = JSON['roomID']
+        roomID = JSON.getattr("RoomID", "")
         if roomID in main.rooms:
             response = {}
             response.update(main.rooms[roomID]["room"].json)
