@@ -24,5 +24,15 @@ Defenitions:
     - static
       - functions.js - All javascript functions for the website.
 
-<img src=./Pictures/Website1.png>
-<img src=./Pictures/Website2.png>
+<figure>
+    <img src=./Pictures/Website3.png>
+    <figcaption>Website overview desktop</figcaption>
+</figure>
+<figure>
+    <img src=./Pictures/Website4.png>
+    <figcaption>Website overview uncollapsed rooms</figcaption>
+</figure>
+<figure>
+    <img src=./Pictures/Website5.png>
+    <figcaption>Overview of one light</figcaption>
+</figure>
