@@ -28,14 +28,14 @@ def buttonRead():
             States = requests.post("http://localhost:5000/api/light/getStatus", json={})
             for Room in States:
                 for Lights in States[Room]:
-            Url = "http://localhost:5000/api/light/setAttr"
-            OnOff = "on" if Light.Function =="off" else "off"
-            Data = {"Room": Room,
-                    "Lights": [Light.name],
-                    "AttrKey": ["function", OnOff]
-                    }
-            print(Data)
-            requests.post(Url, json=Data)
+                    Url = "http://localhost:5000/api/light/setAttr"
+                    OnOff = "on" if Light.Function =="off" else "off"
+                    Data = {"Room": Room,
+                            "Lights": [Light.name],
+                            "AttrKey": ["function", OnOff]
+                            }
+                    print(Data)
+                    requests.post(Url, json=Data)
 
 #this function is used to measure temp and load of the pi.
 def PiControl(rooms):
