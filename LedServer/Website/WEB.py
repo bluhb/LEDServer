@@ -201,14 +201,12 @@ def ApiRoomstatisticsGetRooms():
 @app.route('/api/roomstatistics/data', methods=["POST"])
 def returnData():
     # expect json with only the room ID in it, return with the data in json
-    json = request.get_json(force=True)
+    JSON = request.get_json(force=True)
     try:
-        roomID = json['roomID']
+        roomID = JSON['roomID']
         if roomID in main.rooms:
             response = {}
             response.update(main.rooms[roomID]["room"].json)
-            if "lightID" in json:
-                response.update({"color": main.rooms[roomID]["lights"][json["lightID"]].color_rgb})
             return(jsonify(response), 200)
         else:
             return("",418) #I'm a teapot
