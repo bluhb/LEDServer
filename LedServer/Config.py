@@ -14,7 +14,7 @@ rooms = {
         "bed":{
             "room":data.room(name="bed", dataKeys=dataKeys),
             "lights":{
-                "LedStrip":LED.Arduino(name ='bed',
+                "LedStrip":LED.Arduino(name ='LedStrip',
                     serialPort = 'ttyUSB0',
                     master = {'room':'livingroom', 'light':'Muur'},
                     roomSensors = 'livingroom')
@@ -23,11 +23,11 @@ rooms = {
         "livingroom":{
             "room":data.room(name='livingroom', dataKeys=dataKeys),
             "lights":{
-                "Muur":LED.APALedstrip(name = 'livingroom',
+                "Muur":LED.APALedstrip(name = 'Muur',
                     ),
-                "Bank":LED.WiFiLight(Name = "livingroom2",
+                "Bank":LED.WiFiLight(Name = "Bank",
                     IP_ADRESS = "ESP-01_test.lan",
-                    Master = {"room":"livingroom", "light":"LedStrip"})
+                    Master = {"room":"livingroom", "light":"Muur"})
                 }
             }
         }

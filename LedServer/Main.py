@@ -33,11 +33,15 @@ threads['pi'] = threading.Thread(target = WF.PiControl, args = (rooms,))
 threads['pi'].daemon = True
 threads['pi'].start()
 
+threads['buttonReader'] = threading.Thread(target = WF.buttonRead)
+threads['buttonReader'].daemon = True
+threads['buttonReader'].start()
+
 for room in rooms:
     try:
         if "lights" in rooms[room]:
             for key, value in rooms[room]['lights'].items():
-                threads[key] = threading.Thread(target = WF.Worker, args = (value,))
+                threads[key] = threading.Thread(target = WF.Worker, args = (room, value,))
                 threads[key].daemon = True
                 threads[key].start()
                 print(room + " " + key + " started a new thread")

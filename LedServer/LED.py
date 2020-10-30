@@ -72,9 +72,12 @@ class GenericLed:
         return None
 
     def __setattr__(self, Name, Value):
-        if Name == "function" and Value != "on" and hasattr(self, Name):
+        if Name == "function" and getattr(self, "function", None) != "off" and hasattr(self, Name):
             self.oldFunction = self.function
-        self.__dict__[Name] = Value
+            print("Set oldfunction to: {}".format(self.oldFunction))
+            self.__dict__[Name] = Value
+        else:
+            self.__dict__[Name] = Value
         return None
 
 
@@ -93,10 +96,7 @@ class GenericLed:
 
     def on(self):
         self.HSV.V = 100
-        if self.oldFunction != "":
-            self.function = self.oldFunction
-        else:
-            self.function = "colorfill"
+        self.function = self.oldFunction
         return None
 
     def colorfade(self): #colorfade the led strip
@@ -106,7 +106,7 @@ class GenericLed:
                 self.HSV.H = angle
                 self.HSV.S = 100
                 self.colorfill()
-                while time.perf_counter() - Prev < self.wait:
+                while time.perf_counter() - Prev < self.Speed:
                     pass
             else:
                 break
@@ -159,10 +159,10 @@ class Arduino(GenericLed):
 
         self.HSV = HSV()
         self.TempHumid = {}
-        self.wait = 0.1
+        self.Speed = 0.1
         self.brightness = 1
         self.function = 'off'
-        self.oldFunction = ""
+        self.oldFunction = "colorfill"
         self.functdict = {
                 'colorfill': self.colorfill,
                 'on': self.on,
@@ -189,7 +189,7 @@ class Arduino(GenericLed):
             self.Read()
             self.prevMilli = time.perf_counter()
         if self.sync and not self.master == None:
-            self.wait = main.rooms[self.master['room']]['lights'][self.master['light']].wait
+            self.Speed = main.rooms[self.master['room']]['lights'][self.master['light']].Speed
             self.HSV = main.rooms[self.master['room']]['lights'][self.master['light']].HSV
             if not self.function == 'colorfill':
                 self.function = 'colorfill'
@@ -239,10 +239,10 @@ class APALedstrip(GenericLed):
         self.name = name
         self.brightness = 1
         self.HSV = HSV()
-        self.wait = 0.1
+        self.Speed = 0.1
         self.length = pixels
         self.function = 'off'
-        self.oldFunction = ""
+        self.oldFunction = "colorfill"
         self.functdict = {
                 'colorfill': self.colorfill,
                 'on': self.on,
@@ -256,7 +256,7 @@ class APALedstrip(GenericLed):
 
     def main(self): #check for sync, copy colors from dict to array and run the function
         if self.sync and not self.master == None:
-            self.wait = main.rooms[self.master['room']]['lights'][self.master['light']].wait
+            self.Speed = main.rooms[self.master['room']]['lights'][self.master['light']].Speed
             self.HSV = main.rooms[self.master['room']]['lights'][self.master['light']].HSV
 
         self.functdict[self.function]()
@@ -279,6 +279,7 @@ class APALedstrip(GenericLed):
         if self.length < 1: self.length = 1
         for angle in range(0,360, 1): #loop from zero to 200 pi, because you can't loop in floats
             if self.function == "rainbow":
+                Time = time.perf_counter()
                 for j in range(0, len(self.pixels),1):
                     if j < int(self.length):
                         angle = angle + offset #calculate offset with angle, this will make sure every led is another color
@@ -289,7 +290,8 @@ class APALedstrip(GenericLed):
                     else:
                         self.pixels[j] = (0,0,0)
                 self.pixels.show()
-                time.sleep(int(self.wait))
+                while time.perf_counter() - Time < self.Speed:
+                    pass
             else:
                 break
         return None
@@ -299,11 +301,11 @@ class WiFiLight(GenericLed):
         self.Adress = "http://"+IP_ADRESS+"/color"
         self.LastSendTime = None
         self.OldColor = []
-        self.wait = 0.1
+        self.Speed = 0.1
         self.HSV = HSV()
         self.brightness = 1
         self.function = "off"
-        self.oldFunction = ""
+        self.oldFunction = "colorfill"
         self.master = Master
         self.sync = False
         self.functdict = {"on":self.on,
@@ -341,7 +343,7 @@ class WiFiLight(GenericLed):
 
     def main(self):
         if self.sync and not self.master == None:
-            self.wait = main.rooms[self.master['room']]['lights'][self.master['light']].wait
+            self.Speed = main.rooms[self.master['room']]['lights'][self.master['light']].Speed
             self.HSV = main.rooms[self.master['room']]['lights'][self.master['light']].HSV
             if not self.function == 'colorfill':
                 self.function = 'colorfill'

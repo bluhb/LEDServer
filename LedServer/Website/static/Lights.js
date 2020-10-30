@@ -21,6 +21,8 @@ function UpdateLightFunctionColor(Statusses){
         for (var Light in Statusses[Room]){
             Func = Statusses[Room][Light]["Function"];
             Color = Statusses[Room][Light]["HSV"];
+            Speed = Statusses[Room][Light]["Speed"]*1000;
+            console.log(Speed)
             AvgCount++;
             AvgH.Sin += Math.sin(deg2rad(Color.h));
             AvgH.Cos += Math.cos(deg2rad(Color.h));
@@ -36,6 +38,7 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
             document.getElementById("Intensity-".concat(ID)).value = Color.v;
+            document.getElementById("Speed-".concat(ID)).value = Speed;
             Color.v = 100;
             window.ColorPickers[ID].color.set(Color);
             HSL = HSVtoHSL(Color);
@@ -97,6 +100,22 @@ function VChanged(V, ID){
     });
 }
 
+function SpeedChanged(Speed, ID){
+    Room = ID.split("-")[1];
+    Light = ID.split("-")[2];
+    Data = {"Room":Room,
+        "Lights":[Light],
+        "AttrKey":["Speed", Speed/1000],
+    };
+    console.log(Data);
+    Url = BaseUrl.concat('/api/light/setAttr');
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
+}
 function SwitchAllClicked(ID, Value){
     ID = ID.split("-").slice(0,-1).join("-");
     SearchString = '[id^='.concat(ID).concat(']');

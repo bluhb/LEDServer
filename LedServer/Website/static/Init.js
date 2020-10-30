@@ -15,7 +15,7 @@ async function CreateRoomCards(){
                                 <label class="custom-control-label" for="Switch-{{Room}}-all">ON / OFF</label> 
                             </div>
                             <label class="text-info">Intensity</label><br>
-                            <input type="range" class="slider" id="Intensity-{{Room}}-all" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                            <input type="range" class="slider intensityslider" id="Intensity-{{Room}}-all" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                         </form> 
                 </div>
 
@@ -28,7 +28,7 @@ async function CreateRoomCards(){
                                     <p>
                                         <a>Whole room</a>
                                     </p>
-                                    <div class="wheel" id="colorpicker-{{Room}}-all"></div>
+                                    <div class="wheel center" id="colorpicker-{{Room}}-all"></div>
                                 </div>
                             </div>
                         </div>
@@ -47,15 +47,20 @@ async function CreateRoomCards(){
                                         <label class="custom-control-label" for="Switch-{{../Room}}-{{this}}">ON / OFF</label> 
                                     </div>
                                         <label class="text-info">Intensity</label><br>
-                                        <input type="range" class="slider" id="Intensity-{{../Room}}-{{this}}" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                                        <input type="range" class="slider intensityslider" id="Intensity-{{../Room}}-{{this}}" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                                 </form> 
                             </div>
                             <div id="{{../Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
                                 <div class="card-body">
                                     <p style="text-decoration:underline"><strong>Settings {{this}}</strong><p>
-                                    <div class="wheel" id="colorpicker-{{../Room}}-{{this}}"></div>
+                                    <div class="wheel center" id="colorpicker-{{../Room}}-{{this}}"></div>
 
                                     <div id="Functions-{{../Room}}-{{this}}"></div>
+
+                                    <div id="Speed-{{../Room}}-{{this}}">
+                                        <label class="text-info">Speed</label><br>
+                                        <input type="range" class="slider speedadjust" id="Speed-{{../Room}}-{{this}}" oninput="SpeedChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
