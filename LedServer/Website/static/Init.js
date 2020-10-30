@@ -28,7 +28,7 @@ async function CreateRoomCards(){
                                     <p>
                                         <a>Whole room</a>
                                     </p>
-                                    <div class="wheel" id="colorpicker-{{Room}}-all"></div>
+                                    <div class="wheel center" id="colorpicker-{{Room}}-all"></div>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@ async function CreateRoomCards(){
                             <div id="{{../Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
                                 <div class="card-body">
                                     <p style="text-decoration:underline"><strong>Settings {{this}}</strong><p>
-                                    <div class="wheel" id="colorpicker-{{../Room}}-{{this}}"></div>
+                                    <div class="wheel center" id="colorpicker-{{../Room}}-{{this}}"></div>
 
                                     <div id="Functions-{{../Room}}-{{this}}"></div>
 
