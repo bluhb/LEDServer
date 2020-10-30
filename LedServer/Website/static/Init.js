@@ -15,7 +15,7 @@ async function CreateRoomCards(){
                                 <label class="custom-control-label" for="Switch-{{Room}}-all">ON / OFF</label> 
                             </div>
                             <label class="text-info">Intensity</label><br>
-                            <input type="range" class="slider" id="Intensity-{{Room}}-all" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                            <input type="range" class="slider intensityslider" id="Intensity-{{Room}}-all" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                         </form> 
                 </div>
 
@@ -47,7 +47,7 @@ async function CreateRoomCards(){
                                         <label class="custom-control-label" for="Switch-{{../Room}}-{{this}}">ON / OFF</label> 
                                     </div>
                                         <label class="text-info">Intensity</label><br>
-                                        <input type="range" class="slider" id="Intensity-{{../Room}}-{{this}}" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                                        <input type="range" class="slider intensityslider" id="Intensity-{{../Room}}-{{this}}" oninput="VChanged(this.value, this.id)"> <!-- style=width:100px> -->
                                 </form> 
                             </div>
                             <div id="{{../Room}}collapse{{this}}" class="collapse" data-parent="#accordion">
@@ -59,7 +59,7 @@ async function CreateRoomCards(){
 
                                     <div id="Speed-{{../Room}}-{{this}}">
                                         <label class="text-info">Speed</label><br>
-                                        <input type="range" class="speedadjust" id="Speed-{{../Room}}-{{this}}" oninput="SpeedChanged(this.value, this.id)"> <!-- style=width:100px> -->
+                                        <input type="range" class="slider speedadjust" id="Speed-{{../Room}}-{{this}}" oninput="SpeedChanged(this.value, this.id)"> <!-- style=width:100px> -->
                                     </div>
                                 </div>
                             </div>
