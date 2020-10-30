@@ -16,7 +16,7 @@ def Worker(Room, light):
     global buttonPin
     while True:
         if not GPIO.input(buttonPin):
-            Url = "localhost:5000/api/light/setAttr"
+            Url = "http://localhost:5000/api/light/setAttr"
             OnOff = "on" if light.function =="off" else "off"
             Data = {"Room": Room,
                     "Lights": [light.name],
