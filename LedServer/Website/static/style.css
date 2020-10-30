@@ -7,6 +7,8 @@
  }
 
  .slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    margin-top:0px;
     width:26px;
     height:26px;
     border-radius:13px;
@@ -14,12 +16,14 @@
  }
  .slider::-moz-range-thumb{
     -webkit-appearance: none;
+    margin-top:0px;
     width:26px;
     height:26px;
     border-radius:13px;
     cursor:pointer;
  }
  .slider::-ms-thumb{
+    -webkit-appearance: none;
     margin-top:0;
     width:26px;
     height:26px;
