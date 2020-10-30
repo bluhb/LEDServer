@@ -2,7 +2,7 @@ function Init(){
     GetCurrentTemps()    
 }
 
-async function GetCurrentTemps(){
+async function GetCurrentData(){
     Url = BaseUrl.concat('/api/roomstatistics/getRooms');
     Rooms = await $.ajax({
         dataType:'json',

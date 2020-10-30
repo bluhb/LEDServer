@@ -206,7 +206,10 @@ def returnData():
         roomID = JSON.get("RoomID", "")
         if roomID in main.rooms:
             response = {}
-            response.update(main.rooms[roomID]["room"].json)
+            Data = main.rooms[roomID]["room"].getDataFromDB(Items=1)
+            Time = main.rooms[roomID]["room"].getDataFromDB(Items=1)
+            response.update(Data)
+            response.update(Time)
             return(jsonify(response), 200)
         else:
             return("",418) #I'm a teapot
