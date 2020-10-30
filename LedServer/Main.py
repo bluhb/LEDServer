@@ -37,7 +37,7 @@ for room in rooms:
     try:
         if "lights" in rooms[room]:
             for key, value in rooms[room]['lights'].items():
-                threads[key] = threading.Thread(target = WF.Worker, args = (value,))
+                threads[key] = threading.Thread(target = WF.Worker, args = (room, value,))
                 threads[key].daemon = True
                 threads[key].start()
                 print(room + " " + key + " started a new thread")

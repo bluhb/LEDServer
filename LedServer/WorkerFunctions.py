@@ -3,6 +3,7 @@ import psutil
 import time
 import RPi.GPIO as GPIO
 import shutil
+import request
 from __main__ import BACKUPTIME, BACKUPPATH
 
 #set up button to turn on lights without phone
@@ -11,11 +12,17 @@ buttonPin = 4
 GPIO.setup(buttonPin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 #this is the worker function, it will run the main method of the light object.
-def Worker(light):
+def Worker(Room, light):
     global buttonPin
     while True:
         if not GPIO.input(buttonPin):
-            setattr(light, "function", "on")
+            Url = "localhost:5000/api/light/setAttr"
+            OnOff = "on" if light.function =="off" else "off"
+            Data = {"Room": Room,
+                    "Lights": [light.name],
+                    "AttrKey": ["function", OnOff]
+                    }
+            requests.post(Url, Data)
         light.main()
         time.sleep(light.Speed)
 
