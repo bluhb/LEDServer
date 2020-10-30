@@ -7,14 +7,6 @@
  }
 
  .slider::-webkit-slider-thumb{
-    -webkit-appearance: none;
-    width:26px;
-    height:26px;
-    border-radius:13px;
-    cursor:pointer;
- }
- .slider::-webkit-slider-thumb{
-    -webkit-appearance: none;
     width:26px;
     height:26px;
     border-radius:13px;
@@ -28,7 +20,6 @@
     cursor:pointer;
  }
  .slider::-ms-thumb{
-    -webkit-appearance: none;
     margin-top:0;
     width:26px;
     height:26px;
