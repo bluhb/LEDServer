@@ -15,6 +15,7 @@
     color:grey;
     border: 1px solid #000000;
     box-shadow 1px 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background:grey;
     cursor:pointer;
  }
  .slider::-moz-range-thumb{
