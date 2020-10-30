@@ -12,9 +12,6 @@
     width:26px;
     height:26px;
     border-radius:13px;
-    color:grey;
-    border: 1px solid #000000;
-    box-shadow 1px 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     background:white;
     cursor:pointer;
  }
@@ -24,6 +21,7 @@
     width:26px;
     height:26px;
     border-radius:13px;
+    background:white;
     cursor:pointer;
  }
  .slider::-ms-thumb{
@@ -32,6 +30,7 @@
     width:26px;
     height:26px;
     border-radius:13px;
+    background:white;
     cursor:pointer;
  }
 
