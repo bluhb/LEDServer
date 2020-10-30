@@ -155,7 +155,7 @@ def ApiLightSetV():
                     "S": Lobj.HSV.S,
                     "V": JSON["V"]}
             main.rooms[RoomID]["lights"][Light].HSV.SetHSV(**HSV)
-            print(main.rooms[RoomdID]["lights"][Light].HSV)
+            print(main.rooms[RoomID]["lights"][Light].HSV)
         return("HSV set", 200)
     else:
         return("Bad Json", 400)
