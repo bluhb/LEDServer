@@ -21,6 +21,7 @@ function UpdateLightFunctionColor(Statusses){
         for (var Light in Statusses[Room]){
             Func = Statusses[Room][Light]["Function"];
             Color = Statusses[Room][Light]["HSV"];
+            Speed = Statusses[Room][Light]["Speed"]*1000;
             AvgCount++;
             AvgH.Sin += Math.sin(deg2rad(Color.h));
             AvgH.Cos += Math.cos(deg2rad(Color.h));
@@ -36,6 +37,7 @@ function UpdateLightFunctionColor(Statusses){
                 document.getElementById("Switch-".concat(ID)).checked = false;
             }
             document.getElementById("Intensity-".concat(ID)).value = Color.v;
+            document.getElementById("Speed-".concat(ID)).value = Speed;
             Color.v = 100;
             window.ColorPickers[ID].color.set(Color);
             HSL = HSVtoHSL(Color);
