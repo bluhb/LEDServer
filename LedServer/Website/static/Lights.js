@@ -102,7 +102,7 @@ function SpeedChanged(Speed, ID){
     Light = ID.split("-")[2];
     Data = {"Room":Room,
         "Lights":[Light],
-        "AttrKey":["Speed", Speed],
+        "AttrKey":["Speed", Speed/1000],
     };
     console.log(Data);
     Url = BaseUrl.concat('/api/light/setAttr');
