@@ -15,9 +15,7 @@ def Worker(light):
     global buttonPin
     while True:
         if not GPIO.input(buttonPin):
-            light.function = 'on'
-            light.HSV.h = 20
-            light.HSV.s = 100
+            setattr(light, "function", "on")
         light.main()
         time.sleep(light.Speed)
 
