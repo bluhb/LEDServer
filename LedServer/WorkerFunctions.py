@@ -3,7 +3,7 @@ import psutil
 import time
 import RPi.GPIO as GPIO
 import shutil
-import request
+import requests
 from __main__ import BACKUPTIME, BACKUPPATH
 
 #set up button to turn on lights without phone
