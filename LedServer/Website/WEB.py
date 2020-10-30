@@ -206,8 +206,7 @@ def returnData():
         roomID = JSON.get("RoomID", "")
         if roomID in main.rooms:
             response = {}
-            Data = main.rooms[roomID]["room"].getDataFromDB(Items=1)
-            Time = main.rooms[roomID]["room"].getDataFromDB(Items=1)
+            Data, Time = main.rooms[roomID]["room"].getDataFromDB(Items=1)
             response.update(Data)
             response.update(Time)
             return(jsonify(response), 200)
