@@ -26,6 +26,7 @@ def buttonRead():
         time.sleep(0.1)
         if not GPIO.input(buttonPin):
             States = requests.post("http://localhost:5000/api/light/getStatus", json={})
+            States = States.json()
             for Room in States:
                 for Lights in States[Room]:
                     Url = "http://localhost:5000/api/light/setAttr"
