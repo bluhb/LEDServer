@@ -289,7 +289,7 @@ class APALedstrip(GenericLed):
                     else:
                         self.pixels[j] = (0,0,0)
                 self.pixels.show()
-                time.sleep(int(self.Speed))
+                time.sleep(int(self.Speed*10))
             else:
                 break
         return None
