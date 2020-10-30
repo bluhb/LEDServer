@@ -28,7 +28,7 @@ def buttonRead():
             States = requests.post("http://localhost:5000/api/light/getStatus", json={})
             States = States.json()
             for Room in States:
-                for Lights in States[Room]:
+                for Light in States[Room]:
                     Url = "http://localhost:5000/api/light/setAttr"
                     OnOff = "on" if Light.Function =="off" else "off"
                     Data = {"Room": Room,
