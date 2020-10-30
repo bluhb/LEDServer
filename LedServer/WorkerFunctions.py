@@ -25,10 +25,13 @@ def buttonRead():
     while True:
         time.sleep(0.1)
         if not GPIO.input(buttonPin):
+            States = requests.post("http://localhost:5000/api/light/getStatus", json={})
+            for Room in States:
+                for Lights in States[Room]
             Url = "http://localhost:5000/api/light/setAttr"
-            OnOff = "on" if light.function =="off" else "off"
+            OnOff = "on" if Light.Function =="off" else "off"
             Data = {"Room": Room,
-                    "Lights": [light.name],
+                    "Lights": [Light.name],
                     "AttrKey": ["function", OnOff]
                     }
             print(Data)
