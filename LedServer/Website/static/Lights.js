@@ -22,6 +22,7 @@ function UpdateLightFunctionColor(Statusses){
             Func = Statusses[Room][Light]["Function"];
             Color = Statusses[Room][Light]["HSV"];
             Speed = Statusses[Room][Light]["Speed"]*1000;
+            console.log(Speed)
             AvgCount++;
             AvgH.Sin += Math.sin(deg2rad(Color.h));
             AvgH.Cos += Math.cos(deg2rad(Color.h));
