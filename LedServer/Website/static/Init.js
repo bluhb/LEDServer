@@ -56,6 +56,8 @@ async function CreateRoomCards(){
                                     <div class="wheel" id="colorpicker-{{../Room}}-{{this}}"></div>
 
                                     <div id="Functions-{{../Room}}-{{this}}"></div>
+                                    <label class="text-info">Speed</label><br>
+                                    <input type="range" class="slider" max=0.1 min=0.0001 id="Speed-{{../Room}}-{{this}}" oninput="SpeedChanged(this.value, this.id)"> <!-- style=width:100px> -->
                                 </div>
                             </div>
                         </div>

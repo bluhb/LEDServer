@@ -97,6 +97,22 @@ function VChanged(V, ID){
     });
 }
 
+function SpeedChanged(Speed, ID){
+    Room = ID.split("-")[1];
+    Light = ID.split("-")[2];
+    Data = {"Room":Room,
+        "Lights":[Light],
+        "AttrKey":["Speed", Speed],
+    };
+    console.log(Data);
+    Url = BaseUrl.concat('/api/light/setAttr');
+    $.ajax({
+        dataType:'json',
+        type: "post",
+        url:Url,
+        data:JSON.stringify(Data)
+    });
+}
 function SwitchAllClicked(ID, Value){
     ID = ID.split("-").slice(0,-1).join("-");
     SearchString = '[id^='.concat(ID).concat(']');
