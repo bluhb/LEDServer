@@ -97,5 +97,6 @@ class room:
         for value in DataRaw:
             for key in Data:
                 Data[key].append(float(value[key]))
-            Time.append(value["time"])
+            if "time" in value:
+                Time.append(value["time"])
         return Data, Time
