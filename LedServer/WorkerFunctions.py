@@ -37,6 +37,7 @@ def buttonRead():
                             }
                     print(Data)
                     requests.post(Url, json=Data)
+            time.sleep(5)
 
 #this function is used to measure temp and load of the pi.
 def PiControl(rooms):
