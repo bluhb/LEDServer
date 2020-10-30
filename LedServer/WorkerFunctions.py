@@ -30,9 +30,9 @@ def buttonRead():
             for Room in States:
                 for Light in States[Room]:
                     Url = "http://localhost:5000/api/light/setAttr"
-                    OnOff = "on" if Light.Function =="off" else "off"
+                    OnOff = "on" if States[Room][Light].Function =="off" else "off"
                     Data = {"Room": Room,
-                            "Lights": [Light.name],
+                            "Lights": [Light],
                             "AttrKey": ["function", OnOff]
                             }
                     print(Data)
