@@ -8,10 +8,11 @@
 
  .slider::-webkit-slider-thumb{
     -webkit-appearance: none;
-    margin-top:-14px;
+    margin-top:0px;
     width:26px;
     height:26px;
     border-radius:13px;
+    color:grey;
     border: 1px solid #000000;
     box-shadow 1px 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     cursor:pointer;
