@@ -15,6 +15,15 @@ GPIO.setup(buttonPin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 def Worker(Room, light):
     global buttonPin
     while True:
+
+        light.main()
+        time.sleep(light.Speed)
+
+    return(None)
+
+def buttonRead():
+    while True:
+        time.sleep(0.1)
         if not GPIO.input(buttonPin):
             Url = "http://localhost:5000/api/light/setAttr"
             OnOff = "on" if light.function =="off" else "off"
@@ -24,10 +33,6 @@ def Worker(Room, light):
                     }
             print(Data)
             requests.post(Url, json=Data)
-        light.main()
-        time.sleep(light.Speed)
-
-    return(None)
 
 #this function is used to measure temp and load of the pi.
 def PiControl(rooms):
