@@ -211,7 +211,8 @@ def returnData():
         else:
             return("",418) #I'm a teapot
     except Exception as E:
-        return(jsonify({'error': E}), 200)
+        print(E)
+        return("Error", 500)
 
 @app.route('/api/roomstatistics/graphData', methods=["POST"])
 def returnGraphData():
