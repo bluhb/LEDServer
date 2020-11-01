@@ -82,7 +82,7 @@ def ApiSwitchAllLights():
 
     if "Room" in JSON\
             and "Function" in JSON:
-        RoomID = JSON["Room"]
+        RoomID = JSON["Room"].replace(" ","")
         Function = JSON["Function"]
         for light in main.rooms[RoomID]["lights"]:
             main.rooms[RoomID]["lights"][light].function=Function
@@ -98,7 +98,7 @@ def ApiLightSetattr():
     if "Room" in JSON\
             and "Lights" in JSON\
             and "AttrKey" in JSON:
-        RoomID = JSON["Room"]
+        RoomID = JSON["Room"].replace(" ","")
         Key = JSON["AttrKey"][0]
         Value = JSON["AttrKey"][1]
         for Light in JSON["Lights"]:
@@ -117,7 +117,7 @@ def ApiLightSetHS():
             and "Lights" in JSON\
             and "H" in JSON\
             and "S" in JSON:
-        RoomID = JSON["Room"]
+        RoomID = JSON["Room"].replace(" ","")
         if JSON["Lights"][0] == "all":
             Lights = main.rooms[RoomID]["lights"].keys()
         else:
@@ -139,7 +139,7 @@ def ApiLightSetV():
     if "Room" in JSON\
             and "Lights" in JSON\
             and "V" in JSON:
-        RoomID = JSON["Room"]
+        RoomID = JSON["Room"].replace(" ","")
         if JSON["Lights"][0] == "all":
             Lights = main.rooms[RoomID]["lights"].keys()
         else:
@@ -160,7 +160,7 @@ def ApiLightGetattr():
     if "Room" in JSON\
             and "Light" in JSON\
             and "Attr" in JSON:
-        RoomID = JSON["Room"]
+        RoomID = JSON["Room"].replace(" ","")
         Key = JSON["Attr"]
         Value = getattr(main.rooms[RoomID]["lights"][Light], Key)
         return(jsonify({"Key": Key, "Value": Value}), 200)
@@ -192,7 +192,7 @@ def returnData():
     # expect json with only the room ID in it, return with the data in json
     json = request.get_json(force=True)
     try:
-        roomID = json['roomID']
+        roomID = json['roomID'].replace(" ","")
         if roomID in main.rooms:
             response = {}
             response.update(main.rooms[roomID]["room"].json)
@@ -208,7 +208,7 @@ def returnData():
 def returnGraphData():
     # expect json with roomID
     JSON = request.get_json(force = True)
-    RoomID = JSON["RoomID"]
+    RoomID = JSON["RoomID"].replace(" ","")
     Items = int(JSON.get("Items", 1000))
     print("Items: {}".format(Items))
     print("RoomID: {}".format(RoomID))
