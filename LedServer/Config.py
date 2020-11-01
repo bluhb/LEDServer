@@ -20,7 +20,7 @@ rooms = {
                     roomSensors = 'livingroom')
                 }
             },
-        "livingroom":{
+        "living room":{
             "room":data.room(name='livingroom', dataKeys=dataKeys),
             "lights":{
                 "Muur":LED.APALedstrip(name = 'Muur',
