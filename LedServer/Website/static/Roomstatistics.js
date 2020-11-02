@@ -1,5 +1,6 @@
 function Init(){
-    GetCurrentData()    
+    GetCurrentData();
+    setTimeout(5000. GetCurrentData);
 }
 
 async function GetCurrentData(){
