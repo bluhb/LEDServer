@@ -93,7 +93,7 @@ function CreateGraph(Room, DataPoints){
                                 Layout || {});
                 }
                 catch(err){
-                    document.getElementById(Room.concat("-Error")).innerHTML = err.message;
+                    console.log(err)
                 }
             }
         }
