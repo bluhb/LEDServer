@@ -126,7 +126,7 @@ function SwitchAllClicked(ID, Value){
     OnOff = ((Value) ? 'on' : 'off');
     Url = window.BaseUrl.concat('/api/light/switchAll');
     Data = {
-        "Room":ID.split("-")[1],
+        "Room":[ID.split("-")[1]],
         "Function": OnOff
     }
     console.log(Data);
