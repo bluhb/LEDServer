@@ -22,13 +22,15 @@ async function GetCurrentData(){
             data:JSON.stringify({"RoomID": Room})
         });
         Exists=false;
+        NewDataObj={"Room":Room, "Data":[]}
         for (key in NewData){
             if (typeof(NewData[key][0]) !=="undefined"){
                 Exists = true;
-                NewData[key] = NewData[key][0];
+                DataObj = {"Key":key, "Value":NewData[key][0]};
+                NewDataObj["Data"].push(DataObj);
             }
         }
-        if (Exists){Data[Room] = Object.entries(NewData)}
+        if (Exists){Data[Room] = NewDataObj}
     }
     console.log(Data);
     document.getElementById("Container").innerHTML = "";
@@ -47,10 +49,11 @@ function CompileTemplates(Data){
     HTML = `
     <div class="row">
         <div class="col">
-            {{#Data}}
             <div class="card flexbox">
                 <div class="card-header" style="background-color:AntiqueWhite;">
-                    <h2>{{this}}</h2>
+                    <h2>{{Room}}</h2>
+            `
+    HTMLData=`
                     <div class="row">
                         <div class="col">
                             Temperatuur
@@ -59,28 +62,15 @@ function CompileTemplates(Data){
                             16&deg;C
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            Humidity
-                        </div>
-                        <div class="col">
-                            16%
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            LDR
-                        </div>
-                        <div class="col">
-                            878
-                        </div>
-                    </div>
+            `
+    HTMLEnd =`
                 </div>
             </div>
         </div>
     </div>`;
     HTMLT = Handlebars.compile(HTML);
-    HTMLC = HTMLT(Data);
+    HTMLDT = Handlebars.compile(HTMLData);
+    for Room
     console.log(HTMLC);
 }
 
