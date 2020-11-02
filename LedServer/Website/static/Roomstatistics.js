@@ -15,12 +15,19 @@ async function GetCurrentData(){
     Url = BaseUrl.concat('/api/roomstatistics/data')
     for (Room in Rooms){
         Room = Rooms[Room]
-        Data[Room] = await $.ajax({
+        NewData = await $.ajax({
             dataType:'json',
             type: "post",
             url:Url,
             data:JSON.stringify({"RoomID": Room})
         });
+        Exists=false;
+        for (key in NewData){
+            if (typeof(NewData[key]) !=="undefined"){
+                Exists = true;
+            }
+        }
+        if (Exists){Data[Room] = NewData}
     }
     console.log(Data);
     document.getElementById("Container").innerHTML = "";
@@ -28,16 +35,18 @@ async function GetCurrentData(){
         HTML = "<div><p><h3>" + Room + "</h3></p>"
         for(Key in Data[Room]){
             Value = Data[Room][Key];
-            if (typeof(Value[0]) !== "undefined"){
-                HTML += "<p>" + Key + " : " + Value[0] + "</p>";
-            }else{
-                HTML = "";
+            HTML += "<p>" + Key + " : " + Value[0] + "</p>";
             }
         }
-        if (HTML !== ""){
-            HTML += "</div>"
-            document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
+        HTML += "</div>"
+        document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
         }
     }
+}
+
+function CompileTemplates(Data){
+    HTML = 
+
+
 }
 
