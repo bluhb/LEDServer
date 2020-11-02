@@ -84,7 +84,7 @@ def ApiSwitchAllLights():
             and "Function" in JSON:
         RoomID = [x.replace(" ", "") for x in JSON["Room"]]
         if RoomID[0] == "all":
-            RoomID = main.rooms[RoomID]["lights"].keys()
+            RoomID = main.rooms.keys()
         Function = JSON["Function"]
         for Room in RoomID:
             for light in main.rooms[Room]["lights"]:
