@@ -47,29 +47,28 @@ async function GetCurrentData(){
 
 function CompileTemplates(Data){
     HTML = `
-    <div class="row">
         <div class="col">
             <div class="card flexbox">
                 <div class="card-header" style="background-color:AntiqueWhite;">
                     <h2>{{Room}}</h2>
-            `
-    HTMLData=`
+                    {{each Data}}
                     <div class="row">
                         <div class="col">
-                            Temperatuur
+                            {{this.Key}}
                         </div>
                         <div class="col">
-                            16&deg;C
+                            {{this.Value}}
                         </div>
                     </div>
-            `
-    HTMLEnd =`
                 </div>
             </div>
-        </div>
-    </div>`;
+        </div>`;
+    HTMLTotal = "<div class='row'>"
     HTMLT = Handlebars.compile(HTML);
-    HTMLDT = Handlebars.compile(HTMLData);
-    console.log(HTMLC);
+    for (Room in Data){
+        HTMLTotal += HTMLT(Data[Room]);
+    }
+    HTMLTotal += "</div>";
+    console.log(HTMLTotal);
 }
 
