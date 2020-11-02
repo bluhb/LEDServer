@@ -70,7 +70,6 @@ function CompileTemplates(Data){
     </div>`;
     HTMLT = Handlebars.compile(HTML);
     HTMLDT = Handlebars.compile(HTMLData);
-    for Room
     console.log(HTMLC);
 }
 
