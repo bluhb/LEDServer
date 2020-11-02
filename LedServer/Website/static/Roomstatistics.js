@@ -37,7 +37,6 @@ async function GetCurrentData(){
             Value = Data[Room][Key];
             HTML += "<p>" + Key + " : " + Value[0] + "</p>";
             }
-        }
         HTML += "</div>"
         document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
     }
