@@ -87,8 +87,8 @@ def ApiSwitchAllLights():
             RoomID = main.rooms[RoomID]["lights"].keys()
         Function = JSON["Function"]
         for Room in RoomID:
-            for light in main.rooms[RoomID]["lights"]:
-                main.rooms[RoomID]["lights"][light].function=Function
+            for light in main.rooms[Room]["lights"]:
+                main.rooms[Room]["lights"][light].function=Function
         return("Turned on", 200)
     else:
         return("BadJson",400)
