@@ -36,7 +36,6 @@ async function GetCurrentData(){
     document.getElementById("Container").innerHTML = "";
     HTML = CompileTemplates(Data);
     document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
-    }
 }
 
 function CompileTemplates(Data){
