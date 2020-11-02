@@ -257,7 +257,7 @@ def returnGraphData():
                     )
                 ],
             layout = dict(
-                title = "Temperature and Humidity",
+                title = RoomdID + " Temperature and Humidity",
                 yaxis = {"title": "Degree Celsius"},
                 xaxis = {"automargin": True},
                 yaxis2 = dict(
@@ -278,7 +278,7 @@ def returnGraphData():
                     )
                 ],
             layout = dict(
-                title = "LDR",
+                title = RoomID + " LDR",
                 xaxis = {"automargin": True},
                 yaxis = {"title": "Relative light strength"},
                 showlegend = True
