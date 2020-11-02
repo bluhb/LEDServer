@@ -43,7 +43,7 @@ async function GetCurrentData(){
 }
 
 function CompileTemplates(Data){
-    HTML = 
+    HTML = "blubh1"
 
 
 }
