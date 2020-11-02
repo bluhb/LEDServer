@@ -63,6 +63,6 @@ function CompileTemplates(Data){
         HTMLTotal += HTMLT(Data[Room]);
     }
     HTMLTotal += "</div>";
-    console.log(HTMLTotal);
+    return (HTMLTotal);
 }
 
