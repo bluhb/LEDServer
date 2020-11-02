@@ -25,6 +25,7 @@ async function GetCurrentData(){
         for (key in NewData){
             if (typeof(NewData[key][0]) !=="undefined"){
                 Exists = true;
+                NewData[key] = NewData[key][0];
             }
         }
         if (Exists){Data[Room] = Object.entries(NewData)}
