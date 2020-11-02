@@ -32,7 +32,6 @@ async function GetCurrentData(){
             }
         }
         if (Exists){Data[Room] = NewDataObj}
-        CreateGraph(Room, 5000);
 
     }
     console.log(Data);
