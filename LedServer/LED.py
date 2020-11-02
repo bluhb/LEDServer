@@ -184,15 +184,17 @@ class Arduino(GenericLed):
 
     def main(self): #run the function and check if the sensors need to be read. If sync option is set then sync with master
         self.functdict[self.function]()
-        self.now = time.perf_counter()
-        if (self.now - self.prevMilli >= self.interval) and not (self.roomSensors == None):
+        self.now = time.perf_counter_ns()
+        if (self.now - self.prevMilli >= self.interval*1000000000) and not (self.roomSensors == None):
             self.Read()
-            self.prevMilli = time.perf_counter()
+            self.prevMilli = time.perf_counter_ns()
         if self.sync and not self.master == None:
             self.Speed = main.rooms[self.master['room']]['lights'][self.master['light']].Speed
             self.HSV = main.rooms[self.master['room']]['lights'][self.master['light']].HSV
             if not self.function == 'colorfill':
                 self.function = 'colorfill'
+        while time.perf_counter_ns() - self.now < self.Speed*1000000000:
+            pass
         return None
 
     def colorfill(self): #write colors to the arduino
@@ -260,6 +262,8 @@ class APALedstrip(GenericLed):
             self.HSV = main.rooms[self.master['room']]['lights'][self.master['light']].HSV
 
         self.functdict[self.function]()
+        while time.perf_counter_ns() - self.now < self.Speed*1000000000:
+            pass
         return None
 
     def colorfill(self): #fill the whole strip with the same color, every pixel higher than length will be black
@@ -348,3 +352,5 @@ class WiFiLight(GenericLed):
             if not self.function == 'colorfill':
                 self.function = 'colorfill'
         self.functdict[self.function]()
+        while time.perf_counter_ns() - self.now < self.Speed*1000000000:
+            pass
