@@ -1,6 +1,6 @@
 function Init(){
     GetCurrentData();
-    setTimeout(GetCurrentData, 5000);
+
 }
 
 async function GetCurrentData(){
@@ -37,6 +37,8 @@ async function GetCurrentData(){
     document.getElementById("Container").innerHTML = "";
     HTML = CompileTemplates(Data);
     document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
+
+    setTimeout(GetCurrentData, 5000);
 }
 
 function CompileTemplates(Data){
