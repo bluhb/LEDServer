@@ -41,20 +41,18 @@ async function GetCurrentData(){
 function CompileTemplates(Data){
     HTML = `
         <div class="justify-content-center card-deck">
-            <div class="card">
-                <div class="card-header" style="background-color:AntiqueWhite;">
-                    <h2>{{Room}}</h2>
-                    {{#each Data}}
-                    <div class="row">
-                        <div class="col">
-                            {{this.Key}}
-                        </div>
-                        <div class="col">
-                            {{this.Value}}
-                        </div>
+            <div class="card" style="background-color:AntiqueWhite;">
+                <h2>{{Room}}</h2>
+                {{#each Data}}
+                <div class="row">
+                    <div class="col">
+                        {{this.Key}}
                     </div>
-                    {{/each}}
+                    <div class="col">
+                        {{this.Value}}
+                    </div>
                 </div>
+                {{/each}}
             </div>
         </div>`;
     HTMLTotal = "<div class='row'>"
