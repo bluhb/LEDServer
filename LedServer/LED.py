@@ -243,6 +243,7 @@ class APALedstrip(GenericLed):
         self.HSV = HSV()
         self.Speed = 0.1
         self.length = pixels
+        self.now = time.perf_counter_ns()
         self.function = 'off'
         self.oldFunction = "colorfill"
         self.functdict = {
@@ -257,6 +258,7 @@ class APALedstrip(GenericLed):
         return None
 
     def main(self): #check for sync, copy colors from dict to array and run the function
+        self.now = time.perf_counter_ns()
         if self.sync and not self.master == None:
             self.Speed = main.rooms[self.master['room']]['lights'][self.master['light']].Speed
             self.HSV = main.rooms[self.master['room']]['lights'][self.master['light']].HSV
@@ -308,6 +310,7 @@ class WiFiLight(GenericLed):
         self.Speed = 0.1
         self.HSV = HSV()
         self.brightness = 1
+        self.now = time.perf_counter_ns()
         self.function = "off"
         self.oldFunction = "colorfill"
         self.master = Master
@@ -346,6 +349,7 @@ class WiFiLight(GenericLed):
                 pass
 
     def main(self):
+        self.now = time.perf_counter_ns()
         if self.sync and not self.master == None:
             self.Speed = main.rooms[self.master['room']]['lights'][self.master['light']].Speed
             self.HSV = main.rooms[self.master['room']]['lights'][self.master['light']].HSV
