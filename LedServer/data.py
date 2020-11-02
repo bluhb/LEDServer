@@ -100,4 +100,5 @@ class room:
                     Data[key].append(float(value[key]))
                 except:
                     Data[key].append(value[key])
-        return Data, Time
+        print(Data.keys())
+        return Data
