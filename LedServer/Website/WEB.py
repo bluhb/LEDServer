@@ -49,6 +49,11 @@ def ledPage():
     return render_template('index.html',
                 page='led')
 
+@app.route('/roomstatistics')
+def roomstatisticsPage():
+    return render_template('index.html',
+                page='roomstatistics')
+
 @app.route('/car')
 def ritRegistration():
     global rooms
@@ -153,7 +158,8 @@ def ApiLightSetV():
             HSV = {"H": Lobj.HSV.H,
                     "S": Lobj.HSV.S,
                     "V": JSON["V"]}
-            main.rooms[RoomID]["lights"][Light].HSV.SetHSV(**HSV)
+            if not Lobj.function == "off":
+                Lobj.HSV.SetHSV(**HSV)
         return("HSV set", 200)
     else:
         return("Bad Json", 400)
@@ -191,7 +197,12 @@ def ApiLightGetStatus():
 
 @app.route('/api/room/alarm', methods=["POST"])
 
-@app.route('/api/room/data', methods=["POST"])
+@app.route('/api/roomstatistics/getRooms', methods=["POST"])
+def ApiRoomstatisticsGetRooms():
+    Rooms = list(main.rooms.keys())
+    return (jsonify(Rooms), 200)
+
+@app.route('/api/roomstatistics/data', methods=["POST"])
 def returnData():
     # expect json with only the room ID in it, return with the data in json
     json = request.get_json(force=True)
@@ -208,7 +219,7 @@ def returnData():
     except:
         return(jsonify({'error': 'invalid'}), 200)
 
-@app.route('/api/car/graphData', methods=["POST"])
+@app.route('/api/roomstatistics/graphData', methods=["POST"])
 def returnGraphData():
     # expect json with roomID
     JSON = request.get_json(force = True)
@@ -216,13 +227,17 @@ def returnGraphData():
     Items = int(JSON.get("Items", 1000))
     print("Items: {}".format(Items))
     print("RoomID: {}".format(RoomID))
-    Data, Time = main.rooms[RoomID]["room"].getDataFromDB(Items = Items)
+    Data = main.rooms[RoomID]["room"].getDataFromDB(Items = Items)
     # Temperature = signal.savgol_filter(Data["temperature"], 25, 3)
     # Humidity = signal.savgol_filter(Data["humidity"], 25, 3)
     # LDR = signal.savgol_filter(Data["ldr"], 25, 3)
-    Temperature = Data["temperature"]
-    Humidity = Data["humidity"]
-    LDR = Data["ldr"]
+    try:
+        Temperature = Data["temperature"]
+        Humidity = Data["humidity"]
+        LDR = Data["ldr"]
+        Time = Data["time"]
+    except Exception as E:
+        return ("No Graph available", 400)
     Graphs = [
         dict(
             data=[
