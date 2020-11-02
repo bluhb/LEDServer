@@ -43,7 +43,7 @@ async function GetCurrentData(){
 }
 
 function CompileTemplates(Data){
-    HTML = ```
+    HTML = `
     <div class="row">
         <div class="col">
             {{#each Room}}
@@ -77,7 +77,7 @@ function CompileTemplates(Data){
                 </div>
             </div>
         </div>
-    </div>```;
+    </div>`;
     HTMLT = Handlebars.compile(HTML);
     HTMLC = HTMLT(Data);
     console.log(HTMLC);
