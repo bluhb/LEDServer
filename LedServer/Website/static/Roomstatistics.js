@@ -40,22 +40,20 @@ async function GetCurrentData(){
 
 function CompileTemplates(Data){
     HTML = `
-        <div class="justify-content-center card-deck">
-            <div class="card roomstatsCards"">
-                <h2>{{Room}}</h2>
-                {{#each Data}}
-                <div class="row">
-                    <div class="col-sm">
-                        {{this.Key}}
-                    </div>
-                    <div class="col-sm">
-                        {{this.Value}}
-                    </div>
+        <div class="card roomstatsCards"">
+            <h2>{{Room}}</h2>
+            {{#each Data}}
+            <div class="row">
+                <div class="col-sm">
+                    {{this.Key}}
                 </div>
-                {{/each}}
+                <div class="col-sm">
+                    {{this.Value}}
+                </div>
             </div>
+            {{/each}}
         </div>`;
-    HTMLTotal = "<div class='row'>"
+    HTMLTotal = `<div class="justify-content-center card-deck">`
     HTMLT = Handlebars.compile(HTML);
     for (Room in Data){
         HTMLTotal += HTMLT(Data[Room]);
