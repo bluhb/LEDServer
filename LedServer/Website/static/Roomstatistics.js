@@ -73,7 +73,7 @@ function CompileTemplates(Data){
 function CreateGraph(Room, DataPoints){
     console.log("Updating Graph: ".concat(Room));
     request = {"RoomID": Room, "Items": DataPoints};
-    url = "graphData";
+    url = "/api/roomstatistics/graphData";
     $.ajax({
         url: url,
         dataType: 'json',
