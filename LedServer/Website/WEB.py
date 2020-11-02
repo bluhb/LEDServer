@@ -220,7 +220,6 @@ def returnGraphData():
     print("Items: {}".format(Items))
     print("RoomID: {}".format(RoomID))
     Data = main.rooms[RoomID]["room"].getDataFromDB(Items = Items)
-    print(Data)
     # Temperature = signal.savgol_filter(Data["temperature"], 25, 3)
     # Humidity = signal.savgol_filter(Data["humidity"], 25, 3)
     # LDR = signal.savgol_filter(Data["ldr"], 25, 3)
