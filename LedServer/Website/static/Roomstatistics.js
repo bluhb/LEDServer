@@ -43,8 +43,40 @@ async function GetCurrentData(){
 }
 
 function CompileTemplates(Data){
-    HTML = "blubh1"
-
-
+    HTML = ```
+    <div class="row">
+        <div class="col">
+            {{#each Room}}
+            <div class="card flexbox">
+                <div class="card-header" style="background-color:AntiqueWhite;">
+                    <h2>{{this}}</h2>
+                    <div class="row">
+                        <div class="col">
+                            Temperatuur
+                        </div>
+                        <div class="col">
+                            16&deg;C
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Humidity
+                        </div>
+                        <div class="col">
+                            16%
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            LDR
+                        </div>
+                        <div class="col">
+                            878
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>```
 }
 
