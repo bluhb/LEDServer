@@ -51,7 +51,7 @@ function CompileTemplates(Data){
             <div class="card flexbox">
                 <div class="card-header" style="background-color:AntiqueWhite;">
                     <h2>{{Room}}</h2>
-                    {{each Data}}
+                    {{#each Data}}
                     <div class="row">
                         <div class="col">
                             {{this.Key}}
@@ -60,6 +60,7 @@ function CompileTemplates(Data){
                             {{this.Value}}
                         </div>
                     </div>
+                    {{/each}}
                 </div>
             </div>
         </div>`;
