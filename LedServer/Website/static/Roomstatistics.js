@@ -27,7 +27,7 @@ async function GetCurrentData(){
         for (key in NewData){
             if (typeof(NewData[key][0]) !=="undefined"){
                 Exists = true;
-                DataObj = {"Key":key, "Value":NewData[key][0]};
+                DataObj = {"Key":key, "Value":NewData[key]};
                 NewDataObj["Data"].push(DataObj);
             }
         }
