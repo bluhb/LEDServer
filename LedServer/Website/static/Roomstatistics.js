@@ -32,13 +32,15 @@ async function GetCurrentData(){
             }
         }
         if (Exists){Data[Room] = NewDataObj}
+        CreateGraph(Room, 5000);
+
     }
     console.log(Data);
     document.getElementById("Container").innerHTML = "";
     HTML = CompileTemplates(Data);
     document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
-
-    setTimeout(GetCurrentData, 5000);
+    for (Room in Data){CreateGraph(Room, 5000)}
+    setTimeout(GetCurrentData, 30000);
 }
 
 function CompileTemplates(Data){
@@ -62,6 +64,38 @@ function CompileTemplates(Data){
         HTMLTotal += HTMLT(Data[Room]);
     }
     HTMLTotal += "</div>";
+    for (Room in Data){
+        HTMLTotal += "<div id="+Room+"-Graph0></div><div id="+Room+"-Graph1></div>";
+    }
     return (HTMLTotal);
 }
 
+function CreateGraph(Room, DataPoints){
+    console.log("Updating Graph: ".concat(Room));
+    request = {"RoomID": Room, "Items": DataPoints};
+    url = "graphData";
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(request)
+    })
+    .done(
+        function(response){
+            for (i=0; i < response.length; i++){
+                try{
+                    var Data = response[i].data;
+                    var Layout = response[i].layout || {};
+                    var Id = Room.concat("-Graph").concat(i);
+                    Plotly.react(Id,
+                                Data,
+                                Layout || {});
+                }
+                catch(err){
+                    document.getElementById(Room.concat("-Error")).innerHTML = err.message;
+                }
+            }
+        }
+   )
+}

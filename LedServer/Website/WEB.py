@@ -224,9 +224,12 @@ def returnGraphData():
     # Temperature = signal.savgol_filter(Data["temperature"], 25, 3)
     # Humidity = signal.savgol_filter(Data["humidity"], 25, 3)
     # LDR = signal.savgol_filter(Data["ldr"], 25, 3)
-    Temperature = Data["temperature"]
-    Humidity = Data["humidity"]
-    LDR = Data["ldr"]
+    try:
+        Temperature = Data["temperature"]
+        Humidity = Data["humidity"]
+        LDR = Data["ldr"]
+    except Exception as E:
+        return ("No Graph available", 400)
     Graphs = [
         dict(
             data=[
