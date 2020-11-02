@@ -1,4 +1,4 @@
-function RoomstatisticsInit(){
+function Init(){
     GetCurrentData()    
 }
 
@@ -22,7 +22,7 @@ async function GetCurrentData(){
             data:JSON.stringify({"RoomID": Room})
         });
     }
-    console.log(Data)
+    console.log(Data);
     document.getElementById("Container").innerHTML = "";
     for (Room in Data){
         HTML = "<div><p><h3>" + Room + "</h3></p>"
