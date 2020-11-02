@@ -23,7 +23,7 @@ async function GetCurrentData(){
         });
         Exists=false;
         for (key in NewData){
-            if (typeof(NewData[key]) !=="undefined"){
+            if (typeof(NewData[key][0]) !=="undefined"){
                 Exists = true;
             }
         }
