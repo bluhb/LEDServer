@@ -1,4 +1,4 @@
-function Init(){
+function RoomstatisticsInit(){
     GetCurrentData()    
 }
 
@@ -28,11 +28,16 @@ async function GetCurrentData(){
         HTML = "<div><p><h3>" + Room + "</h3></p>"
         for(Key in Data[Room]){
             Value = Data[Room][Key];
-            HTML += "<p>" + Key + " : " + Value[0] + "</p>"
+            if (typeof(Value[0]) !== "undefined"){
+                HTML += "<p>" + Key + " : " + Value[0] + "</p>";
+            }else{
+                HTML = "";
+            }
         }
-        HTML += "</div>"
-        document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
+        if (HTML !== ""){
+            HTML += "</div>"
+            document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
+        }
     }
-    
 }
 
