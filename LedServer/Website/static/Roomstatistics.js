@@ -40,7 +40,6 @@ async function GetCurrentData(){
         }
         HTML += "</div>"
         document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
-        }
     }
 }
 
