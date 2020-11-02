@@ -27,7 +27,7 @@ async function GetCurrentData(){
                 Exists = true;
             }
         }
-        if (Exists){Data[Room] = NewData}
+        if (Exists){Data[Room] = Object.entries(NewData)}
     }
     console.log(Data);
     document.getElementById("Container").innerHTML = "";
