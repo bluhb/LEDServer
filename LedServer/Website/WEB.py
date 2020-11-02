@@ -220,7 +220,7 @@ def returnGraphData():
     Items = int(JSON.get("Items", 1000))
     print("Items: {}".format(Items))
     print("RoomID: {}".format(RoomID))
-    Data, Time = main.rooms[RoomID]["room"].getDataFromDB(Items = Items)
+    Data = main.rooms[RoomID]["room"].getDataFromDB(Items = Items)
     # Temperature = signal.savgol_filter(Data["temperature"], 25, 3)
     # Humidity = signal.savgol_filter(Data["humidity"], 25, 3)
     # LDR = signal.savgol_filter(Data["ldr"], 25, 3)
@@ -228,6 +228,7 @@ def returnGraphData():
         Temperature = Data["temperature"]
         Humidity = Data["humidity"]
         LDR = Data["ldr"]
+        Time = Data["time"]
     except Exception as E:
         return ("No Graph available", 400)
     Graphs = [
