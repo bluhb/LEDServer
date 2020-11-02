@@ -77,6 +77,9 @@ function CompileTemplates(Data){
                 </div>
             </div>
         </div>
-    </div>```
+    </div>```;
+    HTMLT = Handlebars.compile(HTML);
+    HTMLC = HTMLT(Data);
+    console.log(HTMLC);
 }
 
