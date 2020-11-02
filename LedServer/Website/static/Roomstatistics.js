@@ -42,7 +42,7 @@ async function GetCurrentData(){
         CreateGraph(Room, 500);
         await new Promise(r=>setTimeout(r, 1000));
     }
-    setTimeout(GetCurrentData, 30000);
+    setTimeout(GetCurrentData, 120000);
 }
 
 function CompileTemplates(Data){
