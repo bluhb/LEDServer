@@ -41,7 +41,7 @@ async function GetCurrentData(){
 function CompileTemplates(Data){
     HTML = `
         <div class="justify-content-center card-deck">
-            <div class="card" style="background-color:AntiqueWhite;">
+            <div class="card" style="background-color:AntiqueWhite; padding:1%;">
                 <h2>{{Room}}</h2>
                 {{#each Data}}
                 <div class="row">
