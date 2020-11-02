@@ -52,3 +52,10 @@
     width:100%;
     background:grey;
 }
+
+.roomstatsCards{
+    background-color:AntiqueWhite;
+    padding:1%;
+    margin-right:1.5%;
+    margin-left:1.5%;
+}
