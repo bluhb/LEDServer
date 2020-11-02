@@ -38,7 +38,10 @@ async function GetCurrentData(){
     document.getElementById("Container").innerHTML = "";
     HTML = CompileTemplates(Data);
     document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
-    for (Room in Data){CreateGraph(Room, 5000)}
+    for (Room in Data){
+        CreateGraph(Room, 500);
+        await new Promise(r=>setTimeout(r, 1000));
+    }
     setTimeout(GetCurrentData, 30000);
 }
 
