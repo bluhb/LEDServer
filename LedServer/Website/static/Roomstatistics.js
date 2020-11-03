@@ -70,7 +70,7 @@ function CompileTemplates(Data){
         }else{
             Elem = document.getElementById(Room+"-Card");
             Elem.parentNode.removeChild(Elem);
-            document.getElementById("card-deck").insertAdjacentHTML("afterbegin", New);
+            document.getElementById("card-deck").insertAdjacentHTML("beforeend", New);
         }
     }
     HTMLTotal += "</div>";
