@@ -35,7 +35,7 @@ async function GetCurrentData(){
 
     }
     console.log(Data);
-    document.getElementById("Container").innerHTML = "";
+    //document.getElementById("Container").innerHTML = "";
     HTML = CompileTemplates(Data);
     document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
     for (Room in Data){
@@ -47,7 +47,7 @@ async function GetCurrentData(){
 
 function CompileTemplates(Data){
     HTML = `
-        <div class="card roomstatsCards"">
+        <div id = "{{Room}}-Card" class="card roomstatsCards"">
             <h2>{{Room}}</h2>
             {{#each Data}}
             <div class="row">
@@ -62,12 +62,25 @@ function CompileTemplates(Data){
         </div>`;
     HTMLTotal = `<div class="justify-content-center card-deck">`
     HTMLT = Handlebars.compile(HTML);
+    ReplaceAll = false;
     for (Room in Data){
-        HTMLTotal += HTMLT(Data[Room]);
+        New = HTMLT(Data[Room])
+        if (document.getElementById(Room+"-Graph0") != null & document.getElementById(Room+"-Graph1") != null || ReplaceAll){ 
+            ReplaceAll = true;
+            HTMLTotal += New;
+        }else{
+            Elem = document.getElementById(Room+"-Card");
+            Elem.parentNode.removeChild(Elem);
+            document.getElementById("Container").insertAdjacentHTML("afterbegin", New);
+        }
     }
     HTMLTotal += "</div>";
-    for (Room in Data){
-        HTMLTotal += "<div id="+Room+"-Graph0></div><div id="+Room+"-Graph1></div>";
+    if (ReplaceAll){
+        for (Room in Data){
+                HTMLTotal += "<div id="+Room+"-Graph0></div><div id="+Room+"-Graph1></div>";
+        }
+        document.getElementById("Container").innerHTML = "";
+        document.getElementById("Container").insertAdjacentHTML("afterbegin", HTMLTotal);
     }
     return (HTMLTotal);
 }
