@@ -64,9 +64,10 @@ def ritRegistration():
 @app.route('/api/light/getLights', methods=["POST"])
 def ApiGetLights():
     Data = {}
-    for room in main.rooms:
+    for room in sorted(main.rooms):
         if "lights" in main.rooms[room]:
             Data[room] = list(main.rooms[room]["lights"].keys())
+            Data[room].sort()
     return (jsonify(Data), 200)
 
 @app.route('/api/light/getLightsFunctions', methods=["POST"])
@@ -200,6 +201,7 @@ def ApiLightGetStatus():
 @app.route('/api/roomstatistics/getRooms', methods=["POST"])
 def ApiRoomstatisticsGetRooms():
     Rooms = list(main.rooms.keys())
+    Rooms.sort()
     return (jsonify(Rooms), 200)
 
 @app.route('/api/roomstatistics/data', methods=["POST"])
