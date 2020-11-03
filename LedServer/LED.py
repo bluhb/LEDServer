@@ -216,7 +216,7 @@ class Arduino(GenericLed):
         t = time.localtime()
         Time = time.strftime("%d-%m-%Y %H:%M:%S", t)
         print(val)
-        json = {'time': Time, 'temperature':int(val[0]) - 2, 'humidity':int(val[1]), 'ldr':int(val[2])}
+        json = {'time': Time, 'temperature':float(val[0]) - 2, 'humidity':float(val[1]), 'ldr':float(val[2])}
         main.rooms[self.roomSensors]['room'].json.update(json)
         main.rooms[self.roomSensors]['room'].writeToDB()
         print(json)
