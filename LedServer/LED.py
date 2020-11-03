@@ -180,6 +180,7 @@ class Arduino(GenericLed):
         for i in range(0,4): #schrijf buffer van arduino vol
             self.arduino.write(struct.pack('?', False))
             time.sleep(0.1)
+        self.Read()
         return None
 
     def main(self): #run the function and check if the sensors need to be read. If sync option is set then sync with master
@@ -214,7 +215,8 @@ class Arduino(GenericLed):
         val = humidTemp.split(",")
         t = time.localtime()
         Time = time.strftime("%d-%m-%Y %H:%M:%S", t)
-        json = {'time': Time, 'temperature':int(val[0]) - 4, 'humidity':int(val[1]), 'ldr':int(val[2])}
+        print(val)
+        json = {'time': Time, 'temperature':val[0], 'humidity':val[1], 'ldr':val[2]}
         main.rooms[self.roomSensors]['room'].json.update(json)
         main.rooms[self.roomSensors]['room'].writeToDB()
         print(json)
