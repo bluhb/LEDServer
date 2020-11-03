@@ -188,6 +188,7 @@ class Arduino(GenericLed):
         self.now = time.perf_counter_ns()
         if (self.now - self.prevMilli >= self.interval*1000000000) and not (self.roomSensors == None) or self.FirstTime:
             self.Read()
+            self.FirstTime = False
             self.prevMilli = time.perf_counter_ns()
         if self.sync and not self.master == None:
             self.Speed = main.rooms[self.master['room']]['lights'][self.master['light']].Speed
