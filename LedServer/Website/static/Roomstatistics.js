@@ -65,7 +65,7 @@ function CompileTemplates(Data){
     ReplaceAll = false;
     for (Room in Data){
         New = HTMLT(Data[Room])
-        if (document.getElementById(Room+"-Graph0") != null & document.getElementById(Room+"-Graph1") != null || ReplaceAll){ 
+        if (document.getElementById(Room+"-Graph0") == null & document.getElementById(Room+"-Graph1") == null || ReplaceAll){ 
             ReplaceAll = true;
             HTMLTotal += New;
         }else{
