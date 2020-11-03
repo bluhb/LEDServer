@@ -80,6 +80,8 @@ function CompileTemplates(Data){
         }
         document.getElementById("Container").innerHTML = "";
         document.getElementById("Container").insertAdjacentHTML("afterbegin", HTMLTotal);
+    }else{
+            document.getElementById("Container").insertAdjacentHTML("afterbegin", "</div>");
     }
 }
 
