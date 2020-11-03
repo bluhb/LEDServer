@@ -37,7 +37,6 @@ async function GetCurrentData(){
     console.log(Data);
     //document.getElementById("Container").innerHTML = "";
     HTML = CompileTemplates(Data);
-    document.getElementById("Container").insertAdjacentHTML("afterbegin", HTML);
     for (Room in Data){
         CreateGraph(Room, 500);
         await new Promise(r=>setTimeout(r, 1000));
@@ -82,7 +81,6 @@ function CompileTemplates(Data){
         document.getElementById("Container").innerHTML = "";
         document.getElementById("Container").insertAdjacentHTML("afterbegin", HTMLTotal);
     }
-    return (HTMLTotal);
 }
 
 function CreateGraph(Room, DataPoints){
