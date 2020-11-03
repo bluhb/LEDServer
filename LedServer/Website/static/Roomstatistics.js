@@ -59,7 +59,7 @@ function CompileTemplates(Data){
             </div>
             {{/each}}
         </div>`;
-    HTMLTotal = `<div class="justify-content-center card-deck">`
+    HTMLTotal = `<div id="card-deck" class="justify-content-center card-deck">`
     HTMLT = Handlebars.compile(HTML);
     ReplaceAll = false;
     for (Room in Data){
@@ -70,7 +70,7 @@ function CompileTemplates(Data){
         }else{
             Elem = document.getElementById(Room+"-Card");
             Elem.parentNode.removeChild(Elem);
-            document.getElementById("Container").insertAdjacentHTML("afterbegin", New);
+            document.getElementById("card-deck").insertAdjacentHTML("afterbegin", New);
         }
     }
     HTMLTotal += "</div>";
