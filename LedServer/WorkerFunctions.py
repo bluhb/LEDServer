@@ -13,7 +13,6 @@ GPIO.setup(buttonPin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 #this is the worker function, it will run the main method of the light object.
 def Worker(Room, light):
-    global buttonPin
     while True:
 
         light.main()
