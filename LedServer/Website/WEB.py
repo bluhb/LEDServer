@@ -279,7 +279,9 @@ def returnGraphData():
                 yaxis2 = dict(
                     title = "Relative Humidity",
                     overlaying = "y",
-                    side = "left"
+                    side = "left",
+                    anchor= "free",
+                    position = 0.15
                     ),
                 yaxis3 = dict(
                     title = "Relative light strenght",
