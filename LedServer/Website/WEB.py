@@ -61,6 +61,13 @@ def ritRegistration():
             rooms = rooms,
             page='ritRegistration')
 
+@app.route('/thermostat')
+def Thermostat():
+    global rooms
+    return render_template('index.html',
+            rooms = rooms,
+            page='Thermostat')
+
 @app.route('/api/light/getLights', methods=["POST"])
 def ApiGetLights():
     Data = {}
