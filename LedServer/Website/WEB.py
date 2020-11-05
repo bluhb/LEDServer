@@ -263,6 +263,13 @@ def returnGraphData():
                     name = "Humidity",
                     yaxis = "y2",
                     type = "lines"
+                    ),
+                dict(
+                    x = Time,
+                    y = LDR,
+                    name = "LDR",
+                    yaxis = "y3",
+                    type = "lines"
                     )
                 ],
             layout = dict(
@@ -271,6 +278,11 @@ def returnGraphData():
                 xaxis = {"automargin": True},
                 yaxis2 = dict(
                     title = "Relative Humidity",
+                    overlaying = "y",
+                    side = "left"
+                    ),
+                yaxis3 = dict(
+                    title = "Relative light strenght",
                     overlaying = "y",
                     side = "right"
                     )
