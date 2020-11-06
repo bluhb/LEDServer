@@ -31,18 +31,25 @@ class HSV:
         return None
 
     def __setattr__(self, Name, Value):
-        Value = int(Value)
         try:
             if Name in "S,V":
                 if 0<= Value <= 100:
-                    self.__dict__[Name] = Value + self.ColorCorrection[Name]
+                    if Value > 0:
+                        self.__dict__[Name] = Value + self.ColorCorrection[Name]
+                    else:
+                        self.__dict__[Name] = 0
                 else:
                     raise ValueError("{} is a too high or low value, must be 0<{}>100".format(Name,Name))
             elif Name in "H":
                 if  0 <= Value <= 360:
-                    self.__dict__[Name] = Value + self.ColorCorrection[Name]
+                    if Value > 0:
+                        self.__dict__[Name] = Value + self.ColorCorrection[Name]
+                    else:
+                        self.__dict__[Name] = 0
                 else:
                     raise ValueError("{} is a too high or low value, must be 0<{}>360".format(Name,Name))
+            elif Name == "ColorCorrection":
+                self.__dict__[Name] = Value
             else:
                 raise AttributeError("{} Does not exist in HSV class".format(Name))
 
