@@ -364,7 +364,7 @@ class WiFiLight(GenericLed):
             print(Name, "Had a connection error")
         self.name = Name
 
-    def colorfill(self, TimeOut = 1):
+    def colorfill(self, TimeOut = 0.01):
         #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
 
         def padding(x):
