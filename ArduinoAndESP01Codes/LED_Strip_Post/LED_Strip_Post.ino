@@ -13,10 +13,10 @@ const int IHIGH = LOW;
 void handleRoot();
 void handleColor();
 void handleNotFound();
-IPAddress staticIP(192, 168, 1, 235);
-IPAddress gateway(192, 168, 1, 1);
+IPAddress staticIP(192, 168, 2, 16);
+IPAddress gateway(192, 168, 2, 254);
 IPAddress subnet(255, 255, 255, 0);
-IPAddress dns(192, 168, 1, 80);
+IPAddress dns(192, 168, 2, 12);
 
 void setup() {  
   // put your setup code here, to run once:
@@ -56,11 +56,11 @@ void setup() {
   delay(100);
   digitalWrite(LEDG, ILOW);
   delay(100);
-  analogWrite(LEDB, 255);
+  analogWrite(LEDB, 0);
   delay(50);
   analogWrite(LEDB, 125);
   delay(50);
-  analogWrite(LEDB, 0);
+  analogWrite(LEDB, 255);
 }
 
 void handleRoot(){
@@ -68,9 +68,10 @@ void handleRoot(){
 }
 
 void handleColor(){
+  Server.send(200, "Color received");
   int r = 255 - Server.arg("plain").substring(1,4).toInt();
   int g = 255 - Server.arg("plain").substring(4,7).toInt();
-  int b = Server.arg("plain").substring(7,10).toInt();
+  int b = 255 - Server.arg("plain").substring(7,10).toInt();
 //  Serial.print(r); Serial.print(",");
 //  Serial.print(g); Serial.print(",");  
 //  Serial.print(b); Serial.println("");
