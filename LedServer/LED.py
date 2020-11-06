@@ -23,10 +23,11 @@ from LEDData import SunRise
 #------ in the future a class for wifi enabled led strips will come.
 
 class HSV:
-    def __init__(self):
+    def __init__(self, ColorCorrection):
         self.H = 0
         self.S = 0
         self.V = 0
+        self.ColorCorrection = ColorCorrection
         return None
 
     def __setattr__(self, Name, Value):
@@ -157,7 +158,7 @@ class Arduino(GenericLed):
         self.name = name
         self.arduino = serial.Serial(self.device, 115200)
 
-        self.HSV = HSV()
+        self.HSV = HSV(ColorCorrection)
         self.TempHumid = {}
         self.Speed = 0.1
         self.brightness = 1
@@ -243,7 +244,7 @@ class APALedstrip(GenericLed):
 		auto_write=False)
         self.name = name
         self.brightness = 1
-        self.HSV = HSV()
+        self.HSV = HSV(ColorCorrection)
         self.Speed = 0.1
         self.length = pixels
         self.now = time.perf_counter_ns()
@@ -311,7 +312,7 @@ class WiFiLight(GenericLed):
         self.LastSendTime = None
         self.OldColor = []
         self.Speed = 0.1
-        self.HSV = HSV()
+        self.HSV = HSV(ColorCorrection)
         self.brightness = 1
         self.now = time.perf_counter_ns()
         self.function = "off"
