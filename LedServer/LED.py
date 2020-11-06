@@ -84,7 +84,7 @@ class HSV:
             value = value - self.ColorCorrection[key]
             Check = 100 if value in ["S", "V"] else 360
             Floor = "Floor" if value in ["S", "V"] else "Wrap"
-            Color[key] = CheckGreaterThan(value, 100)
+            Color[key] = self.CheckGreaterThan(value, 100)
         return Color
 
     def ToRGB(self):
