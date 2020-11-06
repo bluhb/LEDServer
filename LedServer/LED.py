@@ -81,7 +81,7 @@ class HSV:
     def GetHSV(self):
         Color = {"h":self.H, "s":self.S, "v":self.V}
         for key, value in Color.items():
-            value = value - self.ColorCorrection[key]
+            value = value - self.ColorCorrection[key.upper()]
             Check = 100 if value in ["S", "V"] else 360
             Ceill = "Ceill" if value in ["S", "V"] else "Wrap"
             Color[key] = self.CheckGreaterThan(value, Check, Ceill)
