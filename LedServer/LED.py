@@ -79,7 +79,7 @@ class HSV:
         self.V = V + self.ColorCorrection["V"]
 
     def GetHSV(self):
-        Color = {"H":self.H, "S":self.S, "V":self.V}
+        Color = {"h":self.H, "s":self.S, "v":self.V}
         for key, value in Color.items():
             value = value - self.ColorCorrection[key]
             Check = 100 if value in ["S", "V"] else 360
