@@ -24,11 +24,11 @@ rooms = {
             "room":data.room(name='livingroom', dataKeys=dataKeys),
             "lights":{
                 "Muur":LED.APALedstrip(name = 'Muur',
+                    ColorCorrection={"H": -10, "S":0, "V":0}
                     ),
                 "Bank":LED.WiFiLight(Name = "Bank",
                     IP_ADRESS = "bank.lights",
                     Master = {"room":"livingroom", "light":"Muur"},
-                    ColorCorrection={"H":5, "S":0, "V":0})
                 }
             }
         }
