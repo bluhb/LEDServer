@@ -78,6 +78,15 @@ class HSV:
         self.S = S + self.ColorCorrection["S"]
         self.V = V + self.ColorCorrection["V"]
 
+    def GetHSV(self):
+        Color = {"H":self.H, "S":self.S, "V":self.V}
+        for key, value in Color.items():
+            value = value - self.ColorCorrection[key]
+            Check = 100 if value in ["S", "V"] else 360
+            Floor = "Floor" if value in ["S", "V"] else "Wrap"
+            Color[key] = CheckGreaterThan(value, 100)
+        return Color
+
     def ToRGB(self):
         return(tuple(round(i*255) for i in colorsys.hsv_to_rgb(self.H/360, self.S/100, self.V/100)))
 

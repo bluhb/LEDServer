@@ -192,11 +192,7 @@ def ApiLightGetStatus():
         if "lights" in main.rooms[room]:
             RoomsLights[room] = {}
             for Light in list(main.rooms[room]["lights"].keys()):
-                RoomsLights[room][Light] = {"HSV":{
-                    "h": main.rooms[room]["lights"][Light].HSV.H,
-                    "s": main.rooms[room]["lights"][Light].HSV.S,
-                    "v":main.rooms[room]["lights"][Light].HSV.V
-                    },
+                RoomsLights[room][Light] = {"HSV":main.rooms[room]["lights"][Light].HSV.GetHSV(),
                     "Function":main.rooms[room]["lights"][Light].function,
                     "Speed":main.rooms[room]["lights"][Light].Speed,
                 }
