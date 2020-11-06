@@ -35,7 +35,8 @@ class HSV:
             if Name in "S,V":
                 if 0<= Value <= 100:
                     if Value > 0:
-                        self.__dict__[Name] = Value + self.ColorCorrection[Name]
+                        Value = Value + self.ColorCorrection[Name]
+                        self.__dict__[Name] = self.CheckGreaterThan(Value, 100, "Ceill")
                     else:
                         self.__dict__[Name] = 0
                 else:
@@ -43,7 +44,8 @@ class HSV:
             elif Name in "H":
                 if  0 <= Value <= 360:
                     if Value > 0:
-                        self.__dict__[Name] = Value + self.ColorCorrection[Name]
+                        Value = Value + self.ColorCorrection[Name]
+                        self.__dict__[Name] = self.CheckGreaterThan(Value, 360, "Wrap")
                     else:
                         self.__dict__[Name] = 0
                 else:
@@ -55,6 +57,14 @@ class HSV:
 
         except Exception as e:
             print(e)
+
+    def CheckGreaterThan(Value, Check, WrapOrCeill):
+        if Value > Check:
+            if WrapOrCeill == "Wrap":
+                Value = Value - Check
+            elif WrapOrCeill == "Ceill":
+                Value = Check
+        return Value
 
     def SetHSV(self, H, S, V):
         self.H = H + self.ColorCorrection["H"]
