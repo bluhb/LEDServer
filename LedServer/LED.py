@@ -125,7 +125,7 @@ class GenericLed:
                 Prev = time.perf_counter()
                 self.HSV.H = angle
                 self.HSV.S = 100
-                self.colorfill()
+                self.colorfill(TimeOut = 0.007)
                 while time.perf_counter() - Prev < self.Speed:
                     pass
             else:
@@ -219,7 +219,7 @@ class Arduino(GenericLed):
             pass
         return None
 
-    def colorfill(self): #write colors to the arduino
+    def colorfill(self, TimeOut = 0): #write colors to the arduino
         RGB = self.HSV.ToRGB()
         data = struct.pack('>BBB',
             int(RGB[0]),
@@ -291,7 +291,7 @@ class APALedstrip(GenericLed):
             pass
         return None
 
-    def colorfill(self): #fill the whole strip with the same color, every pixel higher than length will be black
+    def colorfill(self, TimeOut = 0): #fill the whole strip with the same color, every pixel higher than length will be black
         Color = self.HSV.ToRGB()
         self.pixels.fill(Color)
         # for i in range(0,len(self.pixels), 1):
@@ -350,7 +350,7 @@ class WiFiLight(GenericLed):
             print(Name, "Had a connection error")
         self.name = Name
 
-    def colorfill(self):
+    def colorfill(self, TimeOut = 1):
         #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
 
         def padding(x):
@@ -366,7 +366,7 @@ class WiFiLight(GenericLed):
             self.OldColor = Colors
             self.LastSendTime = time.perf_counter()
             try:
-                Re = rq.post(self.Adress, json = str(Colors[0])+str(Colors[1])+str(Colors[2]), timeout = 0.007)
+                Re = rq.post(self.Adress, json = str(Colors[0])+str(Colors[1])+str(Colors[2]), timeout = TimeOut)
                 #print("Check ", "r"+str(color[0])+"g"+str(color[1])+"b"+str(color[2]))
             except Exception as E:
                 pass
