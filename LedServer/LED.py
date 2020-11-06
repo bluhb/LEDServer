@@ -60,16 +60,16 @@ class HSV:
         except Exception as e:
             print(e)
 
-    def CheckGreaterThan(self, Value, Check, WrapOrCeill, WrapOrFloor):
+    def CheckGreaterThan(self, Value, Check, WrapOrCeill):
         if Value > Check:
             if WrapOrCeill == "Wrap":
                 Value = Value - Check
             elif WrapOrCeill == "Ceill":
                 Value = Check
         elif Value < 0:
-            if WrapOrFloor == "Wrap":
+            if WrapOrCeill == "Wrap":
                 Value = Value + Check
-            elif WrapOrFloor == "Floor":
+            elif WrapOrCeill == "Ceill":
                 Value = 0
         return Value
 
@@ -83,8 +83,8 @@ class HSV:
         for key, value in Color.items():
             value = value - self.ColorCorrection[key]
             Check = 100 if value in ["S", "V"] else 360
-            Floor = "Floor" if value in ["S", "V"] else "Wrap"
-            Color[key] = self.CheckGreaterThan(value, 100)
+            Ceill = "Ceill" if value in ["S", "V"] else "Wrap"
+            Color[key] = self.CheckGreaterThan(value, Check, Ceill)
         return Color
 
     def ToRGB(self):
