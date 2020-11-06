@@ -67,7 +67,6 @@ class HSV:
             elif WrapOrCeill == "Ceill":
                 Value = Check
         elif Value < 0:
-            Value = 0
             if WrapOrFloor == "Wrap":
                 Value = Value + Check
             elif WrapOrFloor == "Floor":
