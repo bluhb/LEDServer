@@ -29,6 +29,7 @@ rooms = {
                 "Bank":LED.WiFiLight(Name = "Bank",
                     IP_ADRESS = "bank.lights",
                     Master = {"room":"livingroom", "light":"Muur"},
+                )
                 }
             }
         }
