@@ -376,7 +376,7 @@ class WiFiLight(GenericLed):
             return R
         Color = self.HSV.ToRGB()
         Colors = [padding(x) for x in Color]
-        if not self.OldColor == Colors or time.perf_counter() > self.LastSendTime + 60: #don't resend already send colors, unless 1 minute have past.
+        if not self.OldColor == Colors or time.perf_counter() > self.LastSendTime + 60: #don't resend already send colors, unless 1 minute have past. Have to remake wifi light in udp.
             self.OldColor = Colors
             self.LastSendTime = time.perf_counter()
             try:
