@@ -34,12 +34,12 @@ class HSV:
         try:
             if Name in "S,V":
                 if 0<= Value <= 100:
-                    self.__dict__[Name] = Value
+                    self.__dict__[Name] = Value + self.ColorCorrection[Name]
                 else:
                     raise ValueError("{} is a too high or low value, must be 0<{}>100".format(Name,Name))
             elif Name in "H":
                 if  0 <= Value <= 360:
-                    self.__dict__[Name] = Value
+                    self.__dict__[Name] = Value + self.ColorCorrection[Name]
                 else:
                     raise ValueError("{} is a too high or low value, must be 0<{}>360".format(Name,Name))
             else:
@@ -49,9 +49,9 @@ class HSV:
             print(e)
 
     def SetHSV(self, H, S, V):
-        self.H = H
-        self.S = S
-        self.V = V
+        self.H = H + self.ColorCorrection["H"]
+        self.S = S + self.ColorCorrection["S"]
+        self.V = V + self.ColorCorrection["V"]
 
     def ToRGB(self):
         return(tuple(round(i*255) for i in colorsys.hsv_to_rgb(self.H/360, self.S/100, self.V/100)))
@@ -148,7 +148,7 @@ class GenericLed:
 #------ class for arduino ledstrip.
 
 class Arduino(GenericLed):
-    def __init__(self, name, serialPort, master = None, roomSensors = None): #initialize object
+    def __init__(self, name, serialPort, master = None, roomSensors = None, ColorCorrection={"H":0, "S":0, "V":0}): #initialize object
         print(name +" is initializing, after that it will brighten up your day!")
         self.roomSensors = roomSensors
         self.master = master
@@ -231,7 +231,7 @@ class Arduino(GenericLed):
 
 # -------- class for APA102 led strip, expected at the SPI pins of the raspberry pi
 class APALedstrip(GenericLed):
-    def __init__(self, name, master = None, pixels = 135): #initialize object
+    def __init__(self, name, master = None, pixels = 135, ColorCorrection={"H":0, "S":0, "V":0}): #initialize object
         print(name +" is initializing, after that it will brighten up your day!")
         self.master = master
         self.sync = False #boolean used to sync colorfades with master
@@ -306,7 +306,7 @@ class APALedstrip(GenericLed):
         return None
 
 class WiFiLight(GenericLed):
-    def __init__(self, Name, IP_ADRESS, Master=None):
+    def __init__(self, Name, IP_ADRESS, Master=None, ColorCorrection={"H":0, "S":0, "V":0}):
         self.Adress = "http://"+IP_ADRESS+"/color"
         self.LastSendTime = None
         self.OldColor = []

@@ -26,8 +26,9 @@ rooms = {
                 "Muur":LED.APALedstrip(name = 'Muur',
                     ),
                 "Bank":LED.WiFiLight(Name = "Bank",
-                    IP_ADRESS = "ESP-01_test.lan",
-                    Master = {"room":"livingroom", "light":"Muur"})
+                    IP_ADRESS = "bank.lights",
+                    Master = {"room":"livingroom", "light":"Muur"},
+                    ColorCorrection={"H":5, "S":0, "V":0})
                 }
             }
         }
