@@ -37,7 +37,7 @@ class HSV:
                     if Value > 0:
                         Value = Value + self.ColorCorrection[Name]
                         print(Value)
-                        self.__dict__[Name] = self.CheckGreaterThan(Value, 100, "Ceill", "Floor")
+                        self.__dict__[Name] = self.CheckGreaterThan(Value, 100, "Ceill")
                     else:
                         self.__dict__[Name] = 0
                 else:
@@ -47,7 +47,7 @@ class HSV:
                     if Value > 0:
                         Value = Value + self.ColorCorrection[Name]
                         print(Value)
-                        self.__dict__[Name] = self.CheckGreaterThan(Value, 360, "Wrap", "Wrap")
+                        self.__dict__[Name] = self.CheckGreaterThan(Value, 360, "Wrap")
                     else:
                         self.__dict__[Name] = 0
                 else:
