@@ -60,7 +60,7 @@ class HSV:
         except Exception as e:
             print(e)
 
-    def CheckGreaterThan(Value, Check, WrapOrCeill):
+    def CheckGreaterThan(self, Value, Check, WrapOrCeill):
         if Value > Check:
             if WrapOrCeill == "Wrap":
                 Value = Value - Check
