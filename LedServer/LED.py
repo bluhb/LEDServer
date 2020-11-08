@@ -74,9 +74,9 @@ class HSV:
         return Value
 
     def SetHSV(self, H, S, V):
-        self.H = H + self.ColorCorrection["H"]
-        self.S = S + self.ColorCorrection["S"]
-        self.V = V + self.ColorCorrection["V"]
+        self.H = H
+        self.S = S
+        self.V = V
 
     def GetHSV(self):
         Color = {"h":self.H, "s":self.S, "v":self.V}
