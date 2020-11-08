@@ -36,7 +36,6 @@ class HSV:
                 if 0<= Value <= 100:
                     if Value > 0:
                         Value = Value + self.ColorCorrection[Name]
-                        print(Value)
                         self.__dict__[Name] = self.CheckGreaterThan(Value, 100, "Ceill")
                     else:
                         self.__dict__[Name] = 0
@@ -46,7 +45,6 @@ class HSV:
                 if  0 <= Value <= 360:
                     if Value > 0:
                         Value = Value + self.ColorCorrection[Name]
-                        print(Value)
                         self.__dict__[Name] = self.CheckGreaterThan(Value, 360, "Wrap")
                     else:
                         self.__dict__[Name] = 0
@@ -108,7 +106,6 @@ class GenericLed:
     def __setattr__(self, Name, Value):
         if Name == "function" and getattr(self, "function", None) != "off" and hasattr(self, Name):
             self.oldFunction = self.function
-            print("Set oldfunction to: {}".format(self.oldFunction))
             self.__dict__[Name] = Value
         else:
             self.__dict__[Name] = Value
@@ -250,7 +247,6 @@ class Arduino(GenericLed):
         val = humidTemp.split(",")
         t = time.localtime()
         Time = time.strftime("%d-%m-%Y %H:%M:%S", t)
-        print(val)
         json = {'time': Time, 'temperature':float(val[0]) - 2, 'humidity':float(val[1]), 'ldr':float(val[2])}
         main.rooms[self.roomSensors]['room'].json.update(json)
         main.rooms[self.roomSensors]['room'].writeToDB()
