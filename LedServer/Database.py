@@ -4,7 +4,7 @@ import threading
 import Settings
 import __main__ as main
 
-
+28793
 """
 This module handles all database connections.
 It practically is a wrapper and expansion on the standard SQLITE3 package.
@@ -21,7 +21,7 @@ class DataBase:
                 host="localhost",
                 user="ledserver",
                 password="ledserver",
-                database="castoringen"
+                database="ledserver"
                 )
         self.Curr = self.DB.cursor(buffered=True)
         self.Curr.execute("USE castoringen;")
