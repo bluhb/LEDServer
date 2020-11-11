@@ -4,7 +4,7 @@ from Database import *
 
 class ritRegistration():
     def __init__(self):
-        self.DB = DataBase("")
+        self.DB = DataBase()
         self.Table = "Ritten"
         self.DB.connectOrCreateTable(self.Table,
                     [["KMStand", "INTEGEER"],
