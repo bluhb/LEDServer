@@ -7,7 +7,7 @@ class ritRegistration():
         self.DB = DataBase()
         self.Table = "Ritten"
         self.DB.connectTable(self.Table,
-                    [["KMStand", "INTEGEER"],
+                    [["KMStand", "INTEGER"],
                      ["BeginEindPunt", "VARCHAR(500)"],
                      ["Getankt", "INTEGER"],
                      ["Time", "datetime"]],
