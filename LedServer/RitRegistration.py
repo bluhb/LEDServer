@@ -9,7 +9,7 @@ class ritRegistration():
         self.DB.connectTable(self.Table,
                     [["KMStand", "INTEGEER"],
                      ["BeginEindPunt", "VARCHAR(500)"],
-                     ["Getankt", "INTEGER(500)"],
+                     ["Getankt", "INTEGER"],
                      ["Time", "DATE"]],
                     )
 
