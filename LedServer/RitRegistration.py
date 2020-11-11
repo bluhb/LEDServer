@@ -8,9 +8,9 @@ class ritRegistration():
         self.Table = "Ritten"
         self.DB.connectTable(self.Table,
                     [["KMStand", "INTEGEER"],
-                     ["BeginEindPunt", "VARCHAR"],
-                     ["Getankt", "INTEGER"],
-                     ["Time", "VARCHAR"]],
+                     ["BeginEindPunt", "VARCHAR[500]"],
+                     ["Getankt", "INTEGER[500]"],
+                     ["Time", "DATE"]],
                     )
 
     def insertMileage(self, KM, BeginEndPoint, Tanked = 0):
@@ -18,7 +18,7 @@ class ritRegistration():
                     [["KMStand", KM],
                     ["BeginEindPunt", BeginEndPoint],
                     ["Getankt", Tanked],
-                    ["Time", datetime.now()]
+                    ["Time", str(datetime.now())]
                     ])
         return True
 
