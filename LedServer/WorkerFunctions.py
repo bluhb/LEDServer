@@ -51,7 +51,7 @@ def PiControl(rooms):
         temp = os.popen("vcgencmd measure_temp").readline().replace("temp=", "")[0:4]
         load = psutil.cpu_percent()
         rooms['pi']['room'].json['temperature'] = temp
-        rooms['pi']['room'].json['load'] = load
+        rooms['pi']['room'].json['cpuload'] = load
         rooms['pi']['room'].writeToDB()
         print(rooms['pi']['room'].json)
         time.sleep(55)

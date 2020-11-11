@@ -3,7 +3,6 @@ from datetime import datetime
 import numpy as np
 import calendar
 from Database import *
-from __main__ import ErrorDB
 
 
 class room:
