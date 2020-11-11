@@ -8,7 +8,7 @@ from Database import *
 class room:
     def __init__(self, name, dataKeys):
         self.DB = DataBase()
-        self.Table = "Sensor"
+        self.Table = name + "_Sensors"
         self.DB.connectTable(self.Table, dataKeys)
         self.name = name
         self.json = {}
@@ -79,15 +79,14 @@ class room:
             Data.append([key, value])
         # self.DB.insertToTable(self.Table, self.name, LDR, Humid, Temp, Time)
         print("writeToDB: {}".format(Data))
-        self.DB.insertToTable2(self.Table, Data)
+        self.DB.insertToTable(self.Table, Data)
         self.DB.DB.commit()
         return None
 
     def getDataFromDB(self, Items = 600):
-        DataRaw = self.DB.selectAllSensorsByRoom(self.name, self.Table, Items)
+        DataRaw = self.DB.selectAllDataFromTable(self.Table)
         Data = {}
         Time = []
-        print("getDataFromDB: name; {}, table; {}".format(self.name, self.Table))
         for value in self.dataKeys:
             if not (value[0] == "room"):
                 Data[value[0]] = []
