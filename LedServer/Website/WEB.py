@@ -257,7 +257,7 @@ def returnGraphData():
                     x = Time,
                     y = Humidity,
                     name = "Humidity",
-                    yaxis = "y2",
+                    yaxis = "Temperature",
                     type = "lines"
                     ),
                 dict(
@@ -270,15 +270,8 @@ def returnGraphData():
                 ],
             layout = dict(
                 title = RoomID + " Temperature and Humidity",
-                yaxis = {"title": "Degree Celsius"},
+                yaxis = {"title": "Degree Celsius and Humidity"},
                 xaxis = {"automargin": True},
-                yaxis2 = dict(
-                    title = "Relative Humidity",
-                    overlaying = "y",
-                    side = "left",
-                    anchor= "free",
-                    position = 0.15
-                    ),
                 yaxis3 = dict(
                     title = "Relative light strenght",
                     overlaying = "y",
@@ -286,23 +279,6 @@ def returnGraphData():
                     )
                 )
             ),
-        dict(
-            data=[
-                dict(
-                    x = Time,
-                    y = LDR,
-                    name = "LDR",
-                    yaxis = "LDR",
-                    type = "lines"
-                    )
-                ],
-            layout = dict(
-                title = RoomID + " LDR",
-                xaxis = {"automargin": True},
-                yaxis = {"title": "Relative light strength"},
-                showlegend = True
-                )
-            )
         ]
 
     GraphsJSON = jsonify(Graphs)
