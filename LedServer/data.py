@@ -8,8 +8,7 @@ from __main__ import ErrorDB
 
 class room:
     def __init__(self, name, dataKeys):
-        self.Database = name + ".sqlite"
-        self.DB = DataBase(self.Database)
+        self.DB = DataBase()
         self.Table = "Sensor"
         self.DB.connectOrCreateTable(self.Table, dataKeys)
         self.name = name
