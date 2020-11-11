@@ -10,7 +10,7 @@ class room:
     def __init__(self, name, dataKeys):
         self.DB = DataBase()
         self.Table = "Sensor"
-        self.DB.connectOrCreateTable(self.Table, dataKeys)
+        self.DB.connectTable(self.Table, dataKeys)
         self.name = name
         self.json = {}
         self.dataKeys = dataKeys

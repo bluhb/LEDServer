@@ -4,9 +4,9 @@ from Database import *
 
 class ritRegistration():
     def __init__(self):
-        self.DB = DataBase("Ritregistratie.sqlite")
+        self.DB = DataBase()
         self.Table = "Ritten"
-        self.DB.connectOrCreateTable(self.Table,
+        self.DB.connectTable(self.Table,
                     [["KMStand", "INTEGEER"],
                      ["BeginEindPunt", "VARCHAR"],
                      ["Getankt", "INTEGER"],

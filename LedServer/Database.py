@@ -23,7 +23,7 @@ class DataBase:
                 database="ledserver"
                 )
         self.Curr = self.DB.cursor(buffered=True)
-        self.Curr.execute("USE castoringen;")
+        self.Curr.execute("USE ledserver;")
         return None
 
     def connectTable(self, Table, KeysSort):
