@@ -1,7 +1,6 @@
 import mysql.connector
 from datetime import datetime
 import threading
-import Settings
 import __main__ as main
 
 28793
