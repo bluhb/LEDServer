@@ -6,7 +6,6 @@ import datetime
 
 #import needed modules
 import Error #Needs to be imported first, other module need this in the main
-ErrorDB = Error.LoggedError() #needs to be create first, other modules need this
 import RitRegistration
 RitReg = RitRegistration.ritRegistration()
 

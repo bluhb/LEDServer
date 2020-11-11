@@ -3,15 +3,13 @@ from datetime import datetime
 import numpy as np
 import calendar
 from Database import *
-from __main__ import ErrorDB
 
 
 class room:
     def __init__(self, name, dataKeys):
-        self.Database = name + ".sqlite"
-        self.DB = DataBase(self.Database)
-        self.Table = "Sensor"
-        self.DB.connectOrCreateTable(self.Table, dataKeys)
+        self.DB = DataBase()
+        self.Table = name + "_Sensors"
+        self.DB.connectTable(self.Table, dataKeys)
         self.name = name
         self.json = {}
         self.dataKeys = dataKeys
@@ -81,15 +79,14 @@ class room:
             Data.append([key, value])
         # self.DB.insertToTable(self.Table, self.name, LDR, Humid, Temp, Time)
         print("writeToDB: {}".format(Data))
-        self.DB.insertToTable2(self.Table, Data)
+        self.DB.insertToTable(self.Table, Data)
         self.DB.DB.commit()
         return None
 
     def getDataFromDB(self, Items = 600):
-        DataRaw = self.DB.selectAllSensorsByRoom(self.name, self.Table, Items)
+        DataRaw = self.DB.selectAllDataFromTable(self.Table)
         Data = {}
         Time = []
-        print("getDataFromDB: name; {}, table; {}".format(self.name, self.Table))
         for value in self.dataKeys:
             if not (value[0] == "room"):
                 Data[value[0]] = []

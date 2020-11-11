@@ -1,82 +1,56 @@
-import sqlite3
+import mysql.connector
 from datetime import datetime
 import threading
+import __main__ as main
+
+28793
+"""
+This module handles all database connections.
+It practically is a wrapper and expansion on the standard SQLITE3 package.
+
+The DB supports multi threaded applications. But insertion will block the threading.
+This means no more than 1 insertion to a single database will happen at the same moment.
+"""
 
 print("DataBase Class Should be defined")
 class DataBase:
-    def __init__(self, DB_Name):
+    def __init__(self):
         self.lock = threading.Lock()
-        self.DB_Name = DB_Name
-        self.DB = sqlite3.connect("./DataBases/" + self.DB_Name, check_same_thread = False)
-        self.Curr = self.DB.cursor()
+        self.DB = mysql.connector.connect(
+                host="localhost",
+                user="ledserver",
+                password="ledserver",
+                database="ledserver"
+                )
+        self.Curr = self.DB.cursor(buffered=True)
+        self.Curr.execute("USE ledserver;")
+        return None
 
-    def connectTable(self, Table):
-        A = self.Curr.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(Table)).fetchall()
-
-        SqlCommand = """
-        CREATE TABLE {} (
-            id INTEGER,
-            room VARCHAR,
-            ldr FLOAT,
-            humidity FLOAT,
-            temperature FLOAT,
-            time VARCHAR,
-            PRIMARY KEY (id));
-            """.format(Table)
+    def connectTable(self, Table, KeysSort):
+        """Table = TableName
+        KeysSort is list containing list with key and sort: [["Example", "VARCHAR"], ["Ex", "INTEGER"]]
+        """
         self.lock.acquire()
-        if not len(A) == 1:
-            self.Curr.executescript(SqlCommand)
-            self.DB.commit()
-            self.lock.release()
-            return True
-        else:
-            self.DB.commit()
-            self.lock.release()
-            return False
+        SqlCommand = "CREATE TABLE IF NOT EXISTS {} ( id INTEGER AUTO_INCREMENT, ".format(Table)
+        for KeySort in KeysSort:
+            Key = KeySort[0]
+            Sort = KeySort[1]
+            SqlCommand += Key + " " + Sort + ", "
 
-    def connectOrCreateTable(self, Table, ColumnList, PrimaryKey="id"):
-        self.lock.acquire()
-        A = self.Curr.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(Table)).fetchall()
-        if len(A) > 0:
-            self.DB.commit()
-            self.lock.release()
-            return False
-        else:
-            SqlCommand = "CREATE TABLE {} (".format(Table)
-            IdFound = False
-            for TableEntry in ColumnList:
-                ColumnName = TableEntry[0]
-                if ColumnName == PrimaryKey:
-                    IdFound = True
-                ColumnSort = TableEntry[1]
-                SqlCommand = SqlCommand + "{} {}".format(ColumnName, ColumnSort.upper()) + ", "
+        SqlCommand += "PRIMARY KEY(id));"
+        print(SqlCommand)
+        # if not len(A) == 1:
+        self.Curr.execute(SqlCommand)
+        self.DB.commit()
+        self.lock.release()
+        return True
+        # else:
+            # self.DB.commit()
+            # self.lock.release()
+            # return False
 
-            if PrimaryKey and IdFound:
-                SqlCommand = SqlCommand + "PRIMARY KEY ({}));".format(PrimaryKey)
-            else:
-                SqlCommand = SqlCommand + "{} INTEGER, PRIMARY KEY ({}));".format(PrimaryKey, PrimaryKey)
-            self.Curr.executescript(SqlCommand)
-            self.DB.commit()
-            self.lock.release()
-            return True
-
-    def insertToTable(self, Table, Room, LDR, Humid, Temp, Time):
-        SqlCommand = "INSERT INTO {} (room, ldr, humidity, temperature, time) values ({},{},{},{},{})".format(
-        "'"+str(Table)+"'", "'"+str(Room)+"'", float(LDR), float(Humid), float(Temp), "'"+str(Time)+"'")
-
-        try:
-            self.lock.acquire()
-            self.Curr.execute(SqlCommand)
-            self.DB.commit()
-            self.lock.release()
-            return True
-        except Exception as E:
-            ErrorDB = __main__.ErrorDB
-            ErrorDB.LogError("Database Error", E, "Adding to the database went wrong", datetime.now())
-            print("Help, this error happenend: {}".format(E))
-            return False
-
-    def insertToTable2(self, Table, InsertKeyValues):
+    def insertToTable(self, Table, InsertKeyValues):
+        """Insert key:value pairs into the selected table from the DB"""
         SqlCommand = "INSERT INTO {} (".format(Table)
         for i in range(0,len(InsertKeyValues)):
             Key = InsertKeyValues[i][0]
@@ -92,44 +66,31 @@ class DataBase:
                 SqlCommand = SqlCommand + """"{}", """.format(Value)
             else:
                 SqlCommand = SqlCommand + """"{}")""".format(Value)
-        print(SqlCommand)
         self.lock.acquire()
         self.Curr.execute(SqlCommand)
         self.DB.commit()
         self.lock.release()
         return None
 
-
-
-    def selectAllSensorsByRoom(self, Room, Table, LastNItems = 600, PrimaryKey = "id"):
-        SqlCommand = """SELECT * FROM {} WHERE room="{}" and id > (select MAX({}) - {} FROM {}) """.format(Table, Room, PrimaryKey, int(LastNItems), Table)
-        print(SqlCommand)
-        self.lock.acquire()
-        DataRaw = self.Curr.execute(SqlCommand)
-        self.lock.release()
-        KeysRaw = DataRaw.description
-        DataLists = DataRaw.fetchall()
-        Keys = [KeyList[0] for KeyList in KeysRaw]
-        Data = []
-        for DataSet in DataLists:
-            DataDict = {}
-            for i in range(0, len(Keys)):
-                DataDict[Keys[i]] = DataSet[i]
-            Data.append(DataDict)
-        return Data
-
-    def selectAllDataFromTable(self, Table, LastNItems = 500, PrimaryKey = "id"):
-        SqlCommand = """SELECT * FROM {} WHERE id > (select MAX({}) - {} FROM {})""".format(
+    def selectAllDataFromTable(self, Table, LastNItems = 500, PrimaryKey = "id", Sort = "id"):
+        """select all the data from the given table"""
+        SqlCommand = """SELECT * FROM {} WHERE {} > (select MAX({}) - {} FROM {}) ORDER BY {} ASC""".format(
                 Table,
                 PrimaryKey,
+                PrimaryKey,
                 LastNItems,
-                Table)
+                Table,
+                Sort)
         self.lock.acquire()
-        DataRaw = self.Curr.execute(SqlCommand)
+        self.Curr.execute(SqlCommand)
+        DataRaw = self.Curr.fetchall()
         self.lock.release()
-        KeysRaw = DataRaw.description
-        DataLists = DataRaw.fetchall()
-        Keys = [KeyList[0] for KeyList in KeysRaw]
+        if len(DataRaw) == 0:
+            return []
+        GetKeysSQL = "SHOW columns FROM {}".format(Table)
+        self.Curr.execute(GetKeysSQL)
+        Keys = [x[0] for x in self.Curr.fetchall()]
+        DataLists = DataRaw
         Data = []
         for DataSet in DataLists:
             DataDict = {}
@@ -138,19 +99,115 @@ class DataBase:
             Data.append(DataDict)
         return Data
 
-    def closeDB(self):
+    def deleteAllDataFromTable(self, Table):
+        SQL = "DELETE FROM {};".format(Table)
+        self.lock.acquire()
+        self.Curr.execute(SQL)
         self.DB.commit()
-        self.DB.close()
+        self.lock.release()
         return None
 
-if __name__ == "__main__":
-    DB = DataBase("Test")
-    DB.connectOrCreateTable("Test", [["Dirk", "integer"], ["room", "string"]])
-    DB.insertToTable2("Test", [["Dirk", 1], ["room", "Bluhb"]])
-    DB2 = DataBase("Test")
-    DB2.connectOrCreateTable("Test", [])
-    Data2 = DB2.selectAllSensorsByRoom("Bluhb", "Test")
-    print(Data2)
-    Data = DB.selectAllSensorsByRoom("Bluhb", "Test")
-    print(Data)
+    def deleteByID(self, ID, Table):
+        SQL = "DELETE FROM {} WHERE ID={}".format(Table, ID)
+        self.lock.acquire()
+        self.Curr.execute(SQL)
+        self.DB.commit()
+        self.lock.release()
+        return None
 
+    def updateById(self, Table, ID, KeyValuePairUpdate):
+        SQL = "UPDATE {} SET {}='{}' WHERE ID={}".format(
+                Table, KeyValuePairUpdate[0], KeyValuePairUpdate[1], ID)
+        self.lock.acquire()
+        self.Curr.execute(SQL)
+        self.DB.commit()
+        self.lock.release()
+        return None
+
+    def updateBulkById(self, Table, KeyValueDictList):
+        """
+        Same as update by id but will handle multiple rows and multiple columns for every row
+        """
+        SQL = []
+        self.lock.acquire()
+        for _,Dict in KeyValueDictList.items():
+            SQLS = ""
+            I = 0
+            ID = Dict.pop("id")
+            SQLS += "UPDATE {} SET ".format(Table)
+            for Key,Value in Dict.items():
+                SQLS += "{}='{}'".format(Key, Value)
+                if not I == len(Dict) - 1:
+                    SQLS += ", "
+                else:
+                    SQLS += " "
+                I += 1
+            SQLS += "WHERE ID={};".format(ID)
+            self.Curr.execute(SQLS)
+        self.DB.commit()
+        self.lock.release()
+        return None
+
+
+
+    def updateByKey(self, Table, KeyValuePairUpdate, KeyValueMatch):
+        SQL = """UPDATE {} SET "{}"="{}" WHERE "{}"="{}"; """.format(
+                Table, KeyValuePairUpdate[0], KeyValuePairUpdate[1], KeyValueMatch[0], KeyValueMatch[1])
+        try:
+            self.lock.acquire()
+            self.Curr.execute(SQL)
+            self.DB.commit()
+            self.lock.release()
+        except Exception as E:
+            print(E)
+            return "Error"
+        return None
+
+    def selectById(self, Table, ID):
+        """Select the data from the table by the id column"""
+        SQL = """SELECT * FROM {} WHERE ID={}""".format(Table, ID)
+        self.lock.acquire()
+        self.Curr.execute(SQL)
+        DataLists = self.Curr.fetchall()
+        self.lock.release()
+
+        GetKeysSQL = "SHOW columns FROM {}".format(Table)
+        self.Curr.execute(GetKeysSQL)
+        Keys = [x[0] for x in self.Curr.fetchall()]
+
+        DataDict = {}
+        DataSet = DataLists[0]
+        for i in range(0, len(Keys)):
+            DataDict[Keys[i]] = DataSet[i]
+        return DataDict
+
+    def selectCountWhere(self, Table, Where):
+        SQL = """SELECT COUNT(*) FROM {} WHERE {};""".format(
+                Table,
+                Where)
+        self.lock.acquire()
+        self.Curr.execute(SQL)
+        DataLists = self.Curr.fetchall()
+        self.lock.release()
+        return DataLists
+
+    def selectWhere(self, Table, Where, Sort="id"):
+        SQL = """SELECT * FROM {} WHERE {} ORDER BY {} DESC;""".format(
+                Table,
+                Where,
+                Sort)
+        self.lock.acquire()
+        self.Curr.execute(SQL)
+        DataLists = self.Curr.fetchall()
+        self.lock.release()
+        GetKeysSQL = "SHOW columns FROM {}".format(Table)
+        self.Curr.execute(GetKeysSQL)
+        Keys = [x[0] for x in self.Curr.fetchall()]
+
+        Data = []
+        for DataSet in DataLists:
+            DataDict = {}
+            for i in range(0, len(Keys)):
+                DataDict[Keys[i]] = DataSet[i]
+            Data.append(DataDict)
+        return Data
