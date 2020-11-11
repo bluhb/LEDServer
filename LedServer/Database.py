@@ -74,7 +74,7 @@ class DataBase:
 
     def selectAllDataFromTable(self, Table, LastNItems = 500, PrimaryKey = "id", Sort = "id"):
         """select all the data from the given table"""
-        SqlCommand = """SELECT * FROM {} WHERE {} > (select MAX({}) - {} FROM {}) ORDER BY {} DESC""".format(
+        SqlCommand = """SELECT * FROM {} WHERE {} > (select MAX({}) - {} FROM {}) ORDER BY {} ASC""".format(
                 Table,
                 PrimaryKey,
                 PrimaryKey,
