@@ -8,7 +8,7 @@ from Database import *
 class room:
     def __init__(self, name, dataKeys):
         self.DB = DataBase()
-        self.Table = name + "-Sensors"
+        self.Table = name + "_Sensors"
         self.DB.connectTable(self.Table, dataKeys)
         self.name = name
         self.json = {}
