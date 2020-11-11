@@ -9,7 +9,7 @@ BACKUPPATH = "./DataBases/BackUps/"
 
 rooms = {
         "pi":{
-            "room":data.room(name="pi", dataKeys=[["room", "VARCHAR(500)"], ["temperature", "INTEGER"], ["cpuload", "INTEGER"]])
+            "room":data.room(name="pi", dataKeys=[["room", "VARCHAR(500)"], ["temperature", "INTEGER"], ["cpuload", "INTEGER"], ["uptime", "VARCHAR(100)"]])
             },
         "bed":{
             "room":data.room(name="bed", dataKeys=dataKeys),
