@@ -10,7 +10,7 @@ class ritRegistration():
                     [["KMStand", "INTEGEER"],
                      ["BeginEindPunt", "VARCHAR(500)"],
                      ["Getankt", "INTEGER"],
-                     ["Time", "DATE"]],
+                     ["Time", "datetime"]],
                     )
 
     def insertMileage(self, KM, BeginEndPoint, Tanked = 0):
