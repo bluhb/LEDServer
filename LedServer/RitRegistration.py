@@ -8,8 +8,8 @@ class ritRegistration():
         self.Table = "Ritten"
         self.DB.connectTable(self.Table,
                     [["KMStand", "INTEGEER"],
-                     ["BeginEindPunt", "VARCHAR[500]"],
-                     ["Getankt", "INTEGER[500]"],
+                     ["BeginEindPunt", "VARCHAR(500)"],
+                     ["Getankt", "INTEGER(500)"],
                      ["Time", "DATE"]],
                     )
 
