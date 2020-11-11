@@ -50,8 +50,11 @@ def PiControl(rooms):
 
         temp = os.popen("vcgencmd measure_temp").readline().replace("temp=", "")[0:4]
         load = psutil.cpu_percent()
+        uptime = os.popen("uptime").readline()
+        uptime = uptime[uptime.find("up ") + 3:uptime.find(",")]
         rooms['pi']['room'].json['temperature'] = temp
         rooms['pi']['room'].json['cpuload'] = load
+        rooms['pi']['room'].json['uptime'] = uptime
         rooms['pi']['room'].writeToDB()
         print(rooms['pi']['room'].json)
         time.sleep(55)
