@@ -38,6 +38,7 @@ class DataBase:
             SqlCommand += Key + " " + Sort + ", "
 
         SqlCommand += "PRIMARY KEY(id));"
+        print(SqlCommand)
         # if not len(A) == 1:
         self.Curr.execute(SqlCommand)
         self.DB.commit()
