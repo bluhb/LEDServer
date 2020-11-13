@@ -4,9 +4,6 @@ import data
 dataKeys = [["temperature", "FLOAT"], ["humidity", "FLOAT"], ["ldr", "FLOAT"], ["time", "VARCHAR(500)"], ["room", "VARCHAR(500)"]] #create the keys for rooms
 rooms = {}
 
-BACKUPTIME = 6 #Time in hours how often the database should be backed up
-BACKUPPATH = "./DataBases/BackUps/"
-
 rooms = {
         "pi":{
             "room":data.room(name="pi", dataKeys=[["room", "VARCHAR(500)"], ["temperature", "INTEGER"], ["cpuload", "INTEGER"], ["uptime", "VARCHAR(100)"]])
