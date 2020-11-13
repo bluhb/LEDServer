@@ -211,3 +211,48 @@ class DataBase:
                 DataDict[Keys[i]] = DataSet[i]
             Data.append(DataDict)
         return Data
+
+    def selectClosestTime(self, Table, Time, TimeKey, Limit=1):
+        SQL = """SELECT * FROM {} ORDER BY ABS(TIMEDIFF({}, {})) ASC LIMIT {}""".format(Table, Time, TimeKey, Limit)
+        self.lock.acquire()
+        self.Curr.execute(SQL)
+        DataLists = self.Curr.fetchall()
+        self.lock.release()
+        GetKeysSQL = "SHOW columns FROM {}".format(Table)
+        self.Curr.execute(GetKeysSQL)
+        Keys = [x[0] for x in self.Curr.fetchall()]
+
+        Data = []
+        for DataSet in DataLists:
+            DataDict = {}
+            for i in range(0, len(Keys)):
+                DataDict[Keys[i]] = DataSet[i]
+            Data.append(DataDict)
+        return Data
+
+    def formatKeysValues(FormatList):
+        S = ""
+        if isinstance(FormatList[0], str):
+            S += "("
+            for X in FormatList:
+                S += str(X) + ", "
+            S = S[0:len(S) - 2]
+            S += ")"
+        elif isinstance(FormatList[0], list):
+            for X in FormatList:
+                S += "("
+                for Y in X:
+                    S += str(Y) + ", "
+                S = S[0:len(S) - 2]
+                S += "), "
+            S = S[0:len(S) - 2]
+        return S
+
+    def insertBulk(self, Table, Keys, ValueListList):
+        SQL = """INSERT INTO {} {} VALUES {};""".format(Table, formatKeysValues(Keys), formatKeysValues(ValueListList))
+        self.lock.acquire()
+        self.Curr.execute(SqlCommand)
+        self.DB.commit()
+        self.lock.release()
+        return SQL
+
