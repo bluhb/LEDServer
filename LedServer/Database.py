@@ -235,7 +235,7 @@ class DataBase:
         if isinstance(FormatList[0], str):
             S += "("
             for X in FormatList:
-                S += '"{}", '.format(X)
+                S += '{}, '.format(X)
             S = S[0:len(S) - 2]
             S += ")"
         elif isinstance(FormatList[0], list):
