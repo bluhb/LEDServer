@@ -17,9 +17,9 @@
             M = parseInt(Time.slice(3,5));
             if (M >= 30){
                 H += 1;
-                M = "00";
+                M = ":00";
             }else{
-                M = "30";
+                M = ":30";
             }
             H = ( (H<10) ? "0".concat(String(H)) : String(H) );
             H = ( (H>23) ? "00" : H );
