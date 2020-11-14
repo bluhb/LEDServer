@@ -230,7 +230,7 @@ class DataBase:
             Data.append(DataDict)
         return Data
 
-    def formatKeysValues(FormatList):
+    def formatKeysValues(self, FormatList):
         S = ""
         if isinstance(FormatList[0], str):
             S += "("
