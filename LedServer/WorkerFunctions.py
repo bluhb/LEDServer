@@ -4,7 +4,6 @@ import time
 import RPi.GPIO as GPIO
 import shutil
 import requests
-from __main__ import BACKUPTIME, BACKUPPATH
 
 #set up button to turn on lights without phone
 GPIO.setmode(GPIO.BCM)
