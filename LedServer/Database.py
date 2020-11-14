@@ -236,7 +236,7 @@ class DataBase:
             S += "("
             for X in FormatList:
                 S += '"' + str(X) + '", '
-                S = S[0:len(S) - 2]
+            S = S[0:len(S) - 2]
             S += ")"
         elif isinstance(FormatList[0], list):
             for X in FormatList:
