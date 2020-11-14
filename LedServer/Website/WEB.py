@@ -316,6 +316,5 @@ def setTemperature():
     Room = Settings["Room"]
     Data = Settings["Data"]
     main.rooms[Room]["Heater"].insertSetPoints(Data)
-    print(Settings)
     return ("", 200)
 
