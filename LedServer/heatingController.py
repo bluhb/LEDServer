@@ -46,6 +46,7 @@ class HeatControl:
         return SetPoint
 
     def insertSetPoints(self, SetPoints):
+        print(SetPoints)
         Values = []
         for Key,Value in SetPoints.items():
             Values.append([Key, float(Value), self.Room])
