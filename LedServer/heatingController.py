@@ -47,7 +47,7 @@ class HeatControl:
 
     def insertSetPoints(self, SetPoints):
         Values = []
-        for Key,Value in SetPoints:
-            Values.append([Key, Value])
+        for Key,Value in SetPoints.items():
+            Values.append([Key, float(Value)])
         self.DB.insertBulk(self.Table, self.Keys, Values)
         return None
