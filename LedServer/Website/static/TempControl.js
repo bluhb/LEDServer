@@ -35,7 +35,7 @@
                 X.sort()
                 Y.splice(X.indexOf(TempPoint), 0, TempPoints[TempPoint]);
             }
-            var Trace = {x:X, y:Y, type:'scatter'}
+            var Trace = {x:X, y:Y, type:'scatter', line:{"smoothing":1.3}}
             var Data = [Trace];
             Plotly.newPlot("Plot", Data);
             console.log(X)
