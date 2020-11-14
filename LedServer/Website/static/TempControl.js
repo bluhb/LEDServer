@@ -4,6 +4,7 @@
             for (var i = 0; i<24; i++){
                 i = ( (i<10) ? "0".concat(String(i)) : String(i) )
                 TempPoints[String(i).concat(":00:00")] = String(20);
+                TempPoints[String(i).concat(":30:00")] = String(20);
             }
             CreatePlot();
         }
