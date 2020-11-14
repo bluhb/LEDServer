@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 TempPoints = {};
 Room = "livingroom";
 
