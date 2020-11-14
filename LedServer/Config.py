@@ -1,6 +1,6 @@
 import LED
 import data
-import heatingController as Heater
+import heatingController
 
 dataKeys = [["temperature", "FLOAT"], ["humidity", "FLOAT"], ["ldr", "FLOAT"], ["time", "VARCHAR(500)"], ["room", "VARCHAR(500)"]] #create the keys for rooms
 rooms = {}
