@@ -23,7 +23,7 @@
             }
             H = ( (H<10) ? "0".concat(String(H)) : String(H) );
             H = ( (H>23) ? "00" : H );
-            document.getElementById("Time").value = String(T).concat(String(M)).concat(":00");
+            document.getElementById("Time").value = String(H).concat(String(M)).concat(":00");
         }
         
         function CreatePlot(){
