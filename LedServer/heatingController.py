@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 class HeatControl:
     def __init__(self, Room, ControllerIP, Wait = 300):
-        self.Room = main.rooms[Room]
+        self.Room = Room
         self.ControllerIP = ControllerIP
         self.Wait = Wait
         self.Keys = Config.TempKeys #Time and Setpoint
@@ -25,7 +25,7 @@ class HeatControl:
         return None
 
     def checkTemp(SetPoint):
-        RoomTemp = self.Room.json["temperature"]
+        RoomTemp = main.rooms[self.Room].json["temperature"]
         if abs(RoomTemp-SetPoint) > 5:
             if RoomTemp == -1: #init value of roomtemps
                 return True
