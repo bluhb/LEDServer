@@ -251,7 +251,7 @@ class DataBase:
     def insertBulk(self, Table, Keys, ValueListList):
         SQL = """INSERT INTO {} {} VALUES {};""".format(Table, self.formatKeysValues(Keys), self.formatKeysValues(ValueListList))
         self.lock.acquire()
-        self.Curr.execute(SqlCommand)
+        self.Curr.execute(SQL)
         self.DB.commit()
         self.lock.release()
         return SQL
