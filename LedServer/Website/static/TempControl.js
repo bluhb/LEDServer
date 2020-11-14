@@ -16,7 +16,7 @@
             T = parseInt(Time.slice(0,2)) + 1;
             T = ( (T<10) ? "0".concat(String(T)) : String(T) );
             T = ( (T>23) ? "00" : T );
-            document.getElementById("Time").value = String(T).concat(":00");
+            document.getElementById("Time").value = String(T).concat(":00:00");
         }
         
         function CreatePlot(){
