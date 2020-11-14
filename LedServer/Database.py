@@ -235,14 +235,14 @@ class DataBase:
         if isinstance(FormatList[0], str):
             S += "("
             for X in FormatList:
-                S += str(X) + ", "
-            S = S[0:len(S) - 2]
+                S += '"' + str(X) + '", '
+                S = S[0:len(S) - 2]
             S += ")"
         elif isinstance(FormatList[0], list):
             for X in FormatList:
                 S += "("
                 for Y in X:
-                    S += str(Y) + ", "
+                    S += '"' + str(Y) + '", '
                 S = S[0:len(S) - 2]
                 S += "), "
             S = S[0:len(S) - 2]
