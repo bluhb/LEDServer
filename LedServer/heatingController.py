@@ -9,7 +9,7 @@ class HeatControl:
         self.ControllerIP = ControllerIP
         self.Wait = Wait
         self.Keys = Config.TempKeys #Time and Setpoint
-        self.Table = Config.TempDBTable
+        self.Table = Config.TempDBTable + self.Room
         self.DB = Database.DataBase()
         self.DB.connectTable(self.Table, Config.TempDBKeys)
         self.State = "Init"
