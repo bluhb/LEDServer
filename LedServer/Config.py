@@ -7,7 +7,7 @@ dataKeys = [["temperature", "FLOAT"], ["humidity", "FLOAT"], ["ldr", "FLOAT"], [
 TempKeys = ["Time", "SetPoint"]
 TempDBTable = "TempSettings"
 TempDBKeys = [
-            ["id", "INTEGER AUTOINCREMENT",
+            ["id", "INTEGER AUTOINCREMENT"],
             ["Time", "TIME"],
             ["SetPoint", "INTEGER"]
 ]
