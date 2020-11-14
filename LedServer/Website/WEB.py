@@ -309,3 +309,10 @@ def returnRitData():
 def returnMileAge():
     MileAges, MileAge = main.RitReg.averageMileage()
     return(jsonify({"Mileage": MileAge, "Mileages": MileAges}), 200)
+
+@app.route('/api/thermostat/setTemps', methods=["POST"])
+def setTemperature():
+    Settings = request.get_json(force=True)
+    print(Settings)
+    return ("", 200)
+
