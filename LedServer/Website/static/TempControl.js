@@ -42,7 +42,7 @@ function CreatePlot(){
 
 function SubmitSettings(){
     Url = BaseUrl.concat("/api/thermostat/setTemps");
-    Data = TempPoints;
+    Data = {"Room":"livingroom", "Data":TempPoints};
     PostToUrl(Data, Url);
 
 }

@@ -1,5 +1,6 @@
 import LED
 import data
+import heatingController as Heater
 
 dataKeys = [["temperature", "FLOAT"], ["humidity", "FLOAT"], ["ldr", "FLOAT"], ["time", "VARCHAR(500)"], ["room", "VARCHAR(500)"]] #create the keys for rooms
 rooms = {}
@@ -27,6 +28,7 @@ rooms = {
                     IP_ADRESS = "bank.lights",
                     Master = {"room":"livingroom", "light":"Muur"},
                 )
-                }
+                },
+            "Heater":heatingController.HeatControl("livingroom", "192.168.2.50")
             }
         }

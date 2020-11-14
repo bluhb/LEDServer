@@ -313,6 +313,9 @@ def returnMileAge():
 @app.route('/api/thermostat/setTemps', methods=["POST"])
 def setTemperature():
     Settings = request.get_json(force=True)
+    Room = Settings["Room"]
+    Data = Settings["Data"]
+    main.rooms[Room]["Heater"].insertSetPoints(Data)
     print(Settings)
     return ("", 200)
 
