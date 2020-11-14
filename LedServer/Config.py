@@ -4,11 +4,11 @@ import heatingController
 
 dataKeys = [["temperature", "FLOAT"], ["humidity", "FLOAT"], ["ldr", "FLOAT"], ["time", "VARCHAR(500)"], ["room", "VARCHAR(500)"]] #create the keys for rooms
 
-TempKeys = ["Time", "SetPoint"]
+TempKeys = ["time", "SetPoint"]
 TempDBTable = "TempSettings"
 TempDBKeys = [
             ["id", "INTEGER AUTOINCREMENT"],
-            ["Time", "TIME"],
+            ["time", "TIME"],
             ["SetPoint", "INTEGER"]
 ]
 
