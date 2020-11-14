@@ -8,7 +8,7 @@ TempKeys = ["tijd", "SetPoint"]
 TempDBTable = "TempSettings"
 TempDBKeys = [
             ["tijd", "TIME"],
-            ["SetPoint", "INTEGER"]
+            ["SetPoint", "FLOAT"]
 ]
 
 rooms = {
