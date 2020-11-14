@@ -100,7 +100,7 @@ class DataBase:
         return Data
 
     def deleteAllDataFromTable(self, Table):
-        SQL = "DELETE FROM {};".format(Table)
+        SQL = "TRUNCATE TABLE {};".format(Table)
         self.lock.acquire()
         self.Curr.execute(SQL)
         self.DB.commit()
