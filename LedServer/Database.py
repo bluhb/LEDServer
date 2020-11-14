@@ -230,7 +230,7 @@ class DataBase:
             Data.append(DataDict)
         return Data
 
-    def formatKeysValues(FormatList):
+    def formatKeysValues(self, FormatList):
         S = ""
         if isinstance(FormatList[0], str):
             S += "("
@@ -249,9 +249,9 @@ class DataBase:
         return S
 
     def insertBulk(self, Table, Keys, ValueListList):
-        SQL = """INSERT INTO {} {} VALUES {};""".format(Table, formatKeysValues(Keys), formatKeysValues(ValueListList))
+        SQL = """INSERT INTO {} {} VALUES {};""".format(Table, self.formatKeysValues(Keys), self.formatKeysValues(ValueListList))
         self.lock.acquire()
-        self.Curr.execute(SqlCommand)
+        self.Curr.execute(SQL)
         self.DB.commit()
         self.lock.release()
         return SQL
