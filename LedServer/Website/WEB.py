@@ -92,20 +92,22 @@ def ApiGetLightsFunctions():
 @app.route('/api/light/switchAll', methods=["POST"])
 def ApiSwitchAllLights():
     JSON = request.get_json(force=True)
-
-    if "Room" in JSON\
-            and "Function" in JSON:
-        RoomID = [x.replace(" ", "") for x in JSON["Room"]]
-        if RoomID[0] == "all":
-            RoomID = main.rooms.keys()
-        Function = JSON["Function"]
-        for Room in RoomID:
-            if "lights" in main.rooms[Room]:
-                for light in main.rooms[Room]["lights"]:
-                    main.rooms[Room]["lights"][light].function=Function
-        return("Turned on", 200)
-    else:
-        return("BadJson",400)
+    try:
+        if "Room" in JSON\
+                and "Function" in JSON:
+            RoomID = [x.replace(" ", "") for x in JSON["Room"]]
+            if RoomID[0] == "all":
+                RoomID = main.rooms.keys()
+            Function = JSON["Function"]
+            for Room in RoomID:
+                if "lights" in main.rooms[Room]:
+                    for light in main.rooms[Room]["lights"]:
+                        main.rooms[Room]["lights"][light].function=Function
+            return("Turned on", 200)
+        else:
+            return("BadJson",400)
+    except Exception as E:
+        return("Wrong RoomID or LightID " + str(E))
 
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
