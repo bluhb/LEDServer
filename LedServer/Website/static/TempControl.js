@@ -51,9 +51,10 @@ async function GetDataFromServer(Room){
     Temp = {}
     for (x in Data){
         x = Data[x]
-        Temp[x["Tijd"]] = x["SetPoint"] 
+        Temp[x["tijd"]] = x["SetPoint"] 
     }
     TempPoints = Temp
+    return TempPoints
 }
 
 function SubmitSettings(){
