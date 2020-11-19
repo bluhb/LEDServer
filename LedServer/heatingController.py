@@ -62,7 +62,7 @@ class HeatControl:
         Data = self.DB.selectAllDataFromTable(self.Table)
         NewData = []
         for x in Data:
-            x["tijd"] = converTimeDeltaToTime(x["tijd"])
+            x["tijd"] = convertTimeDeltaToTime(x["tijd"])
             NewData.append(x)
         return NewData
 
