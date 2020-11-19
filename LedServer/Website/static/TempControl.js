@@ -58,6 +58,22 @@ async function GetDataFromServer(Room){
     TempPoints = Temp
 }
 
+async function GetDataFromServer(Room){
+    var Data = await $.ajax({
+        url: BaseUrl.concat("/api/thermostat/getTemps"),
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify({"Room":Room}),
+    });
+    Temp = {}
+    for (x in Data){
+        x = Data[x]
+        Temp[x["Tijd"]] = x["SetPoint"] 
+    }
+    TempPoints = Temp
+}
+
 function SubmitSettings(){
     Url = BaseUrl.concat("/api/thermostat/setTemps");
     Data = {"Room":"livingroom", "Data":TempPoints};
