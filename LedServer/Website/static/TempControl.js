@@ -72,7 +72,6 @@ async function GetDataFromServer(Room){
         Temp[x["tijd"]] = x["SetPoint"] 
     }
     TempPoints = Temp
-    return TempPoints
 }
 
 function SubmitSettings(){
