@@ -52,3 +52,7 @@ class HeatControl:
         self.DB.deleteAllDataFromTable(self.Table)
         self.DB.insertBulk(self.Table, self.Keys, Values)
         return None
+
+    def getAllSetPoints(self):
+        return (self.DB.selectAllDataFromTable(self.Table))
+

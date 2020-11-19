@@ -320,3 +320,15 @@ def setTemperature():
     main.rooms[Room]["Heater"].insertSetPoints(Data)
     return ("", 200)
 
+@app.route('/api/thermostat/getTemps', methods=["POST"])
+def getTemperature():
+    Room = request.get_json(force=True).get("Room", None)
+    if Room == None:
+        return ("Bad Json", 500)
+    else:
+        try:
+            Data = main.rooms[Room]['Heater'].getAllSetPoints()
+            print(Data)
+            return (jsonify(Data), 200)
+        except Exception as E:
+            return (str(E), 500)
