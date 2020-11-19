@@ -50,7 +50,8 @@ async function GetDataFromServer(Room){
     });
     Temp = {}
     for (x in Data){
-       Temp[x["Tijd"]] = x["SetPoint"] 
+        x = Data[x]
+        Temp[x["Tijd"]] = x["SetPoint"] 
     }
     TempPoints = Temp
 }
