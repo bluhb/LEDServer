@@ -40,11 +40,25 @@ function CreatePlot(){
     Plotly.newPlot("Plot", Data);
 }
 
+async function GetDataFromServer(Room){
+    var Data = await $.ajax({
+        url: BaseUrl.concat("/api/thermostat/getTemps"),
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify({"Room":Room}),
+    });
+    Temp = {}
+    for (x in Data){
+       Temp[x["Tijd"]] = x["SetPoint"] 
+    }
+    TempPoints = Temp
+}
+
 function SubmitSettings(){
     Url = BaseUrl.concat("/api/thermostat/setTemps");
     Data = {"Room":"livingroom", "Data":TempPoints};
     PostToUrl(Data, Url);
-
 }
 
 //Post the data to a given url, just a wrapper for the ajax function
