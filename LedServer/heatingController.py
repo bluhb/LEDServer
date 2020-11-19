@@ -54,5 +54,5 @@ class HeatControl:
         return None
 
     def getAllSetPoints(self):
-        return self.DB.selectAllDataFromTable(self.Table)
+        return (self.DB.selectAllDataFromTable(self.Table))
 
