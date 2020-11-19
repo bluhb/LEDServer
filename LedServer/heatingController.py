@@ -54,5 +54,15 @@ class HeatControl:
         return None
 
     def getAllSetPoints(self):
-        return (self.DB.selectAllDataFromTable(self.Table))
+        def convertTimeDeltaToTime(TimeDelta):
+            Seconds = TimeDelta.seconds
+            Hours = Seconds // 3600
+            Minutes = (sec // 60) - (Hours * 60)
+            return str(Hours) + ":" + str(Minuts) + ":00"
+        Data = self.DB.selectAllDataFromTable(self.Table)
+        NewData = []
+        for x in Data:
+            x["tijd"] = converTimeDeltaToTime(x["tijd"])
+            NewData.append(x)
+        return NewData
 
