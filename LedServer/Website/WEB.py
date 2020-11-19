@@ -328,7 +328,6 @@ def getTemperature():
     else:
         try:
             Data = main.rooms[Room]['Heater'].getAllSetPoints()
-            print(Data)
             return (jsonify(Data), 200)
         except Exception as E:
             return (str(E), 500)
