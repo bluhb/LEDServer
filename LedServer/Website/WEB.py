@@ -297,9 +297,9 @@ def addNewMileage():
         BeginEndPoint = json["BeginEindPunt"]
         Tanked = json["Getankt"]
         main.RitReg.insertMileage(KMStand, BeginEndPoint, Tanked)
-        return("",418)
+        return("",200)
     except Exception as e:
-        return(e,400)
+        return(str(e),400)
 
 @app.route('/api/car/getData')
 def returnRitData():
