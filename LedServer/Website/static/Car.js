@@ -1,5 +1,5 @@
 
-function getData(){
+function getCarData(){
     $.getJSON(BaseUrl + '/api/car/getData').then(Data =>{
         for (i=0; i < Data.length; i++){
             var Paragraph = document.createElement("p")
