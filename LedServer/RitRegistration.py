@@ -14,7 +14,7 @@ class ritRegistration():
                     )
 
     def insertMileage(self, KM, BeginEndPoint, Tanked = 0):
-        self.DB.insertToTable2(self.Table,
+        self.DB.insertToTable(self.Table,
                     [["KMStand", KM],
                     ["BeginEindPunt", BeginEndPoint],
                     ["Getankt", Tanked],
