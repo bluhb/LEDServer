@@ -1,11 +1,16 @@
 import LED
 import data
+import heatingController
 
 dataKeys = [["temperature", "FLOAT"], ["humidity", "FLOAT"], ["ldr", "FLOAT"], ["time", "VARCHAR(500)"], ["room", "VARCHAR(500)"]] #create the keys for rooms
-rooms = {}
 
-BACKUPTIME = 6 #Time in hours how often the database should be backed up
-BACKUPPATH = "./DataBases/BackUps/"
+TempKeys = ["tijd", "SetPoint", "Room"]
+TempDBTable = "TempSettings"
+TempDBKeys = [
+            ["tijd", "TIME"],
+            ["SetPoint", "FLOAT"],
+            ["Room", "VARCHAR(500)"]
+]
 
 rooms = {
         "pi":{
@@ -30,6 +35,7 @@ rooms = {
                     IP_ADRESS = "bank.lights",
                     Master = {"room":"livingroom", "light":"Muur"},
                 )
-                }
+                },
+            "Heater":heatingController.HeatControl("livingroom", "192.168.2.50")
             }
         }

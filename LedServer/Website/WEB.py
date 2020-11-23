@@ -92,20 +92,22 @@ def ApiGetLightsFunctions():
 @app.route('/api/light/switchAll', methods=["POST"])
 def ApiSwitchAllLights():
     JSON = request.get_json(force=True)
-
-    if "Room" in JSON\
-            and "Function" in JSON:
-        RoomID = [x.replace(" ", "") for x in JSON["Room"]]
-        if RoomID[0] == "all":
-            RoomID = main.rooms.keys()
-        Function = JSON["Function"]
-        for Room in RoomID:
-            if "lights" in main.rooms[Room]:
-                for light in main.rooms[Room]["lights"]:
-                    main.rooms[Room]["lights"][light].function=Function
-        return("Turned on", 200)
-    else:
-        return("BadJson",400)
+    try:
+        if "Room" in JSON\
+                and "Function" in JSON:
+            RoomID = [x.replace(" ", "") for x in JSON["Room"]]
+            if RoomID[0] == "all":
+                RoomID = main.rooms.keys()
+            Function = JSON["Function"]
+            for Room in RoomID:
+                if "lights" in main.rooms[Room]:
+                    for light in main.rooms[Room]["lights"]:
+                        main.rooms[Room]["lights"][light].function=Function
+            return("Turned on", 200)
+        else:
+            return("BadJson",400)
+    except Exception as E:
+        return("Wrong RoomID or LightID " + str(E))
 
 @app.route('/api/light/setAttr', methods=["POST"])
 def ApiLightSetattr():
@@ -295,9 +297,9 @@ def addNewMileage():
         BeginEndPoint = json["BeginEindPunt"]
         Tanked = json["Getankt"]
         main.RitReg.insertMileage(KMStand, BeginEndPoint, Tanked)
-        return("",418)
+        return("",200)
     except Exception as e:
-        return(e,400)
+        return(str(e),400)
 
 @app.route('/api/car/getData')
 def returnRitData():
@@ -309,3 +311,23 @@ def returnRitData():
 def returnMileAge():
     MileAges, MileAge = main.RitReg.averageMileage()
     return(jsonify({"Mileage": MileAge, "Mileages": MileAges}), 200)
+
+@app.route('/api/thermostat/setTemps', methods=["POST"])
+def setTemperature():
+    Settings = request.get_json(force=True)
+    Room = Settings["Room"]
+    Data = Settings["Data"]
+    main.rooms[Room]["Heater"].insertSetPoints(Data)
+    return ("", 200)
+
+@app.route('/api/thermostat/getTemps', methods=["POST"])
+def getTemperature():
+    Room = request.get_json(force=True).get("Room", None)
+    if Room == None:
+        return ("Bad Json", 500)
+    else:
+        try:
+            Data = main.rooms[Room]['Heater'].getAllSetPoints()
+            return (jsonify(Data), 200)
+        except Exception as E:
+            return (str(E), 500)
