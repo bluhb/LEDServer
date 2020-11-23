@@ -36,4 +36,8 @@ class ritRegistration():
             KM = DataTank[i+1]["KMStand"] - DataTank[i]["KMStand"]
             Liters = DataTank[i+1]["Getankt"]
             AVGs.append(KM/Liters)
-        return AVGs, sum(AVGs)/len(AVGs)
+        if len(AVGs) > 0:
+            AVGt = sum(AVGs)/len(AVGs)
+        else:
+            AVGt = 0
+        return AVGs, AVGt
