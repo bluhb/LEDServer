@@ -1,17 +1,4 @@
-<head>
-    <script>
-        var rooms = '{{rooms}}';
-    </script>
-    <script type="text/javascript"
-            src="{{ url_for('static', filename='functions.js') }}">
-    </script>
-    <script type="text/javascript">
-        getData();
-    </script>
-
-</head>
-
-<body>
+<div class="container-fluid">
     <p>KM: <input id='KM' type="text"></input> </p>
     <p>BeginEindpunt: <input id='BeginEndPoint' type="text"></input></p>
     <p>Getankt<input id='Tanked' type="text" value=0></input></p>
@@ -27,5 +14,8 @@
         <p>Under here all the data should be shown</p>
         <div id="Data"></div>
     </div>
-</body>
+</div>
 
+    <script>
+        GetCarData()
+    </script>
