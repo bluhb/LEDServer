@@ -1,6 +1,10 @@
+from decouple import config
 import LED
 import data
 import heatingController
+
+DBUser = config('DBUSER')
+DBPassword = config('DBPASS')
 
 dataKeys = [["temperature", "FLOAT"], ["humidity", "FLOAT"], ["ldr", "FLOAT"], ["time", "VARCHAR(500)"], ["room", "VARCHAR(500)"]] #create the keys for rooms
 
