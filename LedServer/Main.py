@@ -9,7 +9,7 @@ import Error #Needs to be imported first, other module need this in the main
 import RitRegistration
 RitReg = RitRegistration.ritRegistration()
 
-from Config import rooms
+from Settings import rooms
 from Website import WEB
 import LED
 import data
