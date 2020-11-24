@@ -17,9 +17,9 @@ class DataBase:
         self.lock = threading.Lock()
         self.DB = mysql.connector.connect(
                 host="localhost",
-                user=config.DBUser,
-                password=config.DBPassword,
-                database=config.DB
+                user=Config.DBUser,
+                password=Config.DBPassword,
+                database=Config.DB
                 )
         self.Curr = self.DB.cursor(buffered=True)
         self.Curr.execute("USE ledserver;")
