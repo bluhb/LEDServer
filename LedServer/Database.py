@@ -2,8 +2,7 @@ import mysql.connector
 from datetime import datetime
 import threading
 import __main__ as main
-from Config import DBUser, DBPassword, DB
-
+import config
 """
 This module handles all database connections.
 It practically is a wrapper and expansion on the standard SQLITE3 package.
@@ -18,9 +17,9 @@ class DataBase:
         self.lock = threading.Lock()
         self.DB = mysql.connector.connect(
                 host="localhost",
-                user=DBUser,
-                password=DBPassword,
-                database=DB
+                user=config.DBUser,
+                password=config.DBPassword,
+                database=config.DB
                 )
         self.Curr = self.DB.cursor(buffered=True)
         self.Curr.execute("USE ledserver;")
