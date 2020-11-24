@@ -2,7 +2,7 @@ import mysql.connector
 from datetime import datetime
 import threading
 import __main__ as main
-import Config
+from Config import DBUser, DBPassword, DB
 
 """
 This module handles all database connections.
@@ -18,9 +18,9 @@ class DataBase:
         self.lock = threading.Lock()
         self.DB = mysql.connector.connect(
                 host="localhost",
-                user=Config.DBUser,
-                password=Config.DBPassword,
-                database=Config.DB
+                user=DBUser,
+                password=DBPassword,
+                database=DB
                 )
         self.Curr = self.DB.cursor(buffered=True)
         self.Curr.execute("USE ledserver;")
