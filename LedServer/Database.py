@@ -2,7 +2,7 @@ import mysql.connector
 from datetime import datetime
 import threading
 import __main__ as main
-import config
+import Config
 """
 This module handles all database connections.
 It practically is a wrapper and expansion on the standard SQLITE3 package.
