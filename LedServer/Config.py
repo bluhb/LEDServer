@@ -3,6 +3,7 @@ import LED
 import data
 import heatingController
 
+DB = "ledserver"
 DBUser = config('DBUSER')
 DBPassword = config('DBPASS')
 
