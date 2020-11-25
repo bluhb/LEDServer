@@ -29,11 +29,12 @@
     <script>
         DarkMode = False;
         function toggleDarkMode(){
-            if (DarkMode){
+            if (window.DarkMode){
                 document.getElementById("DarkLight").href = "/static/style-dark.css";
             }else{            
                 document.getElementById("DarkLight").href = "/static/style.css";
             }
+            window.DarkMode != window.DarkMode
         }
     </script>
 
