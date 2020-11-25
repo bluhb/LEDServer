@@ -59,23 +59,3 @@
     margin-right:1.5%;
     margin-left:1.5%;
 }
-
-h1, h2, h3, p, li, a{
-   color: aliceblue;
-}
-
-label, .text-info{
-   color: aliceblue !important;
-}
-
-.card{
-   background-color: #363636;
-}
-
-body{
-   background-color: #121212;
-}
-.jumbotron{
-   background-color: #242424;
-}
-

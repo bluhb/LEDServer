@@ -16,7 +16,7 @@
         <script src="/static/Roomstatistics.js"></script>
         <script src="/static/TempControl.js"></script>
         <script src="/static/Car.js"></script>
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/style.css" id="DarkLight">
 
 
         <style>
@@ -26,6 +26,16 @@
     max-width: 1250px; /* or 950px */
 }
         </style>
+    <script>
+        DarkMode = False;
+        function toggleDarkMode(){
+            if (DarkMode){
+                document.getElementById("DarkLight").href = "/static/style-dark.css";
+            }else{            
+                document.getElementById("DarkLight").href = "/static/style.css";
+            }
+        }
+    </script>
 
     </head>
     <body>
@@ -50,6 +60,9 @@
                             <a class="nav-link" href="/car">Car</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <button class="nav-link btn" onclick="toggleDarkMode()">Toggle Dark mode</button>
                 </div>
             </nav>
 

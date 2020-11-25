@@ -1,0 +1,81 @@
+ .intensityslider{
+    -webkit-appearance: none;
+    width:100%;
+    height: 26px; 
+    background: transparent;
+    border-radius:13px
+ }
+
+ .slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    margin-top:0px;
+    width:26px;
+    height:26px;
+    border-radius:13px;
+    background:white;
+    cursor:pointer;
+ }
+ .slider::-moz-range-thumb{
+    -webkit-appearance: none;
+    margin-top:0px;
+    width:26px;
+    height:26px;
+    border-radius:13px;
+    background:white;
+    cursor:pointer;
+ }
+ .slider::-ms-thumb{
+    -webkit-appearance: none;
+    margin-top:0;
+    width:26px;
+    height:26px;
+    border-radius:13px;
+    background:white;
+    cursor:pointer;
+ }
+
+.functionbutton{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.center{
+    margin:auto;
+}
+
+.speedadjust{
+    -webkit-appearance: none;
+    border-radius:13px;
+    height:26px;
+    width:100%;
+    background:grey;
+}
+
+.roomstatsCards{
+    background-color:AntiqueWhite;
+    padding:1%;
+    margin-right:1.5%;
+    margin-left:1.5%;
+}
+
+h1, h2, h3, p, li, a{
+   color: aliceblue;
+}
+
+label, .text-info{
+   color: aliceblue !important;
+}
+
+.card{
+   background-color: #363636;
+}
+
+body{
+   background-color: #121212;
+}
+.jumbotron{
+   background-color: #242424;
+}
+
