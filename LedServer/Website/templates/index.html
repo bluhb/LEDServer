@@ -27,7 +27,7 @@
 }
         </style>
     <script>
-        DarkMode = False;
+        DarkMode = false;
         function toggleDarkMode(){
             console.log(window.DarkMode)
             if (window.DarkMode){
@@ -35,7 +35,7 @@
             }else{            
                 document.getElementById("DarkLight").href = "/static/style.css";
             }
-            window.DarkMode != window.DarkMode
+            window.DarkMode = !window.DarkMode
         }
     </script>
 
