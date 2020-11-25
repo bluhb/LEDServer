@@ -29,6 +29,7 @@
     <script>
         DarkMode = False;
         function toggleDarkMode(){
+            console.log(window.DarkMode)
             if (window.DarkMode){
                 document.getElementById("DarkLight").href = "/static/style-dark.css";
             }else{            
@@ -64,6 +65,8 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <button class="nav-link btn" onclick="toggleDarkMode()">Toggle Dark mode</button>
+                        </li>
+                    </ul>
                 </div>
             </nav>
 
