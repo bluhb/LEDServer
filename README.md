@@ -11,12 +11,13 @@ The code is still under production, even though I don't have much time at the mo
 
 Defenitions:
   - Alarm.py - Defines class and helper functions for setting an Alarm on the lights.
-  - Config.py - In this file all the Rooms and lights are defined. This is, as the name suggests, the config file.
+  - Config.py - In this file all the global variables are defined. This is, as the name suggests, the config file.
   - Database.py - Defines class and helper functions for the Databases(In my case Temp, Humidity and light intensity for example)
   - Error.py - Work in progress, the idea is to make a system to Log everything in a database and show this on the website.
   - LED.py - In this file all functions for LED lights are defined. If you want to program a new sort of light(maybe bluetooth ro zigbee) you need to do it in this file.
   - Main.py - Controls the whole program and starts everything up, this is the file you want to run.
   - RitRegistration.py - Defines the class for the rit registration on the site, also calculates avg mileage.
+  - Settings.py - In this file defines all lights, rooms and heaters(thermostats).
   - WorkerFunctions - Defines the functions for the threads.
   - data.py - Defines the class 'room'
   - Website
