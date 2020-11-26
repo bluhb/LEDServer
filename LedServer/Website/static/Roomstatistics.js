@@ -1,9 +1,11 @@
-function Init(){
-    GetCurrentData();
 
+function Init(){
+    window.timer = setTimeout(GetCurrentData, 120000)
+    GetCurrentData();
 }
 
 async function GetCurrentData(){
+    clearTimeout(window.timer)
     Url = BaseUrl.concat('/api/roomstatistics/getRooms');
     Rooms = await $.ajax({
         dataType:'json',
@@ -41,7 +43,7 @@ async function GetCurrentData(){
         CreateGraph(Room, 500);
         await new Promise(r=>setTimeout(r, 1000));
     }
-    setTimeout(GetCurrentData, 120000);
+    window.timer = setTimeout(GetCurrentData, 120000);
 }
 
 function CompileTemplates(Data){
@@ -87,7 +89,7 @@ function CompileTemplates(Data){
 
 function CreateGraph(Room, DataPoints){
     console.log("Updating Graph: ".concat(Room));
-    request = {"RoomID": Room, "Items": DataPoints};
+    request = {"RoomID": Room, "Items": DataPoints, "DarkMode": window.DarkMode};
     url = "/api/roomstatistics/graphData";
     $.ajax({
         url: url,

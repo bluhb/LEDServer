@@ -5,6 +5,7 @@ DB = "ledserver"
 DBUser = config('DBUSER')
 DBPassword = config('DBPASS')
 
+DarkMode = True
 
 TempKeys = ["tijd", "SetPoint", "Room"]
 TempDBTable = "TempSettings"

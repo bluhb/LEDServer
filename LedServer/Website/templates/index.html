@@ -27,16 +27,24 @@
 }
         </style>
     <script>
-        DarkMode = false;
+        DarkMode = true; //start on true because the darkmode gets switched in the function, so it will default to no darkmode
         function toggleDarkMode(){
+            window.DarkMode = !window.DarkMode
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+                window.DarkMode = true
+            }
             console.log(window.DarkMode)
             if (window.DarkMode){
                 document.getElementById("DarkLight").href = "/static/style-dark.css";
             }else{            
                 document.getElementById("DarkLight").href = "/static/style.css";
             }
-            window.DarkMode = !window.DarkMode
+
+            /*if (window.location.pathname == "/roomstatistics") {
+                GetCurrentData()
+            }*/
         }
+        toggleDarkMode()
     </script>
 
     </head>

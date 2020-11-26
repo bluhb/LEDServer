@@ -64,7 +64,7 @@ h1, h2, h3, p, li, a{
    color: aliceblue;
 }
 
-label, .text-info{
+label, .text-info, .col-sm{
    color: aliceblue !important;
 }
 

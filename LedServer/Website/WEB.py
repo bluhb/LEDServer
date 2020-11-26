@@ -5,6 +5,7 @@ import logging
 #from scipy import signal
 import __main__ as main
 import Alarm
+import Config
 
 app = Flask(__name__, static_url_path='/static')
 rooms = []
@@ -232,6 +233,7 @@ def returnGraphData():
     JSON = request.get_json(force = True)
     RoomID = JSON["RoomID"].replace(" ","")
     Items = int(JSON.get("Items", 1000))
+    DarkMode = JSON.get("DarkMode", Config.DarkMode)
     print("Items: {}".format(Items))
     print("RoomID: {}".format(RoomID))
     Data = main.rooms[RoomID]["room"].getDataFromDB(Items = Items)
@@ -271,6 +273,15 @@ def returnGraphData():
                     )
                 ],
             layout = dict(
+                font = dict(
+                    color = "red"
+                    ),
+                legend = dict(
+                    orientation = 'h',
+                    y = 1
+                    ),
+                paper_bgcolor= "rgba(0,0,0,0)",
+                plot_bgcolor = "#000000" if DarkMode else "#ffffff",
                 title = RoomID + " Temperature and Humidity",
                 yaxis = {"title": "Degree Celsius and Humidity"},
                 xaxis = {"automargin": True},
