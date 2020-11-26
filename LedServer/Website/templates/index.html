@@ -4,12 +4,8 @@
         <title>Home ROGIER</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" sizes="128x128" href="/static/icon.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="/static/iro.js-master/dist/iro.min.js"></script>
         <script src="/static/Init.js"></script>
         <script src="/static/Lights.js"></script>
@@ -17,35 +13,49 @@
         <script src="/static/TempControl.js"></script>
         <script src="/static/Car.js"></script>
         <link rel="stylesheet" href="/static/style.css" id="DarkLight">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+        <script>
+            DarkMode = true; //start on true because the darkmode gets switched in the function, so it will default to no darkmode
+            function toggleDarkMode(OverrideUser){
+                window.DarkMode = !window.DarkMode
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !OverrideUser){
+                    window.DarkMode = true
+                }
+                console.log(window.DarkMode)
+                if (window.DarkMode){
+                    document.getElementById("DarkLight").href = "/static/style-dark.css";
+                }else{            
+                    document.getElementById("DarkLight").href = "/static/style.css";
+                }
+                
+                if (OverrideUser){
+                    Path = window.location.pathname;
+                    if (Path == "/roomstatistics") {
+                        GetCurrentData()
+                    }else if (Path = "/thermostat"){
+                        CreatePlot()
+                    }
+                }
+            }
+            toggleDarkMode(false)
+
+        </script>
 
 
         <style>
-.container-fluid {
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 1250px; /* or 950px */
-}
+            .container-fluid {
+                margin-right: auto;
+                margin-left: auto;
+                max-width: 1250px; /* or 950px */
+            }
+            body{display:none};
         </style>
-    <script>
-        DarkMode = true; //start on true because the darkmode gets switched in the function, so it will default to no darkmode
-        function toggleDarkMode(){
-            window.DarkMode = !window.DarkMode
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
-                window.DarkMode = true
-            }
-            console.log(window.DarkMode)
-            if (window.DarkMode){
-                document.getElementById("DarkLight").href = "/static/style-dark.css";
-            }else{            
-                document.getElementById("DarkLight").href = "/static/style.css";
-            }
 
-            /*if (window.location.pathname == "/roomstatistics") {
-                GetCurrentData()
-            }*/
-        }
-        toggleDarkMode()
-    </script>
 
     </head>
     <body>
@@ -72,7 +82,7 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <button class="nav-link btn" onclick="toggleDarkMode()">Toggle Dark mode</button>
+                            <button class="nav-link btn" onclick="toggleDarkMode(true)">Toggle Dark mode</button>
                         </li>
                     </ul>
                 </div>
@@ -91,4 +101,7 @@
 </div>
 
 </body>
+    <script>
+        document.body.style.display = "block";
+    </script>
 </html>

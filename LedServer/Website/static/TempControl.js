@@ -34,7 +34,12 @@ function CreatePlot(){
     }
     var Trace = {x:X, y:Y, type:'scatter', mode:'lines'}
     var Data = [Trace];
-    Plotly.newPlot("Plot", Data);
+    var Layout = {
+        font:{color:"red"},
+        paper_bgcolor : "rgba(0,0,0,0)",
+        plot_bgcolor : ((window.DarkMode) ? "#000000" : "#ffffff" ),  
+    }
+    Plotly.newPlot("Plot", Data, Layout);
 }
 
 async function GetDataFromServer(Room){
